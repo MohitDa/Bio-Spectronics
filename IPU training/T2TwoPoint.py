@@ -1,0 +1,354 @@
+import pandas as pd
+import numpy as np
+import math
+import cv2
+from picamera import PiCamera
+import time
+import math
+import matplotlib.pyplot as plt
+import RPi.GPIO as GPIO
+import Sens
+import Plot
+import Backend_codes
+import DB
+
+backend = Backend_codes.backend()
+plot = Plot.plot()
+db = DB.database()
+# import analyzer
+from threading import Thread
+from mlx90614_rpi import *
+# camera = PiCamera()
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setwarnings(False)
+# 
+# GPIO.setup(24,GPIO.OUT,initial = GPIO.LOW)
+# 
+# camera.meter_mode = 'spot'
+# camera.exposure_mode = 'spotlight'
+# camera.flash_mode = 'off'
+# camera.awb_mode = 'cloudy'
+# # camera.awb_gains = (-1, -2)
+# camera.drc_strength = 'off'
+# camera.image_effect = 'none'
+# # camera.raw_format = 'rgb'
+# # camera.shutter_speed = 31098
+# camera.brightness = 50
+# camera.ISO = 200
+# camera.contrast= 0
+# camera.zoom = (0.49, 0.42, 0.1, 0.148)
+# camera.shutter_speed = 10000
+# camera.resolution = (320, 240)
+# 
+# GPIO.output(24,GPIO.HIGH)
+# camera.start_preview()
+# sleep(20)
+# camera.sop_preview()
+# GPIO.output(24,GPIO.LOW)
+
+# sample_time = 60 #in sec           for how long to take sample images (for developer only, 10 min for testing)
+test_time = 10 #in sec             for how long he test to be run (2 to 4 minutes)
+# delay_between_images = 10 #in sec  gap between each sample
+sample_rest_time = 0	 #time given to sample to rest before test to be started. In sec 
+
+Sr, Sg, Sb, R_w, G_w, B_w, A_b = 0.0,0.0,0.0,0.0,0.0,0.0,0.0
+
+# def get_rgb():
+#     GPIO.output(24,GPIO.HIGH)
+#     image = np.empty((320, 240, 3), dtype=np.uint8)
+# #     camera.capture("/dev/shm/image.png", format='png')
+#     camera.capture(image, 'rgb')
+#     GPIO.output(24,GPIO.LOW)
+# #     image = cv2.imread('/dev/shm/image.png')
+# 
+#     height, width, _ = np.shape(image)
+#     avg_color_per_row = np.average(image, axis=0)
+#     avg_colors = np.average(avg_color_per_row, axis=0)
+#     int_averages = np.array(avg_colors, dtype=np.uint8)
+# #     average_image = np.zeros((height, width, 3), np.uint8)
+# #     average_image[:] = int_averages
+# 
+# #     rgba =cv2.cvtColor(average_image, cv2.COLOR_BGR2RGB)
+# #     print(int_averages)
+#     return int_averages
+
+def kinamatics():
+    
+    y = []
+        
+    input("Press Enter when Sample is Mixed")
+    sample_mixed_time = time.time()
+    
+    input("press Enter After Loading Sample")
+    while time.time() - sample_mixed_time <= sample_rest_time:
+        pass
+    print("process start")
+    proess_init_time = time.time()
+
+    for j in range(0,2):
+        
+        i = j + 1
+        
+        print(i)
+        
+        start = time.time()
+        
+    
+        ax0=backend.get_rgb(save = True, name = "Sample")
+        
+        R_samp = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        G_samp = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        B_samp = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+#         print(Sr, Sg, Sb, R_samp, G_samp, B_samp, R_w, G_w, B_w)
+
+        A_sample= -math.log((Sr*R_samp + Sg*G_samp + Sb*B_samp)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+#         A_sample = -math.log((Sr*R_samp + Sg*G_samp + Sb*B_samp)/(Sr*R_b + Sg*G_b + Sb*B_b), 10)
+#         print(A_sample)
+        
+        with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+            file.write('\n')
+            file.write(str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(A_sample))        
+            file.flush()
+
+        y.append(A_sample)
+        
+        if i <= 1:
+            while time.time() - start <= test_time :
+                continue
+       
+
+    with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+        file.write('\n') 
+        for i in y:
+            file.write(str(i) +",")
+    #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+        file.flush()
+
+    deff = y[1] - y[0]
+    
+    return deff
+
+# def kinamatics():
+#     
+#     y = []
+#     x = []
+#     
+#     print()
+#     input("Press Enter when Sample is Mixed")
+#     sample_mixed_time = time.time()
+#     
+#     input("press Enter After Loading Sample")
+#     while time.time() - sample_mixed_time <= sample_rest_time:
+#         pass
+#     print("process start")
+#     proess_init_time = time.time()
+# 
+#     i = 0
+#     
+#     while time.time() - start <=  test_time:
+#         
+#         i= i + 1
+#         
+#         print(i)
+#         
+#         start = time.time()
+#         
+#     
+#         ax0=backend.get_rgb()
+#         
+#         R_samp = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+#         G_samp = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+#         B_samp = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+# #         print(Sr, Sg, Sb, R_samp, G_samp, B_samp, R_w, G_w, B_w)
+#         try:
+#             A_sample= -math.log((Sr*R_samp + Sg*G_samp + Sb*B_samp)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+#         except:
+#             print("some error  occured")
+# #         A_sample = -math.log((Sr*R_samp + Sg*G_samp + Sb*B_samp)/(Sr*R_b + Sg*G_b + Sb*B_b), 10)
+# #         print(A_sample)
+#         
+#         with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+#             file.write('\n')
+#             file.write(str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(A_sample))        
+#             file.flush()
+# 
+#         y.append(A_sample)
+# #         x.append(len(y))
+# #         plot.plot_graph(x, y, "red", "Absorbances")
+# #         plt.pause(0.01)
+# #         plt.plot(x,y, color = 'red')
+# #         plt.pause(0.01)
+#     
+#         while time.time() - start <= test_time :
+#             continue
+#         
+#     
+#     with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+#         file.write('\n') 
+#         for i in y:
+#             file.write(str(i) +",")
+#     #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+#         file.flush()
+#     
+#     deff = y[1] - y[0]
+#     
+#     return deff
+    
+    
+def camera_function():
+    
+    # camera.start_preview()
+    # sleep(3)
+    # camera.stop_preview()
+
+    time.sleep(3)
+
+    date = backend.get_date()
+    test = backend.get_test()
+    # Sr, Sg, Sb = switch(int(input("Enter filter value. {340, 405, 492, 510, 545, 578, 630}: ")))
+    global Sr
+    global Sg
+    global Sb
+    
+    Sr, Sg, Sb = backend.get_sens()
+
+    print(Sr, Sg, Sb)
+
+    with open("/home/pi/Desktop/IPU training/TwoPointResult.csv", 'a+') as file:
+        file.write('\n')
+        file.write("Date: " + str(date))
+        file.write('\n')
+        file.write("Test: " + str(test))
+        file.write('\n')
+        file.write("val,R,G,B")
+        file.flush()
+        
+    input("Put Water")
+    ax0 = backend.get_rgb(save = True, name = "Water")
+    global R_w
+    global G_w
+    global B_w
+    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    with open("/home/pi/Desktop/IPU training/TwoPointResult.csv", 'a+') as file:
+        file.write('\n') 
+#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+#         file.write(",")
+        file.write("water")
+        file.write("," +str(R_w) + "," +str(G_w) + "," +str(B_w))        
+        file.flush()
+            
+
+
+    input("Put Blank")
+    ax0=backend.get_rgb(save = True, name = "Blank")
+
+    R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    global A_b
+    try:
+        A_b = -math.log((Sr*R_b + Sg*G_b + Sb*B_b)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+    except:
+        print("some error occured")
+    
+    with open("/home/pi/Desktop/IPU training/TwoPointResult.csv", 'a+') as file:
+        file.write('\n') 
+#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+#         file.write(",")
+        file.write("blank")
+        file.write("," +str(R_b) + "," +str(G_b) + "," +str(B_b))        
+        file.flush()
+
+
+    input("Put Standard")
+    q = backend.get_concentration()
+    
+    with open("/home/pi/Desktop/IPU training/TwoPointResult.csv", 'a+') as file:
+        file.write('\n') 
+        file.write(str(q))
+        file.flush()
+        
+    with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+        file.write('\n') 
+        file.write("std: " +str(q) +",")
+        file.flush()
+        
+    deff = kinamatics()
+
+    m = q / deff
+    i = q - m * deff
+
+    factor = q/deff
+    
+    plot.plot_graph([0,q],[i,i+m*deff], "green")
+    plot.plot_graph([0,q],[0,factor*deff], "blue", "green: line, blue: factor")
+    plot.close_graph(4)
+    time.sleep(0.25)
+    
+    with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+        file.write(str(deff) + "," + str(m) + "," + str(i) + "," + str(factor))        
+        file.flush()
+    print("Press enter for next test, and enter 'E' to end test")
+    print("")
+    print("")
+    state = "null"
+
+    test_no = [1]
+    
+
+    while True:
+        
+        state = input("Put Test " +str(test_no[0]))
+        test_no[0] += 1
+        
+        if state == 'E' or state == 'e':
+            break
+        
+        with open("/home/pi/Desktop/IPU training/TwoPointTestData.csv", 'a+') as file:
+            file.write('\n') 
+    #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
+            file.write("sample " +str(test_no[0]))
+    #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+            file.flush()
+        
+        deff = kinamatics()
+        c1 = deff * factor
+        
+        c2 = i + m * deff
+
+        print("Concentration: "+ str(c1) +" mg/dl")
+
+        
+        with open("/home/pi/Desktop/IPU training/TwoPointResult.csv", 'a+') as file:
+            file.write('\n') 
+    #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
+            file.write("sample " +str(test_no[0]) +"," +str(c1) +"," +str(c2))
+    #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+            file.flush()
+
+    camera.close()
+
+
+temp_set = [False]
+# print(temp_set)
+
+t1 = Thread(target=set_peltier_temperature,args=(38,19,0x5A,temp_set))
+t1.start()
+
+print("Setting Peltier Temp")
+# print(temp_set)
+
+
+while temp_set[0] == False:
+    pass
+#     print(temp_set[0])
+    
+camera_function()
+t1.join()
+
+
+
