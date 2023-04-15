@@ -18,9 +18,12 @@ class database:
     
     def execute_command(self, command = ""):
         cursor = conn.execute(command)
+#         print(cursor)
         result = list()
         for i in cursor:
-            result.append(i[0])
+            for j in i:
+#                 print(j)
+                result.append(j)
 #         print(result)
         return result
     
@@ -245,34 +248,12 @@ class database:
         database().execute_command(string)
         database().commit()
     
-    def get_test_name(self):
-        table_test_names = database().execute_command("select test_name from " +database().table_name)
-        
-        if len(table_test_names) < 1:
-            print("table is empty")
-            return ""
-        
-        
-        print("Select test. Press y or n: ")
-        
-        test_names = list()
-
-        for i in table_test_names:
-            while True:
-                
-                response = input("delete "+str(i)+"? ")
-                if response == "y":
-                    return str(i)
-                    break
-#                 print(i)
-                elif response == 'n':
-                    break
-                else:
-                    print("wrong input")
-        return ""
     
-# db = database()
-# db.connect()
+    
+db = database()
+db.connect()
+# db.execute_command('update tests set m = 82.60613293913033, i = 6.663643406522594, R_w = 0.6056309756811918, G_w = 0.580911344020735, B_w = 0.5438318965300498, standard_concentration = 4 where test_name ="Albumin"')
+# db.commit()
 # db.truncate_table()
 # db.edit_entry()
 # db.add_entry()

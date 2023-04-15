@@ -31,7 +31,7 @@ from threading import Thread
 from mlx90614_rpi import *
 
 # sample_time = 1 #in min           for how long to take sample images (for developer only, 10 min for testing)
-test_time = 1.5 #in min             for how long he test to be run (2 to 4 minutes)
+test_time = 90 #in sec             for how long he test to be run (2 to 4 minutes)
 delay_between_images = 60 #in sec  gap between each sample
 sample_rest_time = 15	 #time given to sample to rest before test starts. In sec 
 lamp_hold_time = 1 #time in sec.
@@ -104,7 +104,7 @@ def kinatics():
     
     y = []
     x = []
-    while time.time() - proess_init_time <= 60 * test_time:
+    while time.time() - proess_init_time <=  test_time:
         
         i= i + 1
         
@@ -130,7 +130,7 @@ def kinatics():
 #         plt.plot(x,y, color = 'red')
 #         plt.pause(0.01)
 #         print(y)
-        if i >= test_time * 60 / delay_between_images:
+        if i >= test_time / delay_between_images:
             break
         while time.time() - start <= delay_between_images:
             continue

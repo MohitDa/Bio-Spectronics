@@ -4,6 +4,7 @@ import math
 # import cv2
 # from picamera import PiCamera
 import time
+from time import sleep
 import math
 # import matplotlib.pyplot as plt
 import Plot
@@ -105,7 +106,7 @@ def kinamatics():
         while time.time() - start <= delay_between_images :
             continue
 #     plt.show()
-    plot.close_graph(4)
+    plot.close_graph(0.5)
 #     plt.close()
     sum = 0
     
@@ -126,146 +127,6 @@ def kinamatics():
     
     return sum
 
-def camera_function():
-    
-    # camera.start_preview()
-    # sleep(3)
-    # camera.stop_preview()
-
-    time.sleep(3)
-    
-    date = backend.get_date()
-    test = backend.get_test()
-    # Sr, Sg, Sb = switch(int(input("Enter filter value. {340, 405, 492, 510, 545, 578, 630}: ")))
-
-    global Sr
-    global Sg
-    global Sb
-    
-    Sr, Sg, Sb = backend.get_sens()
-    
-    print(Sr, Sg, Sb)
-
-    with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
-        file.write('\n')
-        file.write("Date: " + str(date))
-        file.write('\n')
-        file.write("Test: " + str(test))
-        file.write('\n')
-        file.write("val,R,G,B")
-        file.flush()
-        
-    input("Put Water")
-    ax0 = backend.get_rgb()
-    global R_w
-    global G_w
-    global B_w
-    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-
-    with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
-        file.write('\n') 
-#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
-#         file.write(",")
-        file.write("water")
-        file.write("," +str(R_w) + "," +str(G_w) + "," +str(B_w))        
-        file.flush()
-            
-
-
-    input("Put Blank")
-    ax0=backend.get_rgb()
-
-    R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-
-    global A_b
-    
-    try:
-        A_b = -math.log((Sr*R_b + Sg*G_b + Sb*B_b)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
-    except:
-        print("some error occured")
-        
-    with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
-        file.write('\n') 
-#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
-#         file.write(",")
-        file.write("blank")
-        file.write("," +str(R_b) + "," +str(G_b) + "," +str(B_b))        
-        file.flush()
-
-
-    input("Put Standard")
-    
-    q = backend.get_concentration()
-    
-    with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
-        file.write('\n') 
-        file.write(str(q))
-        file.flush()
-        
-    with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
-        file.write('\n') 
-        file.write("std: " +str(q) +",")
-        file.flush()
-    sum = kinamatics()
-#     plt.show()
-#     plt.close()
-    m = q / sum
-    i = q - m * sum
-    
-    factor = q/sum
-    
-    
-    plot.plot_graph([0,q],[i,i+m*sum], "green", "y = mx + c")
-    plot.plot_graph([0,q],[0,factor * sum], "blue", "factor")
-    plot.close_graph(4)
-    with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
-        file.write(str(sum) + "," + str(m) + "," + str(i) + "," + str(factor))        
-        file.flush()
-    print("Press enter for next test, and enter 'E' to end test")
-    print("")
-    state = "null"
-
-    test_no = [1]
-    
-
-    while True:
-        
-        state = input("Put Test " +str(test_no[0]))
-        test_no[0] += 1
-        
-        if state == 'E' or state == 'e':
-            break
-        
-        with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
-            file.write('\n') 
-    #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
-            file.write("sample " +str(test_no[0]))
-    #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
-            file.flush()
-        
-        sum = kinamatics()
-#         plt.show()
-#         plt.close()
-        
-        c1 = sum * factor
-        
-        c2 = i + m * sum
-
-        print("Concentration: "+ str(c1) +" " + str(c2) +" mg/dl")
-
-        
-        with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
-            file.write('\n') 
-    #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
-            file.write("sample " +str(test_no[0]) +"," +str(c1) +"," +str(c2))
-    #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
-            file.flush()
-
-    camera.close()
 
 
 temp_set = [False]
@@ -284,7 +145,184 @@ while temp_set[0] == False:
 # 
 # fig = plt.figure()
 # ax1 = fig.add_subplot(1,1,1)
-camera_function()
+
+
+
+date = backend.get_date()
+test = backend.get_test_name(type = "Kinetic")
+# Sr, Sg, Sb = switch(int(input("Enter filter value. {340, 405, 492, 510, 545, 578, 630}: ")))
+
+R_w, G_w, B_w = 0,0,0
+
+Sr, Sg, Sb = backend.get_sens(name = test)
+# Sr, Sg, Sb = 1,1,1
+print(Sr, Sg, Sb)
+
+with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
+    file.write('\n')
+    file.write("Date: " + str(date))
+    file.write('\n')
+    file.write("Test: " + str(test))
+    file.write('\n')
+    file.write("val,R,G,B")
+    file.flush()
+
+
+m,i= 0,0
+unit = 'mg/dl'
+
+sample_rest_time, test_time, delay_between_images = backend.get_times(name = test)
+
+while True:
+    responce = input("Load standard, timigs?: y/n ")
+    if responce == 'y':
+        
+        m,i, R_w, G_w, B_w, unit = backend.get_factor(name = test, water = True)
+    #     global sample_rest_time, test_time
+        
+        
+    #     m,i = factor[0], factor[1]
+#         print(m, i)
+        break
+        
+    elif responce == 'n':
+        if input("Set Timings?: y/n ") == 'y':
+    #         global sample_rest_time
+    #         global test_time
+            while True:
+                try:
+                    sample_rest_time = int(input("Initial Reading Time (rest time) (in seconds): "))
+                    delay_between_images = int(input("Delay Between Images (in seconds): "))
+                    test_time = int(input("Test Time (in seconds): "))
+                    print(sample_rest_time, test_time, delay_between_images)
+                    backend.set_times(name = test, sample_rest_time = sample_rest_time, delay_between_images = delay_between_images, test_time = test_time)
+                    break
+                except:
+                    print("enter correct values")
+                    pass
+        
+        print(sample_rest_time, test_time, delay_between_images)
+
+
+    
+        input("Put Water")
+        ax0 = backend.get_rgb(save = True, name = "Water")
+
+        R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+        with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
+            file.write('\n') 
+        #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+        #         file.write(",")
+            file.write("water")
+            file.write("," +str(R_w) + "," +str(G_w) + "," +str(B_w))        
+            file.flush()
+                
+
+
+        input("Put Blank")
+        ax0=backend.get_rgb(save = True, name = "Blank")
+
+        R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+        B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+        A_b = 0
+        try:
+            A_b = -math.log((Sr*R_b + Sg*G_b + Sb*B_b)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+        except:
+            print("some error occured")
+            
+        with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
+            file.write('\n') 
+        #         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+        #         file.write(",")
+            file.write("blank")
+            file.write("," +str(R_b) + "," +str(G_b) + "," +str(B_b))        
+            file.flush()
+
+
+        input("Put Standard")
+
+        q = backend.get_concentration()
+
+        R_s, G_s, B_s = 0,0,0
+
+        with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
+            file.write('\n') 
+            file.write(str(q))
+            file.flush()
+            
+        with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
+            file.write('\n') 
+            file.write("std: " +str(q) +",")
+            file.flush()
+        sum = kinamatics()
+        #     plt.show()
+        #     plt.close()
+        m = q / sum
+        i = q - m * sum
+        
+        backend.set_factor(name = test, m = m, i = i, R_w = R_w, G_w = G_w, B_w = B_w, standard_concentration = q)
+    #     factor = q/sum
+
+
+        plot.plot_graph([0,q],[i,i+m*sum], "green", "y = mx + c")
+    #     plot.plot_graph([0,q],[0,factor * sum], "blue", "factor")
+        plot.close_graph(4)
+        sleep(0.25)
+        with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
+            file.write(str(sum) + "," + str(m) + "," + str(i))        
+            file.flush()
+            
+        break
+            
+    else:
+        print("wrong input")
+        
+print("Press enter for next test, and enter 'E' to end test")
+print("")
+state = "null"
+
+test_no = [1]
+
+
+while True:
+    
+    state = input("Put Test " +str(test_no[0]))
+    test_no[0] += 1
+    
+    if state == 'E' or state == 'e':
+        break
+    
+    with open("/home/pi/Desktop/IPU training/KinaticTestData.csv", 'a+') as file:
+        file.write('\n') 
+#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
+        file.write("sample " +str(test_no[0]))
+#         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+        file.flush()
+    
+    sum = kinamatics()
+#         plt.show()
+#         plt.close()
+    
+#     c1 = sum * factor
+    
+    c1 = i + m * sum
+
+    print("Concentration: "+ str(c1) +" " + str(unit))
+
+    
+    with open("/home/pi/Desktop/IPU training/KinaticResult.csv", 'a+') as file:
+        file.write('\n') 
+#         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
+        file.write("sample " +str(test_no[0]) +"," +str(c1))
+#         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+        file.flush()
+
+camera.close()
 
 t1.join()
 

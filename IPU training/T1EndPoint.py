@@ -2,14 +2,14 @@
 #code minimized using function defination
 
 # import cv2
-import numpy as np
+# import numpy as np
 # from picamera import PiCamera
 from time import sleep
 import math
 # import matplotlib.pyplot as plt
 # import RPi.GPIO as GPIO
-import pandas as pd
-import numpy as np
+# import pandas as pd
+# import numpy as np
 # import Sens
 
 import Plot
@@ -108,17 +108,23 @@ backend = Backend_codes.backend()
 plot = Plot.plot()
 db = DB.database()
 date = backend.get_date()
-test = backend.get_test()
+test = backend.get_test_name(type = "EP")
+# print(test)
+# 
+# table_test_names = db.execute_command('select test_name from tests where type = "EP"' )
+# print(table_test_names)
 
 # Sr, Sg, Sb = switch(int(input("Enter filter value. {340, 405, 492, 510, 545, 578, 630}: ")))
 
-global Sr
-global Sg
-global Sb
+# global Sr
+# global Sg
+# global Sb
 
-Sr, Sg, Sb = backend.get_sens()
+R_w, G_w, B_w = 0,0,0
+
+Sr, Sg, Sb = backend.get_sens(name = test)
 # Sr, Sg, Sb = 1,1,1
-# print(Sr, Sg, Sb)
+print(Sr, Sg, Sb)
 
 with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
     file.write('\n')
@@ -128,98 +134,110 @@ with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
     file.write('\n')
     file.write("r,g,b,val,R,G,B,A")
     file.flush()
+
+m,i= 0,0
+unit = 'mg/dl'
+
+if input("Load standard?: y/n ") == 'y':
     
-input("Put Water")
-# ax0 = [0,0,0]
-# for i in range(10):
-#     ax0 = ax0 + backend.get_rgb()
-# for i in range(3):
-#     ax0[i] = ax0[i] / 10 
-# print(ax0)
-ax0 = backend.get_rgb(save = True, name = "Water")
-R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-
-with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
-    file.write('\n') 
-    file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
-    file.write(",")
-    file.write("water")
-    file.write("," +str(R_w) + "," +str(G_w) + "," +str(B_w))        
-    file.flush()
-        
-
-
-input("Put Blank")
-ax0 = backend.get_rgb(save = True, name = "Blank")
-# ax0 = [0,0,0]
-# for i in range(10):
-#     ax0 = ax0 + backend.get_rgb()
-# for i in range(3):
-#     ax0[i] = ax0[i] / 10 
-# print(ax0)
-R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-
-A_b = 0
-try:
-    A_b = -math.log((Sr*R_b + Sg*G_b + Sb*B_b)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
-except:
-    print("some error occured")
-
-with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
-    file.write('\n') 
-    file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
-    file.write(",")
-    file.write("blank")
-    file.write("," +str(R_b) + "," +str(G_b) + "," +str(B_b))        
-    file.flush()
-
-
-input("Put Standard")
-q = backend.get_concentration()
-
-R_s, G_s, B_s = 0,0,0
-m,i,factor = 0,0,0
-try:
+    m,i, R_w, G_w, B_w, unit = backend.get_factor(name = test, water = True)
+#     m,i = factor[0], factor[1]
+    print(m, i)
+else:
     
-    ax0=[]
-    while True:
-#         ax0 = [0,0,0]
-#         for i in range(10):
-#             ax0 = ax0 + backend.get_rgb()
-#         for i in range(3):
-#             ax0[i] = ax0[i] / 10
-        ax0 = backend.get_rgb(save = True, name = "Standard")
-        R_s = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-        G_s = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-        B_s = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-        
-        A_s = -math.log((Sr*R_s + Sg*G_s + Sb*B_s)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
-        A_std = A_s - A_b
-        
-        m = q / (A_std)
-        i = q - m * A_s
-        factor = q/A_std
-#         print(str(m) +" " +str(i) + " " + str(factor)) 
-        plot.plot_graph([0,q],[i,i+m*A_s], "green")
-        plot.plot_graph([0,q],[0,factor* A_std], "blue")
-        plot.close_graph(4)
-        sleep(0.25)
-        break
-    
+    input("Put Water")
+    # ax0 = [0,0,0]
+    # for i in range(10):
+    #     ax0 = ax0 + backend.get_rgb()
+    # for i in range(3):
+    #     ax0[i] = ax0[i] / 10 
+    # print(ax0)
+    ax0 = backend.get_rgb(save = True, name = "Water")
+    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
     with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
         file.write('\n') 
         file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
         file.write(",")
-        file.write(str(q))
-        file.write("," +str(R_s) + "," +str(G_s) + "," +str(B_s))        
+        file.write("water")
+        file.write("," +str(R_w) + "," +str(G_w) + "," +str(B_w))        
         file.flush()
-    
-except:
-    print("some error occured")
+            
+
+
+    input("Put Blank")
+    ax0 = backend.get_rgb(save = True, name = "Blank")
+    # ax0 = [0,0,0]
+    # for i in range(10):
+    #     ax0 = ax0 + backend.get_rgb()
+    # for i in range(3):
+    #     ax0[i] = ax0[i] / 10 
+    # print(ax0)
+    R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    A_b = 0
+    try:
+        A_b = -math.log((Sr*R_b + Sg*G_b + Sb*B_b)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+    except:
+        print("some error occured")
+
+    with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
+        file.write('\n') 
+        file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+        file.write(",")
+        file.write("blank")
+        file.write("," +str(R_b) + "," +str(G_b) + "," +str(B_b))        
+        file.flush()
+
+
+    input("Put Standard")
+    q = backend.get_concentration()
+
+    R_s, G_s, B_s = 0,0,0
+
+    try:
+        
+        ax0=[]
+        while True:
+    #         ax0 = [0,0,0]
+    #         for i in range(10):
+    #             ax0 = ax0 + backend.get_rgb()
+    #         for pi in range(3):
+    #             ax0[i] = ax0[i] / 10
+            ax0 = backend.get_rgb(save = True, name = "Standard")
+            R_s = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+            G_s = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+            B_s = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+            
+            A_s = -math.log((Sr*R_s + Sg*G_s + Sb*B_s)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
+            A_std = A_s - A_b
+            
+            m = q / (A_std)
+            i = q - m * A_s
+#             factor = q/A_std
+
+            backend.set_factor(name = test, m = m, i = i, R_w = R_w, G_w = G_w, B_w = B_w, standard_concentration = q)
+    #         print(str(m) +" " +str(i) + " " + str(factor)) 
+            plot.plot_graph([0,q],[i,i+m*A_s], "green")
+#             plot.plot_graph([0,q],[0,factor* A_std], "blue")
+            plot.close_graph(4)
+            sleep(0.25)
+            break
+        
+        with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
+            file.write('\n') 
+            file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]))  
+            file.write(",")
+            file.write(str(q))
+            file.write("," +str(R_s) + "," +str(G_s) + "," +str(B_s))        
+            file.flush()
+        
+    except:
+        print("some error occured")
 # A_std = -math.log((_Sr*R_s + _Sg*G_s + _Sb*B_s)/(_Sr*R_b + _Sg*G_b + _Sb*B_b), 10)
     
 
@@ -252,22 +270,21 @@ while True:
             B_samp = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
             
             A_samp = -math.log((Sr*R_samp + Sg*G_samp + Sb*B_samp)/(Sr*R_w + Sg*G_w + Sb*B_w), 10)
-            A_sample = A_samp - A_b
-            
-#             print(ax0, A_b, A_samp ,m, i, factor)
-            
-            c2 = A_sample * factor
+#             
+
+#             A_sample = A_samp - A_b
+#             c2 = A_sample * factor
             
             c1 = i + m * A_samp
             
-            print("concentration: " +str(c1) + " " + str(c2) +" mg/dl")
+            print("concentration: " +str(c1)  +" " + str(unit)) #+ " " + str(c2)
             break
         
         with open("/home/pi/Desktop/IPU training/V2Result.csv", 'a+') as file:
             file.write('\n') 
             file.write(str(ax0[0]) + "," + str(ax0[1]) + "," +str(ax0[2]) +",")
             file.write("sample " +str(test_no))
-            file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
+            file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1)) #+ "," + str(c2)   
             file.flush()
     
     except:
