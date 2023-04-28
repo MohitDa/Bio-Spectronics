@@ -1,0 +1,9 @@
+{
+    "python.analysis.completeFunctionParens": true,
+    "python.analysis.enableSyncServer": true,
+    "python.analysis.inlayHints.variableTypes": false,
+    "python.analysis.inlayHints.pytestParameters": true,
+    "python.analysis.inlayHints.functionReturnTypes": false,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.addImport.exactMatchOnly": true
+}
