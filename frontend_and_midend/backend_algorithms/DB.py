@@ -1,4 +1,7 @@
+import os
 import sqlite3 as sql
+import os
+
 
 conn = sql.connect("")
 
@@ -7,9 +10,10 @@ class database:
     attributes = ['primary_key', 'test_name', 'type', 'temp', 'wavelength', 'unit', 'result_low', 'result_high', 'sample_rest_time', 'test_time', 'delay_between_images', "standard_concentration", 'm', 'i']
     attributes_type = {'primary_key' : "int", 'test_name' : "text", 'type' : "text", 'temp' : "int", 'wavelength' : "int", 'unit' : "text", 'result_low' : "int", 'result_high' : "int", 'sample_rest_time' : "int", 'test_time' : "float", 'delay_between_images' : "int", "standard_concentration" : "float", 'm' : "float", 'i' : "float"}
     attributes_string = "primary_key, test_name, type, temp, wavelength, unit, result_low, result_high, sample_rest_time, test_time, delay_between_images, standard_concentration, m, i"
-    table_name = 'tests'
+    table_name = 'new_tests'
     
-    def connect(self, path = "/home/pi/Desktop/IPU training/Database/database"):
+    
+    def connect(self, path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'database.db')):
         global conn
         conn = sql.connect(path)
         
@@ -228,7 +232,7 @@ class database:
         database().commit()
         
     def create_table(self):
-        string = """CREATE TABLE "Tests" (
+        string = """CREATE TABLE "new_tests" (
             "primary_key"	INTEGER NOT NULL,
             "test_name"	TEXT NOT NULL,
             "type"	TEXT NOT NULL,
@@ -248,8 +252,7 @@ class database:
         database().execute_command(string)
         database().commit()
     
-    
-    
+
 db = database()
 db.connect()
 # db.execute_command('update tests set m = 82.60613293913033, i = 6.663643406522594, R_w = 0.6056309756811918, G_w = 0.580911344020735, B_w = 0.5438318965300498, standard_concentration = 4 where test_name ="Albumin"')

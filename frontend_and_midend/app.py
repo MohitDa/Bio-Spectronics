@@ -1,21 +1,25 @@
 from asyncio.windows_events import NULL
 import os
+from stat import S_IFBLK
 from tkinter import NO
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from sqlalchemy import select
 import analyzer
+from time import sleep
 app = Flask(__name__)   # Create an instance of flask called "app"
 
-
+import math
 import sys
 sys.path.insert(1, '/backend_algorithms')
 
 
-# # import backend_algorithms
+from backend_algorithms import Backend_codes #, run_motor, peltier
+backend = Backend_codes.backend()
 # import backend_algorithms.run_motor #pump actions
 # import backend_algorithms.peltier   #peltier
+# import backend_algorithms.Sens
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -221,24 +225,63 @@ def add_new_test():
     
     new_test.test_name = ""
     new_test.test_type = "Kinetic"
+    global S_r, S_g, S_b
+
     return render_template("new_test.html", edit_test = new_test)
 
 @app.route("/water",methods=['GET','POST'])
 def water():
     print("Water")
+
+    global S_r, S_g, S_b
+    S_r, S_g, S_b = backend.get_sens(wavelength= request.form['testwavelength1'])
     # return None
+    global R_w, G_w, B_w
+    ax0=backend.get_rgb()
+        
+    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
     return '', 204
 
 @app.route("/reagent_blank",methods=['GET','POST'])
 def reagent_blank():
     print("reagent Blank")
     # return None
+    global R_b, G_b, B_b
+    
+    ax0=backend.get_rgb()
+        
+    R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    global A_blank
+    A_blank= -math.log((S_r*R_b + S_g*G_b + S_b*B_b)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
     return '', 204
 
 @app.route("/standard",methods=['GET','POST'])
 def standard():
     print("standard")
     # return None
+    global R_s, G_s, B_s
+
+    ax0=backend.get_rgb()
+        
+    R_s = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_s = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_s = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    global A_std
+    A_std= -math.log((S_r*R_s + S_g*G_s + S_b*B_s)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
+
+    return '', 204
+
+@app.route("/get_factors",methods=['GET','POST']) 
+def get_factors():
+    print("calculating factors")
+    global m, i
     return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
@@ -307,39 +350,7 @@ def edit_test():
             edit_test["test_test_time"] = test_test_time
             edit_test["test_delay_between_images"] = test_delay_between_images
             edit_test["test_standard_concentration"] = test_standard_concentration
-            # print(edit_test)
-
-            # else:
-            #     test_name = test_details.test_name
-            #     test_type = test_details.type
-            #     test_temp = test_details.temp
-            #     test_wavelength = test_details.wavelength
-            #     test_unit = test_details.unit
-            #     test_result_low = test_details.result_low
-            #     test_result_high = test_details.result_high
-            #     test_sample_rest_time = test_details.sample_rest_time
-            #     test_test_time = test_details.test_time
-            #     test_delay_between_images = test_details.delay_between_images
-            #     test_standard_concentration = test_details.standard_concentration
-            #     test_m = test_details.m
-            #     test_i = test_details.i
-            #     test_R_w = test_details.R_w
-            #     test_G_w = test_details.G_w
-            #     test_B_w = test_details.B_w
-
-                
-            #     edit_test["test_name"] = test_name
-            #     edit_test["test_type"] = test_type
-            #     edit_test["test_temp"] = test_temp
-            #     edit_test["test_wavelength"] = test_wavelength
-            #     edit_test["test_unit"] = test_unit
-            #     edit_test["test_result_low"] = test_result_low
-            #     edit_test["test_result_high"] = test_result_high
-            #     edit_test["test_sample_rest_time"] = test_sample_rest_time
-            #     edit_test["test_test_time"] = test_test_time
-            #     edit_test["test_delay_between_images"] = test_delay_between_images
-            #     edit_test["test_standard_concentration"] = test_standard_concentration
-            #     print(edit_test)
+            
     
         # print("edit test")
 
@@ -378,6 +389,16 @@ def update_test():
             pass
 
         test_update.standard_concentration = request.form['testconc1']
+
+        try:
+            
+            test_update.R_w = R_w
+            test_update.G_w = G_w
+            test_update.B_w = B_w
+            
+        except:
+            pass
+            
         
         # print (test_update.test_id)
         db.session.add(test_update)
@@ -417,7 +438,8 @@ def update_test():
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 
-    print("Something")
+    print("cleaning")
+    sleep(3)
     # peltier.set_peltier(type = "visible")
     # print("cleaning from app.py")
     # run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
@@ -425,8 +447,6 @@ def clean():
 
 if __name__ == '__main__':
    app.run(debug = True)
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)

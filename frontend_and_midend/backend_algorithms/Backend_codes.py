@@ -1,21 +1,25 @@
-import Sens
+import wave
+from backend_algorithms import Sens
 sens = Sens.data()
 
-import DB
+from backend_algorithms import DB
 db = DB.database()
 
-import RPi.GPIO as GPIO
-from picamera import PiCamera
-import numpy as np
-import cv2
-from time import sleep
-from PIL import Image
+try:
+    import RPi.GPIO as GPIO
+    from picamera import PiCamera
+    import numpy as np
+    import cv2
+    from time import sleep
+    from PIL import Image
 
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
 
-GPIO.setup(24,GPIO.OUT,initial = GPIO.LOW)
+    GPIO.setup(24,GPIO.OUT,initial = GPIO.LOW)
+except:
+    pass
 
 # camera.start_preview(fullscreen = False, window = (500, 500, 640, 480))
 
@@ -79,9 +83,11 @@ class backend:
         test = input("Enter test name: ")
         return test
     
-    def get_sens(self, name = "none"):
+    def get_sens(self, name = "none", wavelength = 0):
         S = []
 #         print(name)
+        if wavelength != 0:
+            return sens.getVal(wavelength = wavelength)
         
         try:
             if name == "none":
@@ -97,7 +103,7 @@ class backend:
         
         return S
     
-    def get_rgb(self, save = False, name = "image"):
+    def get_rgb(self):
         
         camera = PiCamera()
         
@@ -138,9 +144,9 @@ class backend:
         camera.close()
 #         cv2.imshow("image", image)
         img = Image.fromarray(image, "RGB")
-        img.show()
+        # img.show()
 #         sleep(1)
-        img.close()
+        # img.close()
         height, width, _ = np.shape(image)
         avg_color_per_row = np.average(image, axis=0)
         avg_colors = np.average(avg_color_per_row, axis=0)
