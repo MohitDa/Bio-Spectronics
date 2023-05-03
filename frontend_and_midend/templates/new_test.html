@@ -92,6 +92,11 @@
         New test
     </div>
     <div class="card-body">
+      
+      <form action="/reagent_blank" id = "blank_form"></form>
+      <form action="/water" id = "water_form"></form>
+      <form action="/standard" id = "standard_form"></form>
+      
       <form method="post" id="new_test" action="/update_test">
         <!-- <div class="row">
           <div class="form-group">
@@ -320,21 +325,15 @@
         </div>
 
         <!-- <div class="row"> -->
-
           
-            <div class="form-group" style="display: inline-block; margin: 0; padding: 0;">
-              <form action="/water" id = "water_form"></form>
-              <form action="/reagent_blank" id = "blank_form"></form>
-              <form action="/standard" id = "standard_form"></form>
+          <div class="form-group"  style="top: -50px; display: block;">
+            
+            <button  class="btn btn-primary"  form = "water_form">Water</button>
+            <button  class="btn btn-primary" form = "blank_form">Reagent Blank</button>
+            <button  class="btn btn-primary" form = "standard_form">Standard</button>
+            <button  type="submit" value="submit" class="btn btn-primary"  form="new_test">Next</button>
+          </div>
 
-              <button  class="btn btn-primary" form = "water_form">Water</button>
-              <button  class="btn btn-primary" form = "blank_form">Reagent Blank</button>
-              <button  class="btn btn-primary" form = "standard_form">Standard</button>
-              <button  type="submit" value="submit" class="btn btn-primary"  form="new_test">Next</button>
-
-              
-            </div>
-          
         <!-- </div> -->
 
       </form>

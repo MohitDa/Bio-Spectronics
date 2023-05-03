@@ -226,17 +226,20 @@ def add_new_test():
 @app.route("/water",methods=['GET','POST'])
 def water():
     print("Water")
-    return None
+    # return None
+    return '', 204
 
 @app.route("/reagent_blank",methods=['GET','POST'])
 def reagent_blank():
     print("reagent Blank")
-    return None
+    # return None
+    return '', 204
 
 @app.route("/standard",methods=['GET','POST'])
 def standard():
     print("standard")
-    return None
+    # return None
+    return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
 def delete_test():
