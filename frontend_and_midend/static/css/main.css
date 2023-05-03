@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
+*{
+ margin:0;
+ padding: 0;
+ outline: 0;
+}
+.filter{
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ z-index: 1;
+ background-color: #ECE8DD;
+
+}
+
+.center{
+    text-align: center;
+    margin-top: -71px;
+    font-size: 42px;
+}
+.center1{
+    margin-left: 35px;
+    margin-top: 10px;
+}
+table{
+ position: absolute;
+ z-index: 2;
+ left: 50%;
+ top: 73%;
+ transform: translate(-50%,-50%);
+ width: 50%; 
+ border-collapse: collapse;
+ border-spacing: 0;
+ box-shadow: 0 2px 15px rgba(64,64,64,.7);
+ border-radius: 12px 12px 12px 12px;
+ overflow: hidden;
+
+}
+td , th{
+ padding:20px 30px;
+ text-align: center;
+ 
+
+}
+th{
+ background-color: #820000;
+ color: #ECECEC;
+ font-family: 'Open Sans',Sans-serif;
+ font-weight: 200;
+ text-transform: uppercase;
+
+}
+tr{
+ width: 100%;
+ background-color: #fafafa;
+ font-family: 'Montserrat', sans-serif;
+}
+tr:nth-child(even){
+ background-color: #eeeeee;
+}
+
+td:hover {
+    /* background-color: #e6cccc; */
+    /* background-color:#E3F6FF; */
+    /* background-color: 		#C0C0C0; */
+    background-color: #ece5d1;
+    /* background-color:#8DCBE6; */
+  }
+
+
+.lists {
+    display: flex;
+    align-items: center;
+    margin-top: 660px;
+}
+
+.list-mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.list-btn {
+    text-align: center;
+}
+
+p.modes-one {
+    border: 1px solid #4cbb17;
+    height: 18px;
+    width: 22px;
+    background: #4cbb17;
+    margin-left: 7px;
+   
+}
+
+p.modes-two {
+    border: 1px solid red;
+    height: 18px;
+    width: 22px;
+    background: red;
+    margin-left: 7px;
+}
+p.modes-three {
+    border: 1px solid #000;
+    height: 18px;
+    width: 22px;
+    background: #000;
+    margin-left: 7px;
+}
+
+p.modes {
+    border: 1px solid #0063b1;
+    height: 18px;
+    width: 22px;
+    background: #0063b1;
+    margin-left: 7px;
+}
+
+.list-mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.list-btn {
+    text-align: center;
+}
+
+.test-field {
+    text-align: center;
+    margin: 50px;
+}
+
+.test-field label {
+    font-size: 25px;
+}
+.test-field input {
+    height: 30px;
+    margin-left: 15px;
+    width: 18%;
+}
+.testtwo-btn{
+    text-align: left !important;
+}
+
+.testtwo-btn .btn{
+    margin: 45px 14px;
+
+}
+
+.return-btn {
+    margin-left: 30px !important;
+}
+
+.testtwo-btn {
+     position: absolute;
+     bottom: 0; 
+    width: 100%;
+    height:55px;
+}
+
+.test-head {
+    text-align: center;
+    margin-top: -66px;
+}
+
+.report-btn {
+    text-align: center !important;
+}
+
+.data-btn {
+    text-align: center !important;
+}
+.data-btn .btn {
+    margin: 60px;
+}
+
+.help-btn {
+    text-align: center !important;
+}
+
+.help-para p {
+    padding: 60px;
+    line-height: 25px;
+}
+
+.report-table {
+    display: flex;
+    margin: 25px;
+}
+
+
+table.r-table {
+    margin-right: 10rem;
+}
+.test-btn-one {
+    text-align: left;
+}
+
+.test-btns {
+    position: relative;
+    left: 35rem !important;
+}
+.edit-btns{
+    position: relative;
+    left: 45rem !important;
+}
+
+.report-btns {
+    position: relative;
+    left: 15rem !important;
+}
+.edit-two-btns{
+    position: relative;
+    left: 68rem !important;
+}
+
+.btn btn-info submit_btn popup-btn {
+    background-color: #0063b1;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 50px 35px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    border: 2px solid #0063b1;
+    margin-top: 47px;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    background-color: #9cc2d5;
+    color: black;
+    border: 2px solid #9cc2d5;
+}
+
+.bio-list {
+    padding: 20px;
+}
+
+.bio-list h1 {
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 25px;
+    color: #25316D;
+    size: 40px;
+}

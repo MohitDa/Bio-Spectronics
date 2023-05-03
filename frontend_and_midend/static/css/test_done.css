@@ -1,0 +1,26 @@
+*{
+    background-color: #ece8dd;
+}
+
+
+.tests-complete{
+    text-align: center;
+    align-items: center;
+    font-size: 30px;
+    color: #820000;
+    margin-top: 60px;
+}
+
+.card-header{
+    background-color: #9d3c3c;
+    color: rgb(255, 243, 227);
+  
+}
+
+.row{
+padding: 50px;
+}
+
+.card{
+    border: 2px solid black;
+}

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./static/list_of_tests.css">
+
+  <link rel="shortcut icon" href="./static/favicon.ico">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+
+  <title>Select Test</title>
+
+</head>
+
+<body background="#ece8dd">
+  <main class="container">
+    <div style="display: flex;   width: 100%;">
+      <!-- <img class="center1" src="/static/logo.png" width="90" height="90">
+      <div class="submit_btn display-4">List of Biochemistry</div> -->
+      
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="/static/logo.png" alt="Logo" width="90" height="90" class="d-inline-block align-text-top">
+          <span class="submit_btn display-4">List of Biochemistry</span>
+        </a>
+      </div>
+    </nav>
+    </div>
+
+
+    <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-secondary" type="submit">Search</button> -->
+    <input class="control" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+<!--   
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      
+      <div class="container-fluid">
+     
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <form class="d-flex" role="search">
+           
+          </form>
+        </div>
+      </div>
+    </nav> -->
+
+
+    <br><br>
+
+
+    <form class="row" method="post" action="/test_done" id="test_list">
+      <div class="col-6">
+
+        <div class="card">
+          <h5 class="card-header" align="center">Visible Tests</h5>
+          <div class="card-body">
+
+            <ul class="list-group">
+              <!-- <form class="grid" method="post" action="/test_done" id="test_list"></form> -->
+              <!-- generate buttons for all visible test in database -->
+              {% for visible in tests_visible %}
+              <div class="checkbox">
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{visible.test_name+ ",visible"}}" />
+                  <span class="checkbox-tile card_gl">
+                    <span>{{ visible.test_name }}</span>
+                  </span>
+                </label>
+              </div>
+              {%endfor%}
+            </ul>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-6">
+
+        <div class="card">
+          <h5 class="card-header" align="center">UV Tests</h5>
+          <div class="card-body">
+            <ul class="list-group">
+              {% for uv in tests_uv %}
+              <div class="checkbox">
+                <label class="checkbox-wrapper">
+                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{uv.test_name+",uv" }}" />
+                  <span class="checkbox-tile card_gl">
+                    <span>{{ uv.test_name }}</span>
+                  </span>
+                </label>
+              </div>
+              {%endfor%}
+            </ul>
+
+            <!-- </form>
+      </main> -->
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+    <!-- <form class="grid" method="post" action="/test_done" id="test_list"> -->
+
+    <!-- generate buttons for all visible test in database
+      {% for visible in tests_visible %}
+      <div class="checkbox">
+        <label class="checkbox-wrapper">
+          <input type="checkbox" class="checkbox-input " name="test_list" value="{{visible.test_name + ",visible"}}" />
+          <span class="checkbox-tile card_gl">
+            <span>{{visible.test_name}}</span>
+          </span>
+        </label>
+      </div>
+      {%endfor%}
+
+       generate buttons for all uv test in database 
+      {% for uv in tests_uv %}
+      <div class="checkbox">
+        <label class="checkbox-wrapper">
+          <input type="checkbox" class="checkbox-input " name="test_list" value="{{uv.test_name+ ",uv" }}" />
+          <span class="checkbox-tile card_gl">
+            <span>{{uv.test_name}}</span>
+          </span>
+        </label>
+      </div>
+      {%endfor%} -->
+
+
+    <!-- </form>
+  </main> -->
+
+    <div class="footer-buttons">
+      <input id="submitbtn" class="btn btn-info submit_btn" type="submit" value="Submit" form="test_list" data-toggle="modal" data-target="#wait_modal">
+
+      <form type="submit" method="post" action="/add_new_test" id="add_new_test">
+        <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="add_new_test">Add new
+          test</button>
+      </form>
+      
+
+      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#edit_test_modal">Edit
+        test</button>
+
+      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#delete_test_modal">Delete
+        test</button>
+        <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#stdval_modal">Measure
+        std. value</button>
+
+      <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="clean" data-target="#clean_modal">Clean
+      </button>
+    </div>
+
+    <!-- <button type="button" class="btn btn-info submit_btn"  value="Submit" form="test_list">Delete test</button>
+  </div> -->
+
+
+    <!-- new test modal form -->
+    <!-- <div class="modal fade" id="add_test_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          
+          <div class="modal-body">
+            <form class="row" type="submit" method="post" action="/add_new_test" id="add_new_test">
+              <input type="submit">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+
+    <!--measure std val modal form-->
+    <div class="modal fade" id="stdval_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Enter Std Value</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="post" id="add_test_uv" action="/add_new_test_uv">
+              <div class="row">
+                <div class="form-group">
+                  <label class="col-form-label">Test Name:</label>
+                  <input type="text" class="form-control" name="testname" required>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label">Test type:</label>
+                  <input type="text" value="uv" class="form-control" name="testtype" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                
+                  <div class="form-group">
+                    <label class="col-form-label">Enter Std Val</label>
+                    <input type="number" value="37" class="form-control" name="test_temperature" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" value="submit" class="btn btn-primary" form="add_test_uv">Submit</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- choose uv or visible modal form -->
+    <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting Temperature</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- edit Test modal form -->
+    <div class="modal fade" id="edit_test_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Edit Test/s</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form method="post" id="edit_test" action="/edit_test">
+
+              <!-- generate buttons for all visible test in database -->
+              {% for visible in tests_visible %}
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexCheckDefault" name="test_list"
+                  value = {{visible.test_id}} />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{visible.test_name}}
+                </label>
+
+              </div>
+              {%endfor%}
+
+              <!-- generate buttons for all uv test in database -->
+              {% for uv in tests_uv %}
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="flexCheckDefault" name="test_list" 
+                  value = {{uv.test_id}} />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{uv.test_name}}
+                </label>
+              </div>
+              {%endfor%}
+
+
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="submit" class="btn btn-primary" form="edit_test">Edit test</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- delete test modal form -->
+    <div class="modal fade" id="delete_test_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Delete Test/s</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form method="post" id="delete_test" action="/delete_test">
+
+              <!-- generate buttons for all visible test in database -->
+              {% for visible in tests_visible %}
+              <div class="form-check">
+
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="test_list"
+                  value="{{visible.test_name + ",visible"}}" />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{visible.test_name}}
+                </label>
+
+              </div>
+              {%endfor%}
+
+              <!-- generate buttons for all uv test in database -->
+              {% for uv in tests_uv %}
+              <div class="form-check">
+
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="test_list"
+                  value="{{uv.test_name + ",uv"}}" />
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{uv.test_name}}
+                </label>
+              </div>
+              {%endfor%}
+
+
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" value="submit" class="btn btn-primary" form="delete_test">Delete test/s</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+<!--stdval modal-->
+
+
+<!--clean modal-->
+<!-- <div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true"> -->
+<!-- <div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Cleaning in Progress...</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form method="post" id="clean_test" action="/clean">
+
+      </form>
+    </div>
+
+  </div>
+</div> -->
+
+
+<!--clean modal-->
+<div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Cleaning in Progress...</h5>
+      
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <form class="row" type="submit" method="post" action="/clean" id="clean"></form>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+<script>
+
+
+
+  $('#visible_modal').on('show.bs.modal', function (event) {
+
+  })
+  $('#wait_modal').on('show.bs.modal', function (event) {
+
+  })
+  $('#uv_modal').on('show.bs.modal', function (event) {
+
+  })
+  $('#choose_modal').on('show.bs.modal', function (event) {
+
+  })
+  $('#edit_test_modal').on('show.bs.modal', function (event) {
+
+  })
+  $('#delete_test_modal').on('show.bs.modal', function (event) {
+
+  })
+  // $('#submitbtn').click (function (e) {
+  //  e.preventDefault(); //will stop the link href to call the blog page
+
+  //  setTimeout(
+  // function() {
+  //   window.location.replace("http://127.0.0.1:5000/test_done");
+  // }, 5000);
+
+// });
+$('#test_list').submit(function (e) {
+   var form = this;
+   e.preventDefault();
+   setTimeout(function () {
+    form.submit();
+   }, 5000); // in milliseconds
+  });
+</script>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  /* div {
+    margin-bottom: 10px;
+  } */
+  label{
+    display: block;
+    position: relative;
+    width: 50%;
+    text-align: left;
+  }
+  input {
+    display: block;
+    position: relative;
+    width: 50%;
+    text-align: left;
+  }
+  .popup {
+  display: none;
+  position: fixed;
+  width: fit-content;
+  left: 40%;
+  /* margin-left: -150px; */
+  height: fit-content;
+  top: 50%;
+  margin-top: -400px;
+  background: #FFF;
+  border: 3px solid #007bff;
+  z-index: 20;
+}
+
+#popup:after {
+  position: fixed;
+  /* content: ""; */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+#popup:before {
+  position: absolute;
+  /* content: ""; */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #FFF;
+  z-index: -1;
+}
+
+
+/* button {
+    margin-top: 50px;
+    background-color: rgba(255,255,255,0.3);
+    border: 3px solid #F04A49;
+    color: #F04A49;
+    font-size: 25px;
+    padding: 10px 20px;
+     */
+/* } */
+
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./static/list_of_tests.css">
+  <link rel="shortcut icon" href="./static/favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+  <title>Edit Test</title>
+</head>
+
+<body>
+  <div class="card text-align">
+    <div class="card-header">
+        New test
+    </div>
+    <div class="card-body">
+      <form method="post" id="new_test" action="/update_test">
+        <!-- <div class="row">
+          <div class="form-group">
+            <label class="col-form-label">Test Name:</label>
+            <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname"
+              required>
+          </div>
+          <div class="form-group" style="display:none">
+            <label class="col-form-label">Test Name Old:</label>
+            <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testnameold" 
+              required>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-6">
+            <!-- <div class="row"> -->
+              <div class="form-group">
+                <label class="col-form-label">Chemistry:</label>
+                <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname"
+                  required>
+              </div>
+              <div class="form-group" style="display:none">
+                <label class="col-form-label">Test Name Old:</label>
+                <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+                  required>
+              </div>
+            <!-- </div> -->
+
+            <div class="form-group">
+              <label class="col-form-label">Method:</label>
+              <select type="text"  class="form-control" name="testmethod" required>
+                <option selected value="EP"> Select Type </option>
+                <option value="EP">End Point</option>
+                <option value="TP">Two Point</option>
+                <option value="Kinetic">Kinetic</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Temperature:</label>
+              <input type="number" value="{{edit_test["test_temp"]}}" step="0.5" class="form-control" name="testtemp">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Wavelength 1:</label>
+              <input type="number" value="{{edit_test["test_wavelength1"]}}" class="form-control" name="testwavelength1">
+            </div>
+            
+            <div class="form-group">
+              <label class="col-form-label">Wavelength 2:</label>
+              <input type="number" value="{{edit_test["test_wavelength2"]}}" class="form-control" name="testwavelength2">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Blank:</label>
+              <Select type="text" class="form-control" name="testblank">
+                <option selected value="Reagent Blank">Reagent Blank</option>
+                <option value="Water">Water</option>
+              </Select>
+            </div>
+            <div class="form-group" >
+              <label class="col-form-label">Standard:</label>
+              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard">
+            </div>
+
+            <div class="form-group" >
+              <button type="submit" onclick="show('std_settings')" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">Conc.</button>
+            </div>
+
+            <div class="popup" id="std_settings">
+              <!-- <div class="card text-center"> -->
+                <div class="card-header">
+                  Std. Input 
+                </div>
+
+                <div class="card-body" style="text-align: left;">
+                  <!-- <form method="post" id="edit_test" action="/update_test"> -->
+                    <!-- <div class="row">
+                      <div class="form-group">
+                        <label class="col-form-label">Test Name:</label>
+                        <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname"
+                          required>
+                      </div>
+                      <div class="form-group" style="display:none">
+                        <label class="col-form-label">Test Name Old:</label>
+                        <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testnameold" 
+                          required>
+                      </div>
+                    </div> -->
+                    <div class="row">
+                      <div class="col-6">
+                          
+                        <div class="form-group" >
+                          <label class="col-form-label">Point: </label>
+                          <input type="number"  value="1" step="1" class="form-control" name="testpoint">
+                        </div>
+
+                        <div class="form-group">
+                          <label class="col-form-label">Type:</label>
+                          <input type="text" value="linear" class="form-control" name="testtype" >
+                        </div>
+
+                      </div>
+
+                      <div class="col-6">
+                        <div class="form-group" >
+                          <label class="col-form-label">Repeat: </label>
+                          <input type="number"  value="1" step="1" class="form-control" name="testrepeat">
+                        </div>
+                      </div>
+                      
+                    </div>
+
+                    Conc.
+
+                    <div class="row">
+                        <div class="col-6">
+                          <div class="form-group">
+                            <label class="col-form-label">1:</label>
+                            <input type="number" value="" class="form-control" name="testconc1" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">3:</label>
+                            <input type="number" value="0" class="form-control" name="testconc3" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">5:</label>
+                            <input type="number" value="0" class="form-control" name="testconc5" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">7:</label>
+                            <input type="number" value="0" class="form-control" name="testconc7" required>
+                          </div>
+
+                        </div>
+
+                        <div class="col-6">
+                          <div class="form-group">
+                            <label class="col-form-label">2:</label>
+                            <input type="number" value="0" class="form-control" name="testconc2" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">4:</label>
+                            <input type="number" value="0" class="form-control" name="testconc4" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">6:</label>
+                            <input type="number" value="0" class="form-control" name="testconc6" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-form-label">8:</label>
+                            <input type="number" value="0" class="form-control" name="testconc8" required>
+                          </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group" >
+                        <button type="submit" onclick="hide('std_settings')" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">OK</button>
+                      </div>
+                    </div>
+
+                    
+
+                  <!-- </form> -->
+                  
+                </div>
+
+              <!-- </div> -->
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label">QC:</label>
+              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="testqc">
+            </div>
+
+          </div>
+
+
+          <div class="col-6">
+            < Reference >
+            <div class="form-group">
+              <label class="col-form-label">Low:</label>
+              <input type="number" value="{{edit_test["test_result_low"]}}" class="form-control"
+                name="testlevellow" required>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">High:</label>
+              <input type="number" value="{{edit_test["test_result_high"]}}" class="form-control"
+                name="testlevelhigh" required>
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Unit:</label>
+              <input type="text" value="{{edit_test["test_unit"]}}" class="form-control"
+                name="testunit">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Decimal:</label>
+              <input type="number" value="2" class="form-control" name="testdecimal">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label">Delay Time:</label>
+              <input type="number" value="{{edit_test["test_sample_rest_time"]}}" class="form-control"
+                name="testdelaytime">
+            </div>
+            {% if ((edit_test["test_type"] == "TP") or (edit_test["test_type"] == "Kinetic"))%}
+            <div class="form-group">
+              <label class="col-form-label">Measuring Time:</label>
+              <input type="number" value="{{edit_test["test_test_time"]}}" class="form-control"
+                name="testtesttime">
+            </div>
+              {% if edit_test["test_type"] == "Kinetic" %}
+              <div class="form-group">
+                <label class="col-form-label">Delay Between Absorbance:</label>
+                <input type="number" value="{{edit_test["test_delay_between_images"]}}" class="form-control"
+                  name="testdelaybetweenimages">
+              </div>
+              {% endif %}
+            {% endif %}
+            <div class="form-group">
+              <label class="col-form-label">Volume:</label>
+              <input type="text" value="100uL" class="form-control" name="testvolume">
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- <div class="row"> -->
+
+          
+            <div class="form-group" style="display: inline-block; margin: 0; padding: 0;">
+              <form action="/water" id = "water_form"></form>
+              <form action="/reagent_blank" id = "blank_form"></form>
+              <form action="/standard" id = "standard_form"></form>
+
+              <button  class="btn btn-primary" form = "water_form">Water</button>
+              <button  class="btn btn-primary" form = "blank_form">Reagent Blank</button>
+              <button  class="btn btn-primary" form = "standard_form">Standard</button>
+              <button  type="submit" value="submit" class="btn btn-primary"  form="new_test">Next</button>
+
+              
+            </div>
+          
+        <!-- </div> -->
+
+      </form>
+    </div>
+
+  </div>
+</body>
+
+</html>
+
+<script>
+$ = function(id) {
+  return document.getElementById(id);
+}
+
+var show = function(id) {
+	$(id).style.display ='block';
+}
+var hide = function(id) {
+	$(id).style.display ='none';
+}
+</script>
