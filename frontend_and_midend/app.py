@@ -96,6 +96,7 @@ class new_tests(db.Model):
     G_w = db.Column(db.Integer, nullable=True)
     B_w = db.Column(db.Integer, nullable=True)
 
+#todo link database of shortcut here
 
 @app.route("/")
 def index():
