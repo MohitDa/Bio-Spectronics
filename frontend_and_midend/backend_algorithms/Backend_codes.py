@@ -87,7 +87,7 @@ class backend:
         S = []
 #         print(name)
         if wavelength != 0:
-            return sens.getVal(wavelength = wavelength)
+            return sens.getVal(wavelength)
         
         try:
             if name == "none":

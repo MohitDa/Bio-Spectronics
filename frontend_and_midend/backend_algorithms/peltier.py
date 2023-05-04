@@ -1,5 +1,7 @@
+import sys
+sys.path.insert(1, '/backend_algorithms')
 
-from mlx90614_rpi import *
+from backend_algorithms.mlx90614_rpi import *
 
 from threading import Thread
 

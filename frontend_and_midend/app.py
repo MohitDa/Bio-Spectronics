@@ -1,7 +1,7 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 import os
 from stat import S_IFBLK
-from tkinter import NO
+# from tkinter import NO
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
@@ -15,7 +15,7 @@ import sys
 sys.path.insert(1, '/backend_algorithms')
 
 
-from backend_algorithms import Backend_codes #, run_motor, peltier
+from backend_algorithms import Backend_codes , run_motor, peltier
 backend = Backend_codes.backend()
 # import backend_algorithms.run_motor #pump actions
 # import backend_algorithms.peltier   #peltier
@@ -225,7 +225,6 @@ def add_new_test():
     
     new_test.test_name = ""
     new_test.test_type = "Kinetic"
-    global S_r, S_g, S_b
 
     return render_template("new_test.html", edit_test = new_test)
 
@@ -233,15 +232,19 @@ def add_new_test():
 def water():
     print("Water")
 
-    global S_r, S_g, S_b
-    S_r, S_g, S_b = backend.get_sens(wavelength= request.form['testwavelength1'])
+    # global S_r, S_g, S_b
+    
+    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
+    # print(S_r, S_g, S_b)
     # return None
     global R_w, G_w, B_w
     ax0=backend.get_rgb()
+    # print(ax0)
         
     R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
     G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
     B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    print(R_w, G_w, B_w)
 
     return '', 204
 
@@ -258,50 +261,68 @@ def reagent_blank():
     B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
 
     global A_blank
+
+    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
     A_blank= -math.log((S_r*R_b + S_g*G_b + S_b*B_b)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
+    # print(R_b, G_b, B_b, A_blank)
     return '', 204
 
 @app.route("/standard",methods=['GET','POST'])
 def standard():
     print("standard")
     # return None
-    global R_s, G_s, B_s
+    global R_std, G_std, B_std
 
     ax0=backend.get_rgb()
         
-    R_s = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_s = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_s = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    R_std = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_std = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_std = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
 
     global A_std
-    A_std= -math.log((S_r*R_s + S_g*G_s + S_b*B_s)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
 
+    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
+    A_std= -math.log((S_r*R_std + S_g*G_std + S_b*B_std)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
+    # print(R_std, G_std, B_std, A_std)
     return '', 204
 
 @app.route("/get_factors",methods=['GET','POST']) 
 def get_factors():
     print("calculating factors")
-    global m, i
-    return '', 204
+    # global m, i
+    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == test_wavelength)
+    # test_name, test_wavelength
+    id = -1
+    with db.engine.connect() as conn:
+        for row in conn.execute(stmt):
+            id = row.test_id
+
+    test_update = new_tests.query.get_or_404(id)
+    test_update.R_w = R_w
+    test_update.G_w = G_w
+    test_update.B_w = B_w
+
+    m = int(q) / (A_std - A_blank)
+    i = int(q) - m * A_std
+
+    test_update.m = m
+    test_update.i = i
+    
+    db.session.add(test_update)
+    db.session.commit()
+    return redirect("/list_of_biochemistry")
+    # return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
 def delete_test():
     if request.method == "POST":
         test_list = request.form.getlist('test_list')
+        # print(test_list)
         for test in test_list:
-            current_test = test.split(",")
-           
-            if current_test[1] == "uv":
-                test_details = new_test_uv.query.get_or_404(current_test[0])
-
-            else:
-                test_details = new_test_visible.query.get_or_404(current_test[0])
-        
-        
+            # print(test)
+            test_details = new_tests.query.get_or_404(test)
             db.session.delete(test_details)
             db.session.commit()
-
-    
 
     return redirect("/list_of_biochemistry")
 
@@ -313,6 +334,7 @@ def edit_test():
         edit_test = dict(test_id = "", test_name = "" , test_type = "" , test_temp = "" , test_wavelength = "" , test_unit = "" , test_result_low = "" , test_result_high = "" , test_sample_rest_time = "" , test_test_time = "" , test_delay_between_images = "" , test_standard_concentration = "")
     
         for test in test_list:
+            # print(test)
             current_test = test.split(",")
             # print("current tests: " +str(current_test[0]))
             test_details = new_tests.query.get_or_404(current_test[0])
@@ -362,6 +384,8 @@ def update_test():
         # test_name = request.form['testname']
         # print(test_name)
 
+
+        global test_name, q, test_wavelength #q is standard concentration
         test_id = request.form['testid']
         # print(test_id)
         test_update = new_tests.query.get(test_id)
@@ -369,10 +393,11 @@ def update_test():
             test_update = new_tests()
             test_update.m = 0
             test_update.i = 0
-        test_update.test_name = request.form['testname']
+        test_name = test_update.test_name = request.form['testname']
         test_update.type = request.form['testmethod']
         test_update.temp = request.form['testtemp']
         test_update.wavelength = request.form['testwavelength1']
+        test_wavelength = test_update.wavelength
         test_update.unit = request.form['testunit']
         test_update.result_low = request.form['testlevellow']
         test_update.result_high = request.form['testlevelhigh']
@@ -389,60 +414,28 @@ def update_test():
             pass
 
         test_update.standard_concentration = request.form['testconc1']
+        q = test_update.standard_concentration
 
         try:
-            
-            test_update.R_w = R_w
-            test_update.G_w = G_w
-            test_update.B_w = B_w
-            
+            test_update.B_w = request.form['testB_w']
         except:
             pass
-            
-        
-        # print (test_update.test_id)
+
         db.session.add(test_update)
         db.session.commit()
 
-        # if(test_type=="visible"):
-        #     test_name = request.form['testnameold']
-        #     test_details = new_test_visible.query.get_or_404(test_name)
-        #     test_details.test_name = request.form['testname']
-        #     test_details.H = request.form['H']
-        #     test_details.S = request.form['S']
-        #     test_details.L = request.form['L']
-        #     test_details.V = request.form['V']
-        #     test_details.test_temperature = request.form['test_temperature']
-        #     test_details.intercept = request.form['intercept']
-        #     test_details.test_level_lower = request.form['test_level_lower']
-        #     test_details.test_level_higher = request.form['test_level_higher']
-        #     test_details.test_unit = request.form['test_unit']
-        #     db.session.add(test_details)
-        #     db.session.commit()
-        
-        # if test_type == "uv":
-        #     test_name = request.form['testnameold']
-        #     test_details = new_test_uv.query.get_or_404(test_name)
-        #     test_details.test_name = request.form['testname']
-        #     test_details.test_temperature = request.form['test_temperature']
-        #     test_details.test_level_lower = request.form['test_level_lower']
-        #     test_details.test_level_higher = request.form['test_level_higher']
-        #     test_details.test_unit = request.form['test_unit']
-        #     db.session.add(test_details)
-        #     db.session.commit()
-
-
-
-        return redirect("/list_of_biochemistry")
+        return '', 204
+        # return redirect("/list_of_biochemistry")
 
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 
     print("cleaning")
-    sleep(3)
+    # sleep(3)
     # peltier.set_peltier(type = "visible")
     # print("cleaning from app.py")
-    # run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
+    run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
+    print('done')
     return redirect("/list_of_biochemistry")
 
 if __name__ == '__main__':
