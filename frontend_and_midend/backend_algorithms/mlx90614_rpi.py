@@ -3,6 +3,7 @@ from mlx90614 import MLX90614
 import time
 import os
 import RPi.GPIO as IO
+from sqlalchemy import null
 IO.setwarnings(False)           #do not show any warnings
 IO.setmode (IO.BCM)         #we are programming the GPIO by BCM pin numbers. (PIN35 as ‘GPIO19’)
 
@@ -19,17 +20,23 @@ millis = lambda: int(round(time.time() * 1000))
 
 def set_peltier_temperature(set_temperature = 37.0, gpio_pin_no = 18, address_recieved = 0x5A, temp_set = [False]):
     
-    global sensor
-    sensor = MLX90614(bus, address = address_recieved)
-    
-    IO.setup(gpio_pin_no,IO.OUT)           # initialize GPIO19 as an output.
-    # print("c")
-    global p
+    global sensor, p
 
-    p = IO.PWM(gpio_pin_no,490.27)
-    p.start(100)
+    p = null
 
-    p.ChangeDutyCycle(100)
+    try:
+        sensor = MLX90614(bus, address = address_recieved)
+        
+        IO.setup(gpio_pin_no,IO.OUT)           # initialize GPIO19 as an output.
+        # print("c")
+
+        p = IO.PWM(gpio_pin_no,490.27)
+        p.start(100)
+
+        p.ChangeDutyCycle(100)
+    except:
+        pass
+
     temperature_read = 0.0
     PID_error = 0.0
     previous_error = 0.0

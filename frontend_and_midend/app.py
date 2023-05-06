@@ -15,7 +15,7 @@ import sys
 sys.path.insert(1, '/backend_algorithms')
 
 
-from backend_algorithms import Backend_codes , run_motor, peltier
+from backend_algorithms import Backend_codes , run_motor, peltier, test
 backend = Backend_codes.backend()
 # import backend_algorithms.run_motor #pump actions
 # import backend_algorithms.peltier   #peltier
@@ -95,6 +95,11 @@ class new_tests(db.Model):
     R_w = db.Column(db.Integer, nullable=True)
     G_w = db.Column(db.Integer, nullable=True)
     B_w = db.Column(db.Integer, nullable=True)
+
+class sqlite_sequence(db.Model):
+
+    name = db.Column(db.String(100),primary_key=True)
+    seq = db.Column(db.Integer)
 
 #todo link database of shortcut here
 
@@ -235,7 +240,7 @@ def water():
 
     # global S_r, S_g, S_b
     
-    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
+    # S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
     # print(S_r, S_g, S_b)
     # return None
     global R_w, G_w, B_w
@@ -247,43 +252,89 @@ def water():
     B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
     print(R_w, G_w, B_w)
 
+    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
+    # test_name, test_wavelength
+    _id = -1
+    with db.engine.connect() as conn:
+        current_test = new_tests()
+
+        for test in conn.execute(stmt):
+            # id = current_test.test_id
+            # print(test.test_name)
+            _id = test.test_id
+            # print(current_test)
+    
+
+    _current_test = new_tests.query.get(_id)
+
+    _current_test.R_w = R_w
+    _current_test.G_w = G_w
+    _current_test.B_w = B_w
+        
+    db.session.add(_current_test)
+    db.session.commit()
+
     return '', 204
 
 @app.route("/reagent_blank",methods=['GET','POST'])
 def reagent_blank():
     print("reagent Blank")
+
+    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
+    # test_name, test_wavelength
+    _id = -1
+    with db.engine.connect() as conn:
+        for rows in conn.execute(stmt):
+            # id = current_test.test_id
+            _id = rows.test_id
     # return None
-    global R_b, G_b, B_b
+    # global R_b, G_b, B_b
     
-    ax0=backend.get_rgb()
+    # ax0=backend.get_rgb()
         
-    R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # R_b = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # G_b = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # B_b = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    _current_test = new_tests.query.get(_id)
 
     global A_blank
+    # test.perform_test(test_id = current_test.test_id)
+    # S_r, S_g, S_b = backend.get_sens(wavelength = current_test.wavelength)
+    # print(_current_test.test_name)
+    A_blank= test.perform_test(_current_test)
 
-    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
-    A_blank= -math.log((S_r*R_b + S_g*G_b + S_b*B_b)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
+    
     # print(R_b, G_b, B_b, A_blank)
     return '', 204
 
 @app.route("/standard",methods=['GET','POST'])
 def standard():
     print("standard")
-    # return None
-    global R_std, G_std, B_std
 
-    ax0=backend.get_rgb()
+    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
+    # test_name, test_wavelength
+    _id = -1
+    with db.engine.connect() as conn:
+        for rows in conn.execute(stmt):
+            # id = current_test.test_id
+            _id = rows.test_id
+            
+    # return None
+    # global R_std, G_std, B_std
+
+    # ax0=backend.get_rgb()
         
-    R_std = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_std = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_std = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # R_std = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # G_std = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    # B_std = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+
+    _current_test = new_tests.query.get(_id)
 
     global A_std
 
-    S_r, S_g, S_b = backend.get_sens(wavelength = test_wavelength)
-    A_std= -math.log((S_r*R_std + S_g*G_std + S_b*B_std)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
+    # S_r, S_g, S_b = backend.get_sens(wavelength = current_test.wavelength)
+    A_std= test.perform_test(_current_test)
     # print(R_std, G_std, B_std, A_std)
     return '', 204
 
@@ -291,31 +342,31 @@ def standard():
 def get_factors():
     print("calculating factors")
     # global m, i
-    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == test_wavelength)
+    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
     # test_name, test_wavelength
-    id = -1
+    _id = -1
+    _current_test = new_tests()
     with db.engine.connect() as conn:
         for row in conn.execute(stmt):
-            id = row.test_id
+            _id = row.test_id
 
-    test_update = new_tests.query.get_or_404(id)
-    test_update.R_w = R_w
-    test_update.G_w = G_w
-    test_update.B_w = B_w
+    _current_test = new_tests.query.get_or_404(_id)
 
-    m = int(q) / (A_std - A_blank)
-    i = int(q) - m * A_std
+    m = _current_test.standard_concentration / (A_std - A_blank)
+    i = _current_test.standard_concentration - m * A_std
 
-    test_update.m = m
-    test_update.i = i
+    _current_test.m = m
+    _current_test.i = i
     
-    db.session.add(test_update)
+    db.session.add(_current_test)
     db.session.commit()
     return redirect("/list_of_biochemistry")
     # return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
 def delete_test():
+
+    
     if request.method == "POST":
         test_list = request.form.getlist('test_list')
         # print(test_list)
@@ -324,6 +375,16 @@ def delete_test():
             test_details = new_tests.query.get_or_404(test)
             db.session.delete(test_details)
             db.session.commit()
+    
+    seq_table = sqlite_sequence()
+    seq_table.name = "new_tests"
+    
+     
+    seq_table.seq = int(db.session.query(func.max(new_tests.test_id)).first()[0])
+    print(seq_table.seq)
+    db.session.add(seq_table)
+    db.session.commit()
+        
 
     return redirect("/list_of_biochemistry")
 
@@ -386,7 +447,7 @@ def update_test():
         # print(test_name)
 
 
-        global test_name, q, test_wavelength #q is standard concentration
+        global test_name, wavelength #q is standard concentration
         test_id = request.form['testid']
         # print(test_id)
         test_update = new_tests.query.get(test_id)
@@ -397,8 +458,7 @@ def update_test():
         test_name = test_update.test_name = request.form['testname']
         test_update.type = request.form['testmethod']
         test_update.temp = request.form['testtemp']
-        test_update.wavelength = request.form['testwavelength1']
-        test_wavelength = test_update.wavelength
+        wavelength = test_update.wavelength = request.form['testwavelength1']
         test_update.unit = request.form['testunit']
         test_update.result_low = request.form['testlevellow']
         test_update.result_high = request.form['testlevelhigh']
@@ -415,7 +475,6 @@ def update_test():
             pass
 
         test_update.standard_concentration = request.form['testconc1']
-        q = test_update.standard_concentration
 
         try:
             test_update.B_w = request.form['testB_w']
@@ -431,12 +490,14 @@ def update_test():
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 
-    print("cleaning")
-    # sleep(3)
-    # peltier.set_peltier(type = "visible")
-    # print("cleaning from app.py")
-    run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
-    print('done')
+    # print("cleaning")
+    # # sleep(3)
+    # # peltier.set_peltier(type = "visible")
+    # # print("cleaning from app.py")
+    # run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
+    # print('done')
+    current_test = new_tests.query.get_or_404(27)
+    print(test.perform_test(current_test))
     return redirect("/list_of_biochemistry")
 
 if __name__ == '__main__':

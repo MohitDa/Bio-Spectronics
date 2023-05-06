@@ -117,15 +117,19 @@ def kinamatics():
     #         file.write("," +str(R_samp) + "," +str(G_samp) + "," +str(B_samp) + "," + str(c1) + "," + str(c2))   
         file.flush()
 
-    for i in range(0, len(y)-1):
-        k = y[i+1] - y[i]
-        sum = sum + k
+    if len(y) <= 1:
+        print(y[0])
+        return y[0]
+    else:
+        for i in range(0, len(y)-1):
+            k = y[i+1] - y[i]
+            sum = sum + k
 #             print(k)
 
-    sum /= len(y) - 1
-#     print(sum)
-    
-    return sum
+        sum /= len(y) - 1
+    #     print(sum)
+        
+        return sum
 
 
 
