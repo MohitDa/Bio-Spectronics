@@ -25,5 +25,7 @@ def set_peltier(type = "null", temp = 0):
     while temp_set[0] == False:
         pass
 
+    return
+
     
 

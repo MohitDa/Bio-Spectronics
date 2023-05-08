@@ -43,8 +43,6 @@ def perform_test(test):
 
     R_w, G_w, B_w = test.R_w, test.G_w, test.B_w
 
-    peltier.set_peltier(type = "visible", temp = test.temp)  #Setting Peltier Tempreature
-
     return kinetic(R_w = R_w, G_w = G_w, B_w = B_w, test_time = test_time, sample_rest_time = sample_rest_time, delay_between_images = delay_between_images)
 
 

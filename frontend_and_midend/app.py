@@ -232,14 +232,6 @@ def add_new_test():
 def water():
     print("Water")
 
-    global R_w, G_w, B_w
-    ax0=backend.get_rgb()
- 
-    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-    print(R_w, G_w, B_w)
-
     stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
 
     _id = -1
@@ -251,6 +243,16 @@ def water():
     
 
     _current_test = new_tests.query.get(_id)
+
+    global R_w, G_w, B_w
+
+    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+    
+    ax0=backend.get_rgb()
+ 
+    R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
+    B_w = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
 
     _current_test.R_w = R_w
     _current_test.G_w = G_w
@@ -274,9 +276,11 @@ def reagent_blank():
 
     _current_test = new_tests.query.get(_id)
 
+    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+
     global A_blank
 
-    A_blank= test.perform_test(_current_test)
+    A_blank = test.perform_test(_current_test)
 
     return '', 204
 
@@ -294,6 +298,8 @@ def standard():
 
     _current_test = new_tests.query.get(_id)
 
+    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+    
     global A_std
 
     A_std= test.perform_test(_current_test)
@@ -321,7 +327,8 @@ def get_factors():
     
     db.session.add(_current_test)
     db.session.commit()
-    return redirect("/list_of_biochemistry")
+    return render_template("new_test_added.html"), {"Refresh": "1; url=list_of_biochemistry"}
+    # return redirect("/list_of_biochemistry")
     # return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
@@ -346,8 +353,8 @@ def delete_test():
     db.session.add(seq_table)
     db.session.commit()
         
-
-    return redirect("/list_of_biochemistry")
+    return render_template("tests_deleted.html"), {"Refresh": "1; url=list_of_biochemistry"}
+    # return redirect("/list_of_biochemistry")
 
 @app.route("/edit_test",methods=['GET','POST'])
 def edit_test():
@@ -391,8 +398,6 @@ def edit_test():
             edit_test["test_delay_between_images"] = test_delay_between_images
             edit_test["test_standard_concentration"] = test_standard_concentration
             
-    
-
     return render_template("edit_test.html", edit_test = edit_test)
 
 @app.route("/update_test",methods=['GET','POST'])
@@ -400,12 +405,13 @@ def update_test():
     if request.method == "POST":
         global test_name, wavelength #q is standard concentration
         test_id = request.form['testid']
-        
+        edit = True #test being edited, not cretated
         test_update = new_tests.query.get(test_id)
         if test_update == None: #test do not exist. Add new test
             test_update = new_tests()
             test_update.m = 0
             test_update.i = 0
+            edit = False #test being creaated, not edited
 
         test_name = test_update.test_name = request.form['testname']
         test_update.type = request.form['testmethod']
@@ -436,8 +442,10 @@ def update_test():
         db.session.add(test_update)
         db.session.commit()
 
-        return '', 204
-        # return redirect("/list_of_biochemistry")
+        if edit == False:
+            return '', 204
+        else:
+            return render_template("test_edited.html"), {"Refresh": "3; url=list_of_biochemistry"}
 
 @app.route("/clean",methods=['GET','POST'])
 def clean():
