@@ -327,7 +327,7 @@ def get_factors():
     
     db.session.add(_current_test)
     db.session.commit()
-    return render_template("new_test_added.html"), {"Refresh": "1; url=list_of_biochemistry"}
+    return render_template("new_test_added.html"), {"Refresh": "3; url=list_of_biochemistry"}
     # return redirect("/list_of_biochemistry")
     # return '', 204
 
@@ -353,7 +353,7 @@ def delete_test():
     db.session.add(seq_table)
     db.session.commit()
         
-    return render_template("tests_deleted.html"), {"Refresh": "1; url=list_of_biochemistry"}
+    return render_template("tests_deleted.html"), {"Refresh": "3; url=list_of_biochemistry"}
     # return redirect("/list_of_biochemistry")
 
 @app.route("/edit_test",methods=['GET','POST'])
