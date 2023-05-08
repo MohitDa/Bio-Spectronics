@@ -10,13 +10,13 @@ def set_peltier(type = "null", temp = 0):
 
     print(type)
     if type == "visible":
-        # print("a")
         t1 = Thread(target=set_peltier_temperature,args=(temp,19,0x5A,temp_set))
         t1.start()
+
     elif type == "uv":
-        # print("b")
         t1 = Thread(target=set_peltier_temperature,args=(temp,18,0x5B,temp_set))
         t1.start()
+        
     else:
         print("else")
     
@@ -25,5 +25,5 @@ def set_peltier(type = "null", temp = 0):
     while temp_set[0] == False:
         pass
 
-    # stop_pwm()
+    
 

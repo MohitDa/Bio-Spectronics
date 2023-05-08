@@ -14,3 +14,5 @@ class data:
 
 	def getVal(self, filt):
 		return (data.dictR.get(filt, data.dictR.get(510)), data.dictG.get(filt, data.dictG.get(510)), data.dictB.get(filt, data.dictB.get(510)))
+
+# data().getVal(510)

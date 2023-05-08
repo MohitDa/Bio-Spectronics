@@ -18,61 +18,9 @@ try:
     GPIO.setwarnings(False)
 
     GPIO.setup(24,GPIO.OUT,initial = GPIO.LOW)
+
 except:
     pass
-
-# camera.start_preview(fullscreen = False, window = (500, 500, 640, 480))
-
-# camera.meter_mode = 'average'
-# camera.exposure_mode = 'spotlight'
-# camera.flash_mode = 'off'
-# camera.awb_mode = 'off'
-# camera.awb_gains = (3.75,1.125)
-# camera.drc_strength = 'off'
-# camera.image_effect = 'none'
-# camera.raw_format = 'rgb'
-# camera.shutter_speed = 31098
-# camera.brightness = 50
-# camera.ISO = 0
-# camera.contrast= 0
-# camera.resolution = (320, 240)
-# camera.zoom = (0.49, 0.42, 0.1, 0.148)
-# camera.shutter_speed = 30000
-
-# sleep(3)
-
-# GPIO.output(24,GPIO.HIGH)
-#
-# camera = PiCamera()
-#         
-# camera.exposure_mode = 'off'
-# camera.flash_mode = 'off'
-# camera.awb_mode = 'off'
-# camera.awb_gains = (3.33, 1.6)
-# camera.drc_strength = 'off'
-# camera.image_effect = 'none'
-# camera.resolution = (320, 240)
-# # camera.raw_format = 'rgb'
-# camera.shutter_speed = 32000
-# camera.brightness = 45
-# camera.ISO = 0
-# camera.contrast= 0
-# camera.zoom = (0.49, 0.42, 0.1, 0.148)
-
-# sleep(5)
-# GPIO.output(24,GPIO.HIGH)
-# camera.start_preview(fullscreen = False, window = (500, 500, 640, 480))
-# # 
-# # 
-# sleep(20)
-# GPIO.output(24,GPIO.LOW)
-# camera.stop_preview()
-
-# camera.zoom = (0.49, 0.42, 0.1, 0.148)
-
-# sleep(5)
-
-
 
 class backend:
     def get_date(self):
@@ -85,17 +33,15 @@ class backend:
     
     def get_sens(self, name = "none", wavelength = 0):
         S = []
-#         print(name)
         if wavelength != 0:
             return sens.getVal(wavelength)
         
         try:
             if name == "none":
                 S = sens.getVal(int(input("Enter filter value. {400, 410, 420, 430,...., 700}: ")))
+
             else:
-#                 print('select wavelength from tests where test_name = "' + name +'"')
                 wavelength = db.execute_command('select wavelength from tests where test_name = "' + name +'"')
-#                 print(wavelength[0])
                 S = sens.getVal(wavelength[0])
         except:
             print("Wrong Input")
@@ -114,7 +60,6 @@ class backend:
         camera.drc_strength = 'off'
         camera.image_effect = 'none'
         camera.resolution = (320, 240)
-        # camera.raw_format = 'rgb'
         camera.shutter_speed = 32000
         camera.brightness = 45
         camera.ISO = 0
@@ -173,8 +118,8 @@ class backend:
     def get_test_name(self, type = "none"):
         
         if type == "none":
-            
             table_test_names = db.execute_command("select test_name from " +db.table_name)
+
         else:
             table_test_names = db.execute_command("select test_name from " +db.table_name +' where type ="' +type +'"')
             
@@ -203,14 +148,12 @@ class backend:
     def get_factor(self, name = "null", water = False):
         
         try:
-#             print("select m,i from " +db.table_name +' where test_name ="' +name +'"')
-#             print(db.execute_command("select m,i from " +db.table_name +' where test_name ="' +name +'"'))
             m, i, unit = db.execute_command("select m , i , unit from " +db.table_name +' where test_name ="' +name +'"')
             R_w, G_w, B_w = 0,0,0
+
             if water == True:
-#                 print("select " +db.attributes[8] +", " +db.attributes[9] +", " +db.attributes[10] +" from "+db.table_name +' where test_name ="' +name +'"')
                 R_w, G_w, B_w = db.execute_command("select R_w, G_w, G_w from "+db.table_name +' where test_name ="' +name +'"')
-#             print(m, i)
+
             return m,i, R_w, G_w, B_w, unit
         except:
             print("error from get_factor()")
@@ -224,9 +167,7 @@ class backend:
             db.commit()
         except:
             print("error from set_factor()")
-                        
-            
-            
+                                 
     def set_times(self, name = "null", sample_rest_time = 0, test_time = 0, delay_between_images = 0):
         try:
             print("update " +db.table_name +" set sample_rest_time = " +str(sample_rest_time) + ", test_time = " +str(test_time)  + ", delay_between_images = " +str(delay_between_images) +' where test_name ="' +name +'"')
@@ -235,8 +176,7 @@ class backend:
             db.commit()
         except:
             print("error from set_times()")
-            
-        
+                 
     def get_times(self, name = "null"):
         try:
             
@@ -246,14 +186,6 @@ class backend:
         except:
             print("error from get_factor()")
 
-# sleep(10)
+
 # backend().get_rgb()
-# sleep(10)
-# backend().get_rgb()
-# sleep(10)
-# backend().get_rgb()
-# sleep(1)
-# backend().get_rgb()
-# sleep(1)
-# backend().get_rgb()
-# sleep(1)
+

@@ -22,13 +22,10 @@ class database:
     
     def execute_command(self, command = ""):
         cursor = conn.execute(command)
-#         print(cursor)
         result = list()
         for i in cursor:
             for j in i:
-#                 print(j)
                 result.append(j)
-#         print(result)
         return result
     
     def commit(self):
@@ -67,7 +64,6 @@ class database:
                     test_name = i
                     choose = True
                     break
-#                 print(i)
                 elif response == 'n':
                     break
                 else:
@@ -115,9 +111,6 @@ class database:
                 else:
                     print("wrong command")
         
-#         print(edits)
-#         print(values)
-        
         if len(values) < 1:
                     return
                 
@@ -134,8 +127,6 @@ class database:
         
         values = list()
         for i in database().attributes[1:]:
-            
-#             print(i +": ")
             
             if database().attributes_type.get(i) == 'int':
                 while True:
@@ -160,10 +151,7 @@ class database:
                         break
                     except:
                         print("wrong value3")
-                        
-        
-#         print(edits)
-#         print(values)
+                    
 
         if len(values) < 1:
             return
@@ -181,11 +169,9 @@ class database:
         string = string[0:-1] + ")"
         print(string)
             
-#         string = string[0:len(string)-1] + ' where test_name = "' +test_name +'"'        
         database().execute_command(string)
         database().commit()
         
-    
     def delete_entry(self):
         
         table_test_names = database().execute_command("select test_name from " +database().table_name)
@@ -206,7 +192,6 @@ class database:
                 if response == "y":
                     test_names.append(i)
                     break
-#                 print(i)
                 elif response == 'n':
                     break
                 else:
@@ -221,13 +206,11 @@ class database:
             string = string + '"' +str(i) + '",'
         
         string = string[0:len(string) - 1] + ")"
-#         print(string)
         database().execute_command(string)
         database().commit()
     
     def truncate_table(self):
         string = "delete from " + database().table_name
-#         print(string)
         database().execute_command(string)
         database().commit()
         
@@ -256,7 +239,6 @@ class database:
 db = database()
 db.connect()
 # db.execute_command('update tests set m = 82.60613293913033, i = 6.663643406522594, R_w = 0.6056309756811918, G_w = 0.580911344020735, B_w = 0.5438318965300498, standard_concentration = 4 where test_name ="Albumin"')
-# db.commit()
 # db.truncate_table()
 # db.edit_entry()
 # db.add_entry()

@@ -5,16 +5,12 @@ import os
 import RPi.GPIO as IO
 from sqlalchemy import null
 IO.setwarnings(False)           #do not show any warnings
-IO.setmode (IO.BCM)         #we are programming the GPIO by BCM pin numbers. (PIN35 as ‘GPIO19’)
+IO.setmode (IO.BCM)             #we are programming the GPIO by BCM pin numbers. (PIN35 as ‘GPIO19’)
 
 
 bus = SMBus(1)
 time.sleep(2)
 os.system('i2cdetect -y 1')
-
-#wait here to avoid 121 IO Error
-
-
 
 millis = lambda: int(round(time.time() * 1000))
 
@@ -26,14 +22,11 @@ def set_peltier_temperature(set_temperature = 37.0, gpio_pin_no = 18, address_re
 
     try:
         sensor = MLX90614(bus, address = address_recieved)
-        
         IO.setup(gpio_pin_no,IO.OUT)           # initialize GPIO19 as an output.
-        # print("c")
-
         p = IO.PWM(gpio_pin_no,490.27)
         p.start(100)
-
         p.ChangeDutyCycle(100)
+
     except:
         pass
 
@@ -63,19 +56,22 @@ def set_peltier_temperature(set_temperature = 37.0, gpio_pin_no = 18, address_re
     while True: #(temperature_read <= set_temperature ):
 
         #print ("Ambient Temperature :", sensor.get_amb_temp())
-#         
+   
         time.sleep(1)
         if temperature_read >= set_temperature - 0.4 and temperature_read <= set_temperature + 0.4:
             temp_set[0] = True
+
         elif temp_set[0] == False:
             print ("Object Temperature :", sensor.get_obj_temp())
             print(PID_value)
+
         #First we read the real value of temperature
         temperature_read = sensor.get_obj_temp()
         if temperature_read < mintemp_error or temperature_read > maxtemp_error:
             print("temp or sensor error. try letting peltier cool down")
             p.ChangeDutyCycle(0)
             return
+        
         #Next we calculate the error between the setpoint and the real value
         PID_error = set_temperature - temperature_read
         #Serial.print("PID_error :");
