@@ -170,7 +170,7 @@ def test_done():
         A_sample = test.perform_test(test_details)
 
         result = m * A_sample + i
-
+        print("result: " +str(result))
         list.append(result)
         
         if result >= test_details.result_high:
@@ -196,7 +196,7 @@ def add_new_test():
 @app.route("/water",methods=['GET','POST'])
 def water():
     print("Water")
-
+    print(test_name)
     stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
 
     _id = -1
@@ -361,9 +361,10 @@ def edit_test():
             edit_test["test_sample_rest_time"] = test_sample_rest_time
             edit_test["test_test_time"] = test_test_time
             edit_test["test_delay_between_images"] = test_delay_between_images
-            edit_test["test_standard_concentration"] = test_standard_concentration
+            edit_test["q"] = test_standard_concentration
             
-    return render_template("edit_test.html", edit_test = edit_test)
+            
+    return render_template("new_test.html", edit_test = edit_test)
 
 @app.route("/update_test",methods=['GET','POST'])
 def update_test():
@@ -407,11 +408,13 @@ def update_test():
         db.session.add(test_update)
         db.session.commit()
 
-        if edit == False:
-            return '', 204
-        else:
-            return render_template("test_edited.html"), {"Refresh": "3; url=list_of_biochemistry"}
+        # if edit == False:
+        #     return '', 204
+        # else:
+            # return render_template("test_edited.html"), {"Refresh": "3; url=list_of_biochemistry"}
 
+        return '', 204
+      
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 

@@ -12,8 +12,8 @@ plot = Plot.plot()                  # graph plot functions
 backend = Backend_codes.backend()   # camera and other
 
 def perform_test(test):
-
-    # print(test.test_name)
+    print("Hello")
+    print(test.test_name)
     global S_r, S_g, S_b            # Sensitivity of R, G and B pixals at perticular wavelength
     S_r, S_g, S_b = backend.get_sens(wavelength = test.wavelength)
 
@@ -82,15 +82,15 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
             print((S_r*R_samp + S_g*G_samp + S_b*B_samp)/(S_r*R_w + S_g*G_w + S_b*B_w))
             A_sample= -math.log((S_r*R_samp + S_g*G_samp + S_b*B_samp)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
             
+            y.append(A_sample)
+            x.append(len(y))
+        
+            while time.time() - start <= delay_between_images :
+                continue
         except:
-            print("some error  occured")
+            print("some error occured")
 
-        y.append(A_sample)
-        x.append(len(y))
-    
-        while time.time() - start <= delay_between_images :
-            continue
-
+        
     sum = 0
     
 

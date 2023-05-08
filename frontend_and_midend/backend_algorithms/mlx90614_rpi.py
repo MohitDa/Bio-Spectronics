@@ -70,7 +70,8 @@ def set_peltier_temperature(set_temperature = 37.0, gpio_pin_no = 18, address_re
         if temperature_read < mintemp_error or temperature_read > maxtemp_error:
             print("temp or sensor error. try letting peltier cool down")
             p.ChangeDutyCycle(0)
-            return
+            stop_pwm()
+            return 
         
         #Next we calculate the error between the setpoint and the real value
         PID_error = set_temperature - temperature_read

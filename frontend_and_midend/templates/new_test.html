@@ -157,13 +157,30 @@
             </div>
             <div class="form-group" >
               <label class="col-form-label">Standard:</label>
-              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard">
+              <input type="checkbox" checked id = 'std_button' style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard"  onchange= "ifchecked('std_button', 'factor_id' ,'conc_button');">
             </div>
 
-            <div class="form-group" >
-              <button type="submit" onclick="show('std_settings')" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">Conc.</button>
+            <div class="form-group" id="factor_id" style="display: none;">
+              
+                <label class="col-form-label">factor:</label>
+                <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testwavelength2" onclick="show('next_button_div');">
+             
             </div>
 
+
+            <div class="form-group" id = 'conc_button'>
+              <button type="submit" onclick="show('std_settings');" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">Conc.</button>
+            </div>
+
+
+            <div class="form-group" style="display: none;" id="test_factor">
+              <label class="col-form-label">Blank:</label>
+              <Select type="text" class="form-control" name="testblank">
+                <option selected value="Reagent Blank">Reagent Blank</option>
+                <option value="Water">Water</option>
+              </Select>
+            </div>
+            
             <div class="popup" id="std_settings">
               <!-- <div class="card text-center"> -->
                 <div class="card-header">
@@ -212,13 +229,13 @@
 
                     <div class="row">
                         <div class="col-6">
-                          <div class="form-group">
+                          <div class="form-group" >
                             <label class="col-form-label">1:</label>
-                            <input type="number" value="" class="form-control" name="testconc1" required>
+                            <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testconc1" required onclick="show('next_button_div');">
                           </div>
                           <div class="form-group">
                             <label class="col-form-label">3:</label>
-                            <input type="number" value="0" class="form-control" name="testconc3" required>
+                            <input type="number" value="0" class="form-control" name="testconc3" required > 
                           </div>
                           <div class="form-group">
                             <label class="col-form-label">5:</label>
@@ -270,11 +287,11 @@
 
             <div class="form-group" >
               <label class="col-form-label">QC:</label>
-              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="testqc">
+              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard">
             </div>
 
-            <div class="form-group" style="top: -50px">
-              <button  type="submit" value="submit" class="btn btn-primary "  form="new_test" onclick="show('factor_calculation_parameters'); hide('next_button')" id="next_button" >Next</button>
+            <div class="form-group" style="top: -50px; display: none ;" id="next_button_div">
+              <button  type="submit" value="OK" class="btn btn-primary "  form="new_test" onclick="show('factor_calculation_parameters'); hide('next_button')" id="next_button"  >Next</button>
             </div>
             
 
@@ -285,12 +302,12 @@
             < Reference >
             <div class="form-group">
               <label class="col-form-label">Low:</label>
-              <input type="number" value="{{edit_test["test_result_low"]}}" class="form-control"
+              <input type="number" step="0.001" value="{{edit_test["test_result_low"]}}" class="form-control"
                 name="testlevellow" required>
             </div>
             <div class="form-group">
               <label class="col-form-label">High:</label>
-              <input type="number" value="{{edit_test["test_result_high"]}}" class="form-control"
+              <input type="number" step="0.001" value="{{edit_test["test_result_high"]}}" class="form-control"
                 name="testlevelhigh" required>
             </div>
             <div class="form-group">
@@ -340,10 +357,21 @@
           
           <div class="form-group" id = "factor_calculation_parameters" style="top: -50px; display: none;">
             
-            <button  class="btn btn-primary" form = "water_form" >Water</button>
-            <button  class="btn btn-primary" form = "blank_form" >Reagent Blank</button>
-            <button  class="btn btn-primary" form = "standard_form" >Standard</button>
-            <button  type="submit" value="submit" class="btn btn-primary"  form="factors_form">Save</button>
+            <!-- <div class="col-6"> -->
+              <button  class="btn btn-primary" form = "water_form" onclick="enable('reagent_blank_button');">Water</button>
+            <!-- </div> -->
+
+            <!-- <div class="col-6"  > -->
+              <button  class="btn btn-primary" id="reagent_blank_button" disabled form = "blank_form" onclick="enable('standard_button');">Reagent Blank</button>
+            <!-- </div> -->
+            
+            <!-- <div class="col-6"   > -->
+              <button  class="btn btn-primary" id="standard_button" form = "standard_form" disabled onclick="enable('save_button');">Standard</button>
+            <!-- </div> -->
+            
+            <!-- <div class="col-6" > -->
+              <button  type="submit" id="save_button"  value="submit" class="btn btn-primary" disabled form="factors_form">Save</button>
+            <!-- </div> -->
           </div>
 
         </div>
@@ -361,11 +389,37 @@ $ = function(id) {
   return document.getElementById(id);
 }
 
+var fromNane = function(name) {
+  return document.getElementsByName(name);
+}
+
 var show = function(id) {
 	$(id).style.display ='block';
 }
 var hide = function(id) {
 	$(id).style.display ='none';
 }
+
+var enable = function(id) {
+	$(id).disabled = false;
+
+}
+var disable = function(id) {
+	$(id).disabled=true;
+}
+
+var ifchecked = function(chechId, hideId, showId ) {
+    
+    if($(chechId).checked) {
+        hide(hideId);
+        show(showId);
+        // console.log("checked")
+    }
+
+    else  {
+      show(hideId);
+      hide(showId);
+    }
+};
 
 </script>
