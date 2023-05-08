@@ -155,17 +155,14 @@
 		<div class="col-6">
 
 			<div class="card">
-				<h5 class="card-header">Visible Spectrum test results</h5>
+				<h5 class="card-header">test results</h5>
 				<div class="card-body">
 					<ul class="list-group">
-					{% for i in range(0,visible_list | length ,2)%}
-
-					<!-- <div>
-						{{visible_list[i]}}
-					</div> -->
-					<li class="list-group-item">value = {{visible_list[i]}}</li>
+					{% for i in range(0,list | length ,2)%}
 					
-						<li class="list-group-item">flag = {{visible_list[i+1]}}</li>
+						<li class="list-group-item">value = {{list[i]}}</li>
+					
+						<li class="list-group-item">flag = {{list[i+1]}}</li>
 					
 					{%endfor%}
 				</ul>
@@ -176,57 +173,9 @@
 
 		</div>
 
-
-		<div class="col-6">
-
-			<div class="card">
-				<h5 class="card-header">UV Spectrum test results</h5>
-				<div class="card-body">
-					<ul class="list-group">
-					{% for i in range(0,uv_list | length ,3)%}
-
-					<li class="list-group-item">value = {{uv_list[i]}}</li>
-					<li class="list-group-item">flag = {{uv_list[i+1]}}</li>
-					<li class="list-group-item">absorbance = {{uv_list[i+2]}}</li>
-			
-
-					<li class="list-group-item">
-					<canvas id= "{{i|string + "linechart"}}" ></canvas>
-					<script>
-						var ctx = document.getElementById("{{ i|string + "linechart"}}").getContext("2d");
-						var lineChart = new Chart(ctx, {
-							type: "line",
-							data: {
-								labels: ['0', "{{ uv_list[i+1] | string }}"],
-								datasets: [
-									{
-										labels: "Concentration",
-										data: [0, {{ uv_list[i]}}],
-								fill: false,
-								borderColor: "rgb(75,192,192)",
-								lineTension: 0.1
-							}
-
-									]
-								},
-										options: {
-											responsive: true
-										}
-							})
-									</script>
-								
-									{%endfor%}</li>
-
-			</div>
-			</div>
-		</div>
-
-
-		
-
-			<form action="/list_of_biochemistry">
-				<button type="submit" class="btn btn-primary"> <- BACK </button>
-			</form>
+		<form action="/list_of_biochemistry">
+			<button type="submit" class="btn btn-primary"> <- BACK </button>
+		</form>
 
 </body>
 

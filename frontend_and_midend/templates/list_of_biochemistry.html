@@ -77,7 +77,7 @@
               {% for visible in tests_visible %}
               <div class="checkbox">
                 <label class="checkbox-wrapper">
-                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{visible.test_name+ ",visible"}}" />
+                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{visible.test_id}}" />
                   <span class="checkbox-tile card_gl">
                     <span>{{ visible.test_name }}</span>
                   </span>
@@ -101,7 +101,7 @@
               {% for uv in tests_uv %}
               <div class="checkbox">
                 <label class="checkbox-wrapper">
-                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{uv.test_name+",uv" }}" />
+                  <input type="checkbox" class="checkbox-input " name="test_list" value="{{uv.test_id}}" />
                   <span class="checkbox-tile card_gl">
                     <span>{{ uv.test_name }}</span>
                   </span>

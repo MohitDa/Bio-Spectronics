@@ -1,6 +1,7 @@
 # from asyncio.windows_events import NULL
 import os
 from stat import S_IFBLK
+from unittest import result
 # from tkinter import NO
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
@@ -136,88 +137,52 @@ def list_of_biochemistry():
 def start_test():
     return redirect("/list_of_biochemistry")
 
-# @app.route("/add_new_test",methods=['GET','POST'])
-# def add_new_test_visible():
-    if request.method == 'POST':
-
-        test_name = request.form['testname']
-        test_type = request.form['testtype']
-        H = request.form['H']
-        S = request.form['S']
-        L = request.form['L']
-        V = request.form['V']
-        test_temperature = request.form['test_temperature']
-        intercept = request.form['intercept']
-        test_level_lower = request.form['test_level_lower']
-        test_level_higher = request.form['test_level_higher']
-        test_unit = request.form['test_level_higher']
-
-        test = new_test_visible( 
-                    test_name = test_name, 
-                    test_type = test_type ,
-                    S=S,H=H,V=V,L=L,
-                    intercept = intercept,
-                    test_temperature = test_temperature,
-                    test_level_lower = test_level_lower, 
-                    test_level_higher = test_level_higher,
-                    test_unit = test_unit )
-
-        db.session.add(test)
-        db.session.commit()
-
-    return render_template("new_test_added.html"),{"Refresh": "2; url=list_of_biochemistry"}
-
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
-    visible_list = []
-    uv_list=[]
+
+    list=[]
 
     if request.method == "POST":
         test_list = request.form.getlist('test_list')
-       
-        for test in test_list:
-            current_test = test.split(",")
-            if current_test[1] == "uv":
-                test_details = new_test_uv.query.get_or_404(current_test[0])
-                flag_low = test_details.test_level_lower
-                flag_high = test_details.test_level_higher
-                temperature = test_details.test_temperature
-                # uv =  analyzer.UV()
-                # value,flag,absorbance =    uv.uv_spectrum(flag_low,flag_high,temperature)
-                # uv_list.append(value)
-                # uv_list.append(flag)
-                # uv_list.append(absorbance)
-                uv_list.append(10)
-                uv_list.append("low")
-                uv_list.append(24)
 
+        test_details = new_tests()
+        for row in test_list:
+            _current_test = row.split(",")
+            print(_current_test)
+            test_details = new_tests.query.get_or_404(_current_test[0]) 
+            # flag_low = test_details.result_low
+            # flag_high = test_details.result_high
+            # temperature = test_details.temp
+            # # uv =  analyzer.UV()
+            # # value,flag,absorbance =    uv.uv_spectrum(flag_low,flag_high,temperature)
+            # # uv_list.append(value)
+            # # uv_list.append(flag)
+            # # uv_list.append(absorbance)
+            # list.append(10)
+            # list.append("low")
+            # list.append(24)
+        
+        m = test_details.m
+        i = test_details.i
 
+        peltier.set_peltier(type = "visible", temp = test_details.temp)  #Setting Peltier Tempreature
+    
+        A_sample = test.perform_test(test_details)
 
-            elif current_test[1] == "visible":
-                test_details = new_test_visible.query.get_or_404(current_test[0])
-                h = test_details.H
-                s = test_details.S
-                l = test_details.L
-                v = test_details.V
-                intercept = test_details.intercept
-                flag_low = test_details.test_level_lower
-                flag_high = test_details.test_level_higher
-                temperature = test_details.test_temperature
-                # value,flag = analyzer.visible_spectrum(h,s,l,v,intercept,flag_low,flag_high,temperature)
-                # visible_list.append(value)
-                # visible_list.append(flag)
-                visible_list.append(19 )
-                visible_list.append("high")
-                
+        result = m * A_sample + i
 
-            # x_axis = []
-            # y_axis = []
-            # for i in range(len(int(absorbance+1))):
-            #     x_axis.append(i)
-            # for i in range(len(int(absorbance+1))):
-            #     x_axis.append(i)
-            
-    return render_template("test_done.html",uv_list = uv_list,visible_list = visible_list)
+        list.append(result)
+        
+        if result >= test_details.result_high:
+            list.append("High")
+
+        elif result <= test_details.result_low:
+            list.append("Low")
+        
+        elif result >= test_details.result_low and result <= test_details.result_high:
+            list.append("Normal")
+
+    return render_template("test_done.html",list = list)
 
 @app.route("/add_new_test",methods=['GET','POST'])
 def add_new_test():
