@@ -6,7 +6,7 @@ from unittest import result
 from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from sqlalchemy import select
+from sqlalchemy import  insert, select, update
 import analyzer
 from time import sleep
 app = Flask(__name__)   # Create an instance of flask called "app"
@@ -309,14 +309,15 @@ def delete_test():
             db.session.delete(test_details)
             db.session.commit()
     
-    seq_table = sqlite_sequence()
-    seq_table.name = "new_tests"
+    print(int(db.session.query(func.max(new_tests.test_id)).first()[0]))
+    stmt = update(sqlite_sequence).where(sqlite_sequence.name == "new_tests").values(seq = int(db.session.query(func.max(new_tests.test_id)).first()[0]))
     
-     
-    seq_table.seq = int(db.session.query(func.max(new_tests.test_id)).first()[0])
-    print(seq_table.seq)
-    db.session.add(seq_table)
-    db.session.commit()
+    with db.engine.connect() as conn:
+        conn.execute(stmt)
+    
+
+    # db.session.add(seq_table)
+    # db.session.commit()
         
     return render_template("tests_deleted.html"), {"Refresh": "3; url=list_of_biochemistry"}
     # return redirect("/list_of_biochemistry")
