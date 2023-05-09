@@ -129,7 +129,7 @@
             <div class="form-group">
               <label class="col-form-label">Method:</label>
               <select type="text"  class="form-control" name="testmethod" required>
-                <option selected value="EP"> Select Type </option>
+                <option selected value="{{edit_test["method"]}}"> {{"Select Type: "+"edit_test["method"]"}}  </option>
                 <option value="EP">End Point</option>
                 <option value="TP">Two Point</option>
                 <option value="Kinetic">Kinetic</option>
@@ -163,7 +163,7 @@
             <div class="form-group" id="factor_id" style="display: none;">
               
                 <label class="col-form-label">factor:</label>
-                <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testwavelength2" onclick="show('next_button_div');">
+                <input type="number" value="{{edit_test["m"]}}" class="form-control" name="testwavelength2" onclick="show('next_button_div');">
              
             </div>
 

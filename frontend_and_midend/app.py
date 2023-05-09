@@ -171,7 +171,7 @@ def test_done():
 
         result = m * A_sample + i
         print("result: " +str(result))
-        list.append(result)
+        list.append(result +" " +test_details.unit)
         
         if result >= test_details.result_high:
             list.append("High")
@@ -363,6 +363,7 @@ def edit_test():
             edit_test["test_test_time"] = test_test_time
             edit_test["test_delay_between_images"] = test_delay_between_images
             edit_test["q"] = test_standard_concentration
+            edit_test["m"] = test_m
             
             
     return render_template("new_test.html", edit_test = edit_test)
