@@ -135,7 +135,7 @@ def list_of_biochemistry():
 
 @app.route("/start_test",methods=['GET','POST'])
 def start_test():
-    return redirect("/list_of_biochemistry")
+    return redirect("/perform_test")
 
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
