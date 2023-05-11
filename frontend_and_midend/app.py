@@ -149,7 +149,6 @@ def start_test():
     
         return render_template("perform_test.html", test = test_details)
 
-
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
 
@@ -444,7 +443,7 @@ def clean():
     print("cleaning")
     run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
     print('done')
-    return redirect("/list_of_biochemistry")
+    return "", 204
 
 if __name__ == '__main__':
    app.run(debug = True)

@@ -102,21 +102,24 @@
     </div>
 
     <form id="test" method="post" action="/test_done" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
+    <form id="blank" method="post" action="/reagent_blank" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
+    <form id="standard" method="post" action="/standard" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
+    <form id="clean" method="post" action="/clean" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
+
 
     <div class="list-btn testtwo-btn">
 
       <!-- <form action="/water" id = "water_form"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form> -->
       
-        <button type="button" class="btn btn-primary submit_btn">Blank</button>
-        <button form="test" class="btn btn-primary submit_btn">Sample</button>
-        <button type="button" class="btn btn-primary submit_btn">Standard</button> 
-        <button type="button" class="btn btn-primary submit_btn">QC1</button>
-        <button type="button" class="btn btn-primary submit_btn">QC2</button>
-        <button type="button" class="btn btn-primary submit_btn">Wash</button>
+        <button form = "blank" class="btn btn-primary submit_btn">Blank</button>
+        <button form = "test" class="btn btn-primary submit_btn">Sample</button>
+        <button form = "standard" class="btn btn-primary submit_btn">Standard</button> 
+        <button class="btn btn-primary submit_btn">QC1</button>
+        <button class="btn btn-primary submit_btn">QC2</button>
+        <button form = "clean" class="btn btn-primary submit_btn">Wash</button>
         <button type="button" class="btn btn-primary submit_btn">No.</button>
         <button type="button" class="btn btn-primary submit_btn">Dilute</button>
         <button type="button" class="btn btn-primary submit_btn">Online</button>
-        <button type="button" class="btn btn-primary submit_btn">Return</button>
     </div>
 
     </div>

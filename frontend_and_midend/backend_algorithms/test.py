@@ -77,9 +77,9 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
         R_samp = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
         G_samp = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
         B_samp = ax0[0]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
-        print(S_r, S_g, S_b, R_samp, G_samp, B_samp, R_w, G_w, B_w)
+        # print(S_r, S_g, S_b, R_samp, G_samp, B_samp, R_w, G_w, B_w)
         try:
-            print((S_r*R_samp + S_g*G_samp + S_b*B_samp)/(S_r*R_w + S_g*G_w + S_b*B_w))
+            # print((S_r*R_samp + S_g*G_samp + S_b*B_samp)/(S_r*R_w + S_g*G_w + S_b*B_w))
             A_sample= -math.log((S_r*R_samp + S_g*G_samp + S_b*B_samp)/(S_r*R_w + S_g*G_w + S_b*B_w), 10)
             
             y.append(A_sample)
@@ -95,7 +95,7 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
     
 
     if len(y) <= 1:
-        print(y)
+        # print(y)
         return y[0]
     else:
         for i in range(0, len(y)-1):
