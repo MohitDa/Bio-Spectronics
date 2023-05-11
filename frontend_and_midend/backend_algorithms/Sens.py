@@ -17,14 +17,14 @@ class data:
 
 	def getVal(self, filt):
 		filt_floor = floor(filt/10)*10
-		print(filt_floor)
+		# print(filt_floor)
 		filt_ceil = ceil(filt/10)*10
-		print(filt_ceil)
+		# print(filt_ceil)
 		R_f, G_f, B_f =  (data.dictR.get(filt_floor, data.dictR.get(510)), data.dictG.get(filt_floor, data.dictG.get(510)), data.dictB.get(filt_floor, data.dictB.get(510)))
 		R_c, G_c, B_c =  (data.dictR.get(filt_ceil, data.dictR.get(510)), data.dictG.get(filt_ceil, data.dictG.get(510)), data.dictB.get(filt_ceil, data.dictB.get(510)))
-		print(R_f, G_f, B_f)
-		print(R_c, G_c, B_c)
-		print(filt%10)
+		# print(R_f, G_f, B_f)
+		# print(R_c, G_c, B_c)
+		# print(filt%10)
 		return ((((R_c - R_f)*(filt%10)/10)+R_f), (((G_c - G_f)*(filt%10)/10)+G_f), (((B_c - B_f)*(filt%10)/10)+B_f))
 
 # print(data().getVal(520))

@@ -110,8 +110,8 @@ def index():
 
 @app.route("/list_of_biochemistry")
 def list_of_biochemistry():
-    tests_visible = new_tests().query.filter(new_tests.wavelength > 400, new_tests.B_w != None)
-    tests_uv = new_tests().query.filter(new_tests.wavelength <= 400, new_tests.B_w != None)
+    tests_visible = new_tests().query.filter(new_tests.wavelength > 400)
+    tests_uv = new_tests().query.filter(new_tests.wavelength <= 400)
 
     # for data in tests_uv:
     #     print(data.B_w)
@@ -135,7 +135,20 @@ def list_of_biochemistry():
 
 @app.route("/start_test",methods=['GET','POST'])
 def start_test():
-    return redirect("/perform_test")
+
+    if request.method == "POST":
+        test_list = request.form.getlist('test_list')
+
+        test_details = new_tests()
+        for row in test_list:
+            _current_test = row.split(",")
+            # print(_current_test)
+            test_details = new_tests.query.get_or_404(_current_test[0]) 
+        
+        # print(test_details.test_name)
+    
+        return render_template("perform_test.html", test = test_details)
+
 
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
@@ -164,14 +177,14 @@ def test_done():
         
         m = test_details.m
         i = test_details.i
-
+        print(m, i)
         peltier.set_peltier(type = "visible", temp = test_details.temp)  #Setting Peltier Tempreature
     
         A_sample = test.perform_test(test_details)
 
         result = m * A_sample + i
         print("result: " +str(result))
-        list.append(result +" " +test_details.unit)
+        list.append(str(result) +" " +test_details.unit)
         
         if result >= test_details.result_high:
             list.append("High")
@@ -284,11 +297,17 @@ def get_factors():
 
     _current_test = new_tests.query.get_or_404(_id)
 
-    m = _current_test.standard_concentration / (A_std - A_blank)
-    i = _current_test.standard_concentration - m * A_std
+    try:
+        m = _current_test.standard_concentration / (A_std - A_blank)
+        i = _current_test.standard_concentration - m * A_std
 
-    _current_test.m = m
-    _current_test.i = i
+        _current_test.m = m
+        _current_test.i = i
+    except:
+        print("float division error")
+
+        _current_test.m = 0
+        _current_test.i = 0
     
     db.session.add(_current_test)
     db.session.commit()
@@ -403,6 +422,8 @@ def update_test():
         test_update.standard_concentration = request.form['testconc1']
 
         try:
+            test_update.R_w = request.form['testR_w']
+            test_update.G_w = request.form['testG_w']
             test_update.B_w = request.form['testB_w']
         except:
             pass

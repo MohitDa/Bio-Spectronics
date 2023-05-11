@@ -9,6 +9,7 @@ def set_peltier(type = "null", temp = 0):
     temp_set = [False]
 
     print(type)
+    t1 = Thread()
     if type == "visible":
         t1 = Thread(target=set_peltier_temperature,args=(temp,19,0x5A,temp_set))
         t1.start()
@@ -24,6 +25,9 @@ def set_peltier(type = "null", temp = 0):
 
     while temp_set[0] == False:
         pass
+        # print(t1.is_alive())
+    
+    # print(t1.is_alive())
 
     return
 

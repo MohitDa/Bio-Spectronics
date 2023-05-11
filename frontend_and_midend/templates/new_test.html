@@ -129,7 +129,7 @@
             <div class="form-group">
               <label class="col-form-label">Method:</label>
               <select type="text"  class="form-control" name="testmethod" required>
-                <option selected value="{{edit_test["method"]}}"> {{"Select Type: "+"edit_test["method"]"}}  </option>
+                <option selected value="{{edit_test["test_type"]}}" > {{"Current Method: " + edit_test['test_type']}}  </option>
                 <option value="EP">End Point</option>
                 <option value="TP">Two Point</option>
                 <option value="Kinetic">Kinetic</option>
@@ -231,7 +231,7 @@
                         <div class="col-6">
                           <div class="form-group" >
                             <label class="col-form-label">1:</label>
-                            <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testconc1" required onclick="show('next_button_div');">
+                            <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testconc1" required >
                           </div>
                           <div class="form-group">
                             <label class="col-form-label">3:</label>
@@ -272,7 +272,7 @@
 
                     <div class="row">
                       <div class="form-group" >
-                        <button type="submit" onclick="hide('std_settings')" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">OK</button>
+                        <button type="submit" onclick="hide('std_settings'); show('next_button_div');" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">OK</button>
                       </div>
                     </div>
 
@@ -358,7 +358,7 @@
           <div class="form-group" id = "factor_calculation_parameters" style="top: -50px; display: none;">
             
             <!-- <div class="col-6"> -->
-              <button  class="btn btn-primary" form = "water_form" onclick="enable('reagent_blank_button');">Water</button>
+              <button  class="btn btn-primary" form = "water_form" onclick="enable('reagent_blank_button');" data-toggle="modal" data-target="#wait_modal">Water</button>
             <!-- </div> -->
 
             <!-- <div class="col-6"  > -->
@@ -380,6 +380,22 @@
     </div>
 
   </div>
+
+   <!-- choose uv or visible modal form -->
+   <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting Temperature</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+     </div>
+   </div> 
+ </div>
+
 </body>
 
 </html>

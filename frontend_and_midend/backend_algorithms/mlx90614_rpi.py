@@ -60,6 +60,7 @@ def set_peltier_temperature(set_temperature = 37.0, gpio_pin_no = 18, address_re
         time.sleep(1)
         if temperature_read >= set_temperature - 0.4 and temperature_read <= set_temperature + 0.4:
             temp_set[0] = True
+            # stop_pwm()
 
         elif temp_set[0] == False:
             print ("Object Temperature :", sensor.get_obj_temp())
