@@ -138,11 +138,11 @@ def start_test():
 
     if request.method == "POST":
         test_list = request.form.getlist('test_list')
-
+        # print(test_list)
         test_details = new_tests()
         for row in test_list:
             _current_test = row.split(",")
-            # print(_current_test)
+            print(_current_test)
             test_details = new_tests.query.get_or_404(_current_test[0]) 
         
         # print(test_details.test_name)
@@ -155,8 +155,9 @@ def test_done():
     list=[]
 
     if request.method == "POST":
-        test_list = request.form.getlist('test_list')
-
+        test_list = request.form.getlist('test_id')
+        print("test_list")
+        print(test_list)
         test_details = new_tests()
         for row in test_list:
             _current_test = row.split(",")
@@ -307,7 +308,7 @@ def get_factors():
 
         _current_test.m = 0
         _current_test.i = 0
-    
+        return '', 204
     db.session.add(_current_test)
     db.session.commit()
     return render_template("new_test_added.html"), {"Refresh": "3; url=list_of_biochemistry"}
@@ -343,10 +344,11 @@ def delete_test():
 @app.route("/edit_test",methods=['GET','POST'])
 def edit_test():
     if request.method == "POST":
+        print("in1")
         test_list = request.form.getlist('test_list')
-        
+        print("in2")
         edit_test = dict(test_id = "", test_name = "" , test_type = "" , test_temp = "" , test_wavelength = "" , test_unit = "" , test_result_low = "" , test_result_high = "" , test_sample_rest_time = "" , test_test_time = "" , test_delay_between_images = "" , test_standard_concentration = "")
-    
+        print("in3")
         for test in test_list:
             current_test = test.split(",")
             test_details = new_tests.query.get_or_404(current_test[0])
@@ -382,9 +384,9 @@ def edit_test():
             edit_test["test_delay_between_images"] = test_delay_between_images
             edit_test["q"] = test_standard_concentration
             edit_test["m"] = test_m
+            print("in4")
             
-            
-    return render_template("new_test.html", edit_test = edit_test)
+        return render_template("new_test.html", edit_test = edit_test)
 
 @app.route("/update_test",methods=['GET','POST'])
 def update_test():
@@ -444,6 +446,7 @@ def clean():
     run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
     print('done')
     return "", 204
+
 
 if __name__ == '__main__':
    app.run(debug = True)
