@@ -104,10 +104,34 @@
     </div>
     <div class="card-body">
       
-      <form action="/reagent_blank"  id = "blank_form"></form>  
-      <form action="/water" id = "water_form" method = "POST"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form>
-      <form action="/standard" id = "standard_form"></form>
-      <form action="/get_factors" id = "factors_form"></form>
+      <form action="/reagent_blank"  id = "blank_form">
+        <div class="form-group" style="display:none">
+          <label class="col-form-label">Test Name Old:</label>
+          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+            required>
+        </div>
+      </form>  
+      <form action="/water" id = "water_form" method = "POST">
+        <div class="form-group" style="display:none">
+          <label class="col-form-label">Test Name Old:</label>
+          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+            required>
+        </div>
+      </form>
+      <form action="/standard" id = "standard_form">
+        <div class="form-group" style="display:none">
+          <label class="col-form-label">Test Name Old:</label>
+          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+            required>
+        </div>
+      </form>
+      <form action="/get_factors" id = "factors_form">
+        <div class="form-group" style="display:none">
+          <label class="col-form-label">Test Name Old:</label>
+          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+            required>
+        </div>
+      </form>
       
       <form method="post" id="new_test" action="/update_test">
         <!-- <div class="row">

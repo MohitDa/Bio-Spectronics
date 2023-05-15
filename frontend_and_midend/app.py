@@ -137,17 +137,10 @@ def list_of_biochemistry():
 def start_test():
 
     if request.method == "POST":
-        test_list = request.form.getlist('test_list')
-        # print(test_list)
-        test_details = new_tests()
-        for row in test_list:
-            _current_test = row.split(",")
-            print(_current_test)
-            test_details = new_tests.query.get_or_404(_current_test[0]) 
-        
-        # print(test_details.test_name)
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
     
-        return render_template("perform_test.html", test = test_details)
+    return render_template("perform_test.html", test = _current_test)
 
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
@@ -155,44 +148,27 @@ def test_done():
     list=[]
 
     if request.method == "POST":
-        test_list = request.form.getlist('test_id')
-        print("test_list")
-        print(test_list)
-        test_details = new_tests()
-        for row in test_list:
-            _current_test = row.split(",")
-            print(_current_test)
-            test_details = new_tests.query.get_or_404(_current_test[0]) 
-            # flag_low = test_details.result_low
-            # flag_high = test_details.result_high
-            # temperature = test_details.temp
-            # # uv =  analyzer.UV()
-            # # value,flag,absorbance =    uv.uv_spectrum(flag_low,flag_high,temperature)
-            # # uv_list.append(value)
-            # # uv_list.append(flag)
-            # # uv_list.append(absorbance)
-            # list.append(10)
-            # list.append("low")
-            # list.append(24)
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
         
-        m = test_details.m
-        i = test_details.i
+        m = _current_test.m
+        i = _current_test.i
         print(m, i)
-        peltier.set_peltier(type = "visible", temp = test_details.temp)  #Setting Peltier Tempreature
+        peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
-        A_sample = test.perform_test(test_details)
+        A_sample = test.perform_test(_current_test)
 
         result = m * A_sample + i
         print("result: " +str(result))
-        list.append(str(result) +" " +test_details.unit)
+        list.append(str(result) +" " +_current_test.unit)
         
-        if result >= test_details.result_high:
+        if result >= _current_test.result_high:
             list.append("High")
 
-        elif result <= test_details.result_low:
+        elif result <= _current_test.result_low:
             list.append("Low")
         
-        elif result >= test_details.result_low and result <= test_details.result_high:
+        elif result >= _current_test.result_low and result <= _current_test.result_high:
             list.append("Normal")
 
     return render_template("test_done.html",list = list)
@@ -209,18 +185,12 @@ def add_new_test():
 @app.route("/water",methods=['GET','POST'])
 def water():
     print("Water")
-    print(test_name)
-    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
 
-    _id = -1
-    with db.engine.connect() as conn:
-        current_test = new_tests()
-
-        for test in conn.execute(stmt):
-            _id = test.test_id
+    _current_test = new_tests
     
-
-    _current_test = new_tests.query.get(_id)
+    if request.method == "POST":
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
 
     global R_w, G_w, B_w
 
@@ -245,14 +215,11 @@ def water():
 def reagent_blank():
     print("reagent Blank")
 
-    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
-
-    _id = -1
-    with db.engine.connect() as conn:
-        for rows in conn.execute(stmt):
-            _id = rows.test_id
-
-    _current_test = new_tests.query.get(_id)
+    _current_test = new_tests
+    
+    if request.method == "POST":
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
 
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
 
@@ -266,15 +233,11 @@ def reagent_blank():
 def standard():
     print("standard")
 
-    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
-
-    _id = -1
-    with db.engine.connect() as conn:
-        for rows in conn.execute(stmt):
-            _id = rows.test_id
-            
-
-    _current_test = new_tests.query.get(_id)
+    _current_test = new_tests
+    
+    if request.method == "POST":
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
 
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
@@ -287,15 +250,11 @@ def standard():
 def get_factors():
     print("calculating factors")
 
-    stmt = select(new_tests).where(new_tests.test_name == test_name and new_tests.wavelength == wavelength)
+    _current_test = new_tests
     
-    _id = -1
-    _current_test = new_tests()
-    with db.engine.connect() as conn:
-        for row in conn.execute(stmt):
-            _id = row.test_id
-
-    _current_test = new_tests.query.get_or_404(_id)
+    if request.method == "POST":
+        test_id = request.form['testid']
+        _current_test = new_tests.query.get(test_id)
 
     try:
         m = _current_test.standard_concentration / (A_std - A_blank)
@@ -309,11 +268,10 @@ def get_factors():
         _current_test.m = 0
         _current_test.i = 0
         return '', 204
+    
     db.session.add(_current_test)
     db.session.commit()
     return render_template("new_test_added.html"), {"Refresh": "3; url=list_of_biochemistry"}
-    # return redirect("/list_of_biochemistry")
-    # return '', 204
 
 @app.route("/delete_test",methods=['GET','POST'])
 def delete_test():
@@ -344,11 +302,8 @@ def delete_test():
 @app.route("/edit_test",methods=['GET','POST'])
 def edit_test():
     if request.method == "POST":
-        print("in1")
         test_list = request.form.getlist('test_list')
-        print("in2")
         edit_test = dict(test_id = "", test_name = "" , test_type = "" , test_temp = "" , test_wavelength = "" , test_unit = "" , test_result_low = "" , test_result_high = "" , test_sample_rest_time = "" , test_test_time = "" , test_delay_between_images = "" , test_standard_concentration = "")
-        print("in3")
         for test in test_list:
             current_test = test.split(",")
             test_details = new_tests.query.get_or_404(current_test[0])
@@ -384,7 +339,6 @@ def edit_test():
             edit_test["test_delay_between_images"] = test_delay_between_images
             edit_test["q"] = test_standard_concentration
             edit_test["m"] = test_m
-            print("in4")
             
         return render_template("new_test.html", edit_test = edit_test)
 
