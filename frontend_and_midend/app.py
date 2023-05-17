@@ -43,8 +43,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
-
 class patient(db.Model):
     id = db.Column(db.Integer, unique=True, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -148,7 +146,12 @@ def test_done():
     list=[]
 
     if request.method == "POST":
-        test_id = request.form['testid']
+
+        
+        
+        print("____________________test_id______________________________")
+        test_id = request.form.get('name')
+        print(test_id)
         _current_test = new_tests.query.get(test_id)
         
         m = _current_test.m

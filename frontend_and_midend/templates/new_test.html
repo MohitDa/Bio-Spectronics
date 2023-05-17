@@ -104,28 +104,35 @@
     </div>
     <div class="card-body">
       
-      <form action="/reagent_blank"  id = "blank_form">
+      <form method="post" action="/reagent_blank"  id = "blank_form">
         <div class="form-group" style="display:none">
           <label class="col-form-label">Test Name Old:</label>
           <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
             required>
         </div>
       </form>  
-      <form action="/water" id = "water_form" method = "POST">
+      <form method="post" action="/water" id = "water_form" >
+        <script> console.log("Hello") </script>
+        
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group" style="display:none">
+              <label class="col-form-label">Test Name Old:</label>
+              <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
+                required>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <form method="post" action="/standard" id = "standard_form">
         <div class="form-group" style="display:none">
           <label class="col-form-label">Test Name Old:</label>
           <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
             required>
         </div>
       </form>
-      <form action="/standard" id = "standard_form">
-        <div class="form-group" style="display:none">
-          <label class="col-form-label">Test Name Old:</label>
-          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-            required>
-        </div>
-      </form>
-      <form action="/get_factors" id = "factors_form">
+      <form method="post" action="/get_factors" id = "factors_form">
         <div class="form-group" style="display:none">
           <label class="col-form-label">Test Name Old:</label>
           <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
@@ -493,16 +500,16 @@ var ifchecked = function(chechId, hideId, showId ) {
 jQuery(document).ready(function() {
   jQuery("#wait_modal").hide();
   
-  // jQuery("#save_modal").hide();
 });
 
 
-  jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
+jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
   event.preventDefault();  // Prevent the default form submission behavior
   
   var formId = jQuery(this).attr("id");
-  var divId = "popup_close_button";
+  var divId = "wait_modal";
   console.log(formId);
+  console.log("Form ID");
   // if(formId == "factors_form"){
   //   divId = "popup_close_button";
   // }

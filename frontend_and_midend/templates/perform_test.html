@@ -101,7 +101,10 @@
         
     </div>
 
-    <form id="test" method="POST" action="/test_done" ><input type="hidden" value= "{{test.test_id}}" name="test_id"  ></form>
+
+    <!-- <form id="test" action="/test_done" method="POST" >
+      <input type="text" value= "100" name="testid"  id = "testid">
+    </form> -->
     <form id="blank" method="post" action="/reagent_blank" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
     <form id="standard" method="post" action="/standard" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
     <form id="clean" method="post" action="/clean" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
@@ -112,7 +115,10 @@
       <!-- <form action="/water" id = "water_form"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form> -->
       
         <button form = "blank" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Blank</button>
-        <button form = "test" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Sample</button>
+        <form id="test" action="/test_done" method="POST" >
+          <input type="hidden" value= "100" name="testid"  id = "testid">
+          <button class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Sample</button>
+        </form>
         <button form = "standard" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Standard</button> 
         <button class="btn btn-primary submit_btn">QC1</button>
         <button class="btn btn-primary submit_btn">QC2</button>
