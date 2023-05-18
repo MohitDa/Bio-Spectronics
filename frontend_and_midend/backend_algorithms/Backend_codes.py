@@ -88,11 +88,11 @@ class backend:
 
         camera.close()
 #         cv2.imshow("image", image)
-        img = Image.fromarray(image, "RGB")
+        # img = Image.fromarray(image, "RGB")
         # img.show()
 #         sleep(1)
         # img.close()
-        height, width, _ = np.shape(image)
+        # height, width, _ = np.shape(image)
         avg_color_per_row = np.average(image, axis=0)
         avg_colors = np.average(avg_color_per_row, axis=0)
         int_averages = np.array(avg_colors, dtype=np.uint8)
@@ -101,7 +101,7 @@ class backend:
 
     #     rgba =cv2.cvtColor(average_image, cv2.COLOR_BGR2RGB)
 #         print(int_averages)
-        return [int_averages[2],int_averages[1],int_averages[0]]
+        return [int_averages[2],int_averages[1],int_averages[0]], image
     
     def get_concentration(self, sample = ""):
         sample = sample + " "

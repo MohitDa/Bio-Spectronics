@@ -1,5 +1,9 @@
 # from asyncio.windows_events import NULL
-import os
+import os, numpy as np, base64, cv2, matplotlib
+
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from PIL import Image
 from stat import S_IFBLK
 from unittest import result
 # from tkinter import NO
@@ -101,15 +105,16 @@ class sqlite_sequence(db.Model):
     seq = db.Column(db.Integer)
 
 #todo link database of shortcut here
-
+# peltier.set_peltier(type = "visible", temp = 37)  #Setting Peltier Tempreature
+    
 @app.route("/")
 def index():
     return render_template("index.html"), {"Refresh": "1; url=list_of_biochemistry"}
 
 @app.route("/list_of_biochemistry")
 def list_of_biochemistry():
-    tests_visible = new_tests().query.filter(new_tests.wavelength > 400)
-    tests_uv = new_tests().query.filter(new_tests.wavelength <= 400)
+    tests_visible = new_tests().query.all()
+    # tests_uv = new_tests().query.filter(new_tests.wavelength <= 400)
 
     # for data in tests_uv:
     #     print(data.B_w)
@@ -129,14 +134,16 @@ def list_of_biochemistry():
     # print(tests_name)
 
 
-    return render_template("list_of_biochemistry.html", tests_visible = tests_visible , tests_uv = tests_uv )
+    return render_template("list_of_biochemistry.html", tests_visible = tests_visible )
 
 @app.route("/start_test",methods=['GET','POST'])
 def start_test():
 
     if request.method == "POST":
-        test_id = request.form['testid']
-        _current_test = new_tests.query.get(test_id)
+        test_id = request.form.get('test_list')
+        # print(test_id)
+        _current_test = db.session.get(new_tests, test_id)
+        # print(_current_test.test_name)
     
     return render_template("perform_test.html", test = _current_test)
 
@@ -145,21 +152,40 @@ def test_done():
 
     list=[]
 
+    image = np.empty((240, 320, 3), dtype=np.uint8)
+
     if request.method == "POST":
 
-        
-        
         print("____________________test_id______________________________")
-        test_id = request.form.get('name')
+        test_id = request.form.get('testid')
         print(test_id)
-        _current_test = new_tests.query.get(test_id)
+        _current_test =  db.session.get(new_tests, test_id)
         
         m = _current_test.m
         i = _current_test.i
-        print(m, i)
-        peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+        # print(m, i)
+        # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
-        A_sample = test.perform_test(_current_test)
+        A_sample, image = test.perform_test(_current_test)
+
+        im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        # Image.fromarray(image, "RGB").show()
+        _, encoded_image = cv2.imencode('.png', im)
+        encoded_image_string = base64.b64encode(encoded_image).decode('utf-8')
+
+        x = np.linspace(0, _current_test.standard_concentration, 100)
+
+        # Calculate y values using the linear equation y = mx + c
+        y = m * x + i
+
+        # Plot the graph
+        plt.plot(x, y)
+        plt.xlabel('x')
+        plt.ylabel('y')
+        plt.title('Graph of y = {:.2f}x + {:.2f}'.format(m, i))
+        plt.grid(True)
+        plt.show()
+
 
         result = m * A_sample + i
         print("result: " +str(result))
@@ -174,7 +200,7 @@ def test_done():
         elif result >= _current_test.result_low and result <= _current_test.result_high:
             list.append("Normal")
 
-    return render_template("test_done.html",list = list)
+    return render_template("test_done.html",list = list, image = encoded_image_string)
 
 @app.route("/add_new_test",methods=['GET','POST'])
 def add_new_test():
@@ -192,11 +218,12 @@ def water():
     _current_test = new_tests
     
     if request.method == "POST":
-        test_id = request.form['testid']
-        _current_test = new_tests.query.get(test_id)
-
-    global R_w, G_w, B_w
-
+        test_id = request.form.get('testid')
+        print(test_id)
+        _current_test =  db.session.get(new_tests, test_id)
+        # sleep(3)
+        
+    # global R_w, G_w, B_w
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
     ax0=backend.get_rgb()
@@ -211,7 +238,7 @@ def water():
         
     db.session.add(_current_test)
     db.session.commit()
-
+    print("done")
     return '', 204
 
 @app.route("/reagent_blank",methods=['GET','POST'])
@@ -221,8 +248,8 @@ def reagent_blank():
     _current_test = new_tests
     
     if request.method == "POST":
-        test_id = request.form['testid']
-        _current_test = new_tests.query.get(test_id)
+        test_id = request.form.get('testid')
+        _current_test =  db.session.get(new_tests, test_id)
 
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
 
@@ -239,8 +266,8 @@ def standard():
     _current_test = new_tests
     
     if request.method == "POST":
-        test_id = request.form['testid']
-        _current_test = new_tests.query.get(test_id)
+        test_id = request.form.get('testid')
+        _current_test =  db.session.get(new_tests, test_id)
 
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
@@ -256,8 +283,8 @@ def get_factors():
     _current_test = new_tests
     
     if request.method == "POST":
-        test_id = request.form['testid']
-        _current_test = new_tests.query.get(test_id)
+        test_id = request.form.get('testid')
+        _current_test =  db.session.get(new_tests, test_id)
 
     try:
         m = _current_test.standard_concentration / (A_std - A_blank)
@@ -351,7 +378,7 @@ def update_test():
         global test_name, wavelength #q is standard concentration
         test_id = request.form['testid']
         edit = True #test being edited, not cretated
-        test_update = new_tests.query.get(test_id)
+        test_update =  db.session.get(new_tests, test_id)
         if test_update == None: #test do not exist. Add new test
             test_update = new_tests()
             test_update.m = 0

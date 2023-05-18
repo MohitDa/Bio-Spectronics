@@ -507,9 +507,10 @@ jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
   event.preventDefault();  // Prevent the default form submission behavior
   
   var formId = jQuery(this).attr("id");
-  var divId = "wait_modal";
+  var divId = "popup_close_button";
   console.log(formId);
   console.log("Form ID");
+  var formData = jQuery(this).serialize();
   // if(formId == "factors_form"){
   //   divId = "popup_close_button";
   // }
@@ -523,6 +524,7 @@ jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
   jQuery.ajax({
     url: jQuery(this).attr("action"),
     type: "POST",
+    data: formData,
     success: function(data, textStatus, jqXHR) {
       if (jqXHR.status === 204) {
         console.log(formId);

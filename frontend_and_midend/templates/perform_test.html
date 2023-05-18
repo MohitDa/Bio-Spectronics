@@ -102,27 +102,22 @@
     </div>
 
 
-    <!-- <form id="test" action="/test_done" method="POST" >
-      <input type="text" value= "100" name="testid"  id = "testid">
-    </form> -->
-    <form id="blank" method="post" action="/reagent_blank" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
-    <form id="standard" method="post" action="/standard" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
-    <form id="clean" method="post" action="/clean" ><input type="hidden" name="test_list" value= {{test.test_id}} ></form>
+    <form id="test_form" action="/test_done" method="POST" ><input type="hidden" name="testid" id="testid" value={{test.test_id}} ></form>
+    <form id="blank_form" method="post" action="/reagent_blank" ><input type="hidden" name="testid" id="testid" value= {{test.test_id}} ></form>
+    <form id="standard_form" method="post" action="/standard" ><input type="hidden" name="testid" id="testid" value= {{test.test_id}} ></form>
+    <form id="clean_form" method="post" action="/clean" ><input type="hidden" name="testid" id="testid" value= {{test.test_id}} ></form>
 
 
     <div class="list-btn testtwo-btn">
 
       <!-- <form action="/water" id = "water_form"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form> -->
       
-        <button form = "blank" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Blank</button>
-        <form id="test" action="/test_done" method="POST" >
-          <input type="hidden" value= "100" name="testid"  id = "testid">
-          <button class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Sample</button>
-        </form>
-        <button form = "standard" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Standard</button> 
+        <button form = "blank_form" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Blank</button>
+        <button form = "test_form" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Sample</button>
+        <button form = "standard_form" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Standard</button> 
         <button class="btn btn-primary submit_btn">QC1</button>
         <button class="btn btn-primary submit_btn">QC2</button>
-        <button form = "clean" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Wash</button>
+        <button form = "clean_form" class="btn btn-primary submit_btn" data-toggle="modal" data-target="#wait_modal">Wash</button>
         <button type="button" class="btn btn-primary submit_btn">No.</button>
         <button type="button" class="btn btn-primary submit_btn">Dilute</button>
         <button type="button" class="btn btn-primary submit_btn">Online</button>

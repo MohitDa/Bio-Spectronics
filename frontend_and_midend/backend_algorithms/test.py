@@ -1,4 +1,4 @@
-import sys, time, math
+import sys, time, math, numpy as np
 from threading import Thread
 
 sys.path.insert(1, '/backend_algorithms')
@@ -62,6 +62,8 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
     proess_init_time = time.time()
 
     i = 0
+
+    image = np.empty((240, 320, 3), dtype=np.uint8)
     
     while time.time() - proess_init_time <=  test_time:
         
@@ -72,7 +74,7 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
         start = time.time()
         
     
-        ax0=backend.get_rgb() #save = True, name = str(i)
+        ax0 , image = backend.get_rgb() #save = True, name = str(i)
         
         R_samp = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
         G_samp = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
@@ -96,12 +98,13 @@ def kinetic(R_w = 0, G_w = 0, B_w = 0, test_time = 0, sample_rest_time = 0, dela
 
     if len(y) <= 1:
         # print(y)
-        return y[0]
+        # print(image)
+        return y[0], image
     else:
         for i in range(0, len(y)-1):
             k = y[i+1] - y[i]
             sum = sum + k
 
         sum /= len(y) - 1
-        
-        return sum
+        # print(image)
+        return sum, image

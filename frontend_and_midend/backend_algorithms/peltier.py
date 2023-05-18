@@ -29,6 +29,7 @@ def set_peltier(type = "null", temp = 0):
     
     # print(t1.is_alive())
 
+    # t1.join()
     return
 
     

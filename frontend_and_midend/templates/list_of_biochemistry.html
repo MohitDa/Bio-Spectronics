@@ -66,6 +66,7 @@
     <!-- action="/test_done" -->
 
     <form class="row" method="post" action="/start_test" id="test_list">  
+      
       <div class="col-6">
 
         <div class="card">
@@ -428,13 +429,13 @@ aria-hidden="true">
   // }, 5000);
 
 // });
-$('#test_list').submit(function (e) {
-   var form = this;
-   e.preventDefault();
-   setTimeout(function () {
-    form.submit();
-   }, 5000); // in milliseconds
-  });
+// $('#test_list').submit(function (e) {
+//    var form = this;
+//    e.preventDefault();
+//    setTimeout(function () {
+//     form.submit();
+//    }, 5000); // in milliseconds
+//   });
 </script>
 
 </html>
