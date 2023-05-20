@@ -293,15 +293,15 @@ def reagent_blank():
     A_blank, image = test.perform_test(_current_test)
 
     # print("{:.2f}".format(A_blank))
-    list=[]
+    list = dict(result = "", flag = "" , test_id = _current_test.test_id)
     if test_type == "update":
 
         m = _current_test.m
         i = _current_test.i
         conc_blank = A_blank * m + i
 
-        list.append("{:.2f} {}".format(conc_blank, _current_test.unit))
-        list.append("Not Applicable")
+        list['result'] = "{:.2f} {}".format(conc_blank, _current_test.unit)
+        list['flag'] = "Not Applicable"
         im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Image.fromarray(image, "RGB").show()
         _, encoded_image = cv2.imencode('.png', im)
@@ -365,15 +365,15 @@ def standard():
     # print(A_std)
 
     # print("{:.2f}".format(A_std))
-    list=[]
+    list = dict(result = "", flag = "" , test_id = _current_test.test_id)
     if test_type == "update":
 
         m = _current_test.m
         i = _current_test.i
         conc_std = A_std * m + i
         
-        list.append("{:.2f} {}".format(conc_std, _current_test.unit))
-        list.append("Not Applicable")
+        list['result'] = "{:.2f} {}".format(conc_std, _current_test.unit)
+        list['flag'] = "Not Applicable"
         im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Image.fromarray(image, "RGB").show()
         _, encoded_image = cv2.imencode('.png', im)
