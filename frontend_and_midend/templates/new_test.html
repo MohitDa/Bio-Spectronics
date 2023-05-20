@@ -105,39 +105,17 @@
     <div class="card-body">
       
       <form method="post" action="/reagent_blank"  id = "blank_form">
-        <div class="form-group" style="display:none">
-          <label class="col-form-label">Test Name Old:</label>
-          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-            required>
-        </div>
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "blank_form_testid" required>
       </form>  
       <form method="post" action="/water" id = "water_form" >
-        <script> console.log("Hello") </script>
-        
-        <div class="row">
-          <div class="col-6">
-            <div class="form-group" style="display:none">
-              <label class="col-form-label">Test Name Old:</label>
-              <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-                required>
-            </div>
-          </div>
-        </div>
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "water_form_testid" required>
       </form>
 
       <form method="post" action="/standard" id = "standard_form">
-        <div class="form-group" style="display:none">
-          <label class="col-form-label">Test Name Old:</label>
-          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-            required>
-        </div>
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "standard_form_testid" required>
       </form>
       <form method="post" action="/get_factors" id = "factors_form">
-        <div class="form-group" style="display:none">
-          <label class="col-form-label">Test Name Old:</label>
-          <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-            required>
-        </div>
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "factors_form_testid" required>
       </form>
       
       <form method="post" id="new_test" action="/update_test">
@@ -166,6 +144,7 @@
                 <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
                   required>
               </div>
+              
             <!-- </div> -->
 
             <div class="form-group">
@@ -511,12 +490,7 @@ jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
   console.log(formId);
   console.log("Form ID");
   var formData = jQuery(this).serialize();
-  // if(formId == "factors_form"){
-  //   divId = "popup_close_button";
-  // }
-  // else{
-  //   divId = "popup_close_button_save";
-  // }
+  console.log(formData);
   
   jQuery("#" + divId).show();
 
@@ -528,9 +502,27 @@ jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
     success: function(data, textStatus, jqXHR) {
       if (jqXHR.status === 204) {
         console.log(formId);
-        // Hide the div if the server returned a 204 response
         jQuery("#" + divId).click();
       }
+    }
+  });
+});
+
+jQuery("#new_test").submit(function(event) {
+  event.preventDefault();  // Prevent the default form submission behavior
+  
+  var formData = jQuery(this).serialize();
+
+  jQuery.ajax({
+    url: jQuery(this).attr("action"),
+    type: "POST",
+    data: formData,
+    success: function(data) {
+      console.log(data.response)
+      jQuery("#water_form_testid").val(data.response);
+      jQuery("#blank_form_testid").val(data.response);
+      jQuery("#standard_form_testid").val(data.response);
+      jQuery("#factors_form_testid").val(data.response);
     }
   });
 });

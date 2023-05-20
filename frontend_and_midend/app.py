@@ -1,5 +1,6 @@
 # from asyncio.windows_events import NULL
 import os, numpy as np, base64, cv2, matplotlib
+from io import BytesIO
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -7,7 +8,7 @@ from PIL import Image
 from stat import S_IFBLK
 from unittest import result
 # from tkinter import NO
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from sqlalchemy import  insert, select, update
@@ -104,9 +105,8 @@ class sqlite_sequence(db.Model):
     name = db.Column(db.String(100),primary_key=True)
     seq = db.Column(db.Integer)
 
-#todo link database of shortcut here
 # peltier.set_peltier(type = "visible", temp = 37)  #Setting Peltier Tempreature
-    
+
 @app.route("/")
 def index():
     return render_template("index.html"), {"Refresh": "1; url=list_of_biochemistry"}
@@ -114,6 +114,7 @@ def index():
 @app.route("/list_of_biochemistry")
 def list_of_biochemistry():
     tests_visible = new_tests().query.all()
+    
     # tests_uv = new_tests().query.filter(new_tests.wavelength <= 400)
 
     # for data in tests_uv:
@@ -141,66 +142,96 @@ def start_test():
 
     if request.method == "POST":
         test_id = request.form.get('test_list')
-        # print(test_id)
         _current_test = db.session.get(new_tests, test_id)
-        # print(_current_test.test_name)
     
     return render_template("perform_test.html", test = _current_test)
 
 @app.route("/test_done",methods=['GET','POST'])
 def test_done():
 
-    list=[]
+
+    list = dict(result = "", flag = "" , test_id = "")
 
     image = np.empty((240, 320, 3), dtype=np.uint8)
 
     if request.method == "POST":
-
-        print("____________________test_id______________________________")
+    
+        # print("____________________test_id______________________________")
         test_id = request.form.get('testid')
-        print(test_id)
+        # print(test_id)
+        list["test_id"] = test_id
         _current_test =  db.session.get(new_tests, test_id)
         
         m = _current_test.m
         i = _current_test.i
         # print(m, i)
-        # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+        peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
         A_sample, image = test.perform_test(_current_test)
 
+        result = m * A_sample + i
+        # print("result: " +str(result))
+        list["result"] = "{:.2f} {}".format(result, _current_test.unit)
+        # list.append(str(result) +" " +_current_test.unit)
+        
+        if result >= _current_test.result_high:
+            list["flag"] = "High"
+
+        elif result <= _current_test.result_low:
+            list["flag"] = "Low"
+        
+        elif result >= _current_test.result_low and result <= _current_test.result_high:
+            list["flag"] = "Normal"
+        
         im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         # Image.fromarray(image, "RGB").show()
         _, encoded_image = cv2.imencode('.png', im)
         encoded_image_string = base64.b64encode(encoded_image).decode('utf-8')
 
-        x = np.linspace(0, _current_test.standard_concentration, 100)
+        x = np.linspace(0, ((2*_current_test.standard_concentration) - i) / m, 100)
 
         # Calculate y values using the linear equation y = mx + c
         y = m * x + i
 
         # Plot the graph
-        plt.plot(x, y)
-        plt.xlabel('x')
-        plt.ylabel('y')
-        plt.title('Graph of y = {:.2f}x + {:.2f}'.format(m, i))
+        plt.plot(x, y, color = 'blue')
+        plt.axhline(y = result, color = 'red', linestyle = ':')
+        plt.scatter(A_sample, result, color = 'green')
+        plt.xlabel('Absorbance')
+        plt.ylabel('Concentration')
+        # plt.title('Graph of y = {:.2f}x + {:.2f}'.format(m, i))
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
-
-        result = m * A_sample + i
-        print("result: " +str(result))
-        list.append(str(result) +" " +_current_test.unit)
+        image_buffer = BytesIO()
+        plt.savefig(image_buffer, format='png')
+        image_buffer.seek(0)
+        plt.clf()
         
-        if result >= _current_test.result_high:
-            list.append("High")
+        # Convert the image file to a base64-encoded string
+        encoded_graph_string = base64.b64encode(image_buffer.getvalue()).decode('utf-8')
+        # print("done")
+    return render_template("test_done.html",list = list, image = encoded_image_string, graph = encoded_graph_string)
 
-        elif result <= _current_test.result_low:
-            list.append("Low")
-        
-        elif result >= _current_test.result_low and result <= _current_test.result_high:
-            list.append("Normal")
+@app.route("/save_result",methods=['GET','POST'])
+def save_result():
+    print("Method: ?")
+    _current_test = new_tests()
+    if request.method == "POST":
+        print("Method: post")
+        test_id = request.form.get('testid')
+        _current_test = db.session.get(new_tests, test_id)
+        patient_name = request.form.get('patientname')
+        test_remark = request.form.get('testremark')
+        patient_id = request.form.get('patientid')
+        test_result = request.form.get('testresult')
+        flag = request.form.get('flag')
 
-    return render_template("test_done.html",list = list, image = encoded_image_string)
+        print(test_id, patient_name, test_remark, patient_id, test_result, flag)
+    
+    # test_done()
+    return render_template("perform_test.html", test = _current_test)
+
 
 @app.route("/add_new_test",methods=['GET','POST'])
 def add_new_test():
@@ -213,20 +244,20 @@ def add_new_test():
 
 @app.route("/water",methods=['GET','POST'])
 def water():
-    print("Water")
+    # print("Water")
 
     _current_test = new_tests
     
     if request.method == "POST":
         test_id = request.form.get('testid')
-        print(test_id)
+        # print(test_id)
         _current_test =  db.session.get(new_tests, test_id)
         # sleep(3)
         
     # global R_w, G_w, B_w
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
-    ax0=backend.get_rgb()
+    ax0, image =backend.get_rgb()
  
     R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
     G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
@@ -238,47 +269,157 @@ def water():
         
     db.session.add(_current_test)
     db.session.commit()
-    print("done")
+    # print("done")
     return '', 204
 
 @app.route("/reagent_blank",methods=['GET','POST'])
 def reagent_blank():
-    print("reagent Blank")
+    # print("reagent Blank")
 
     _current_test = new_tests
     
     if request.method == "POST":
         test_id = request.form.get('testid')
+        test_type = request.form.get('testtype')
+        # print(test_id)
+        # print("test type: ")
+        # print(test_type)
         _current_test =  db.session.get(new_tests, test_id)
-
+    # print(test_type)
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
 
     global A_blank
 
-    A_blank = test.perform_test(_current_test)
+    A_blank, image = test.perform_test(_current_test)
 
+    # print("{:.2f}".format(A_blank))
+    list=[]
+    if test_type == "update":
+
+        m = _current_test.m
+        i = _current_test.i
+        conc_blank = A_blank * m + i
+
+        list.append("{:.2f} {}".format(conc_blank, _current_test.unit))
+        list.append("Not Applicable")
+        im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        # Image.fromarray(image, "RGB").show()
+        _, encoded_image = cv2.imencode('.png', im)
+        encoded_image_string = base64.b64encode(encoded_image).decode('utf-8')
+        
+        x = np.linspace(0, ((2*_current_test.standard_concentration) - i) / m, 100)
+
+        # Calculate y values using the linear equation y = mx + c
+        y = m * x + i
+
+        # Plot the graph
+        plt.plot(x, y, color = 'blue')
+        plt.scatter(A_blank, conc_blank, color = 'green')
+        plt.xlabel('Absorbance')
+        plt.ylabel('Concentration')
+        # plt.title('Graph of y = {:.2f}x + {:.2f}'.format(m, i))
+        plt.grid(True)
+
+        
+        
+        i = i - conc_blank
+        _current_test.i = i
+
+        x = np.linspace(0, ((2*_current_test.standard_concentration) - i) / m, 100)
+
+        # Calculate y values using the linear equation y = mx + c
+        y = m * x + i
+        plt.plot(x, y, color = 'black')
+        image_buffer = BytesIO()
+        plt.savefig(image_buffer, format='png')
+        image_buffer.seek(0)
+        plt.clf()
+
+        # Convert the image file to a base64-encoded string
+        encoded_graph_string = base64.b64encode(image_buffer.getvalue()).decode('utf-8')
+
+        db.session.add(_current_test)
+        db.session.commit()
+        return render_template("test_done.html",list = list, image = encoded_image_string, graph = encoded_graph_string)
+
+    
     return '', 204
 
 @app.route("/standard",methods=['GET','POST'])
 def standard():
-    print("standard")
+    # print("standard")
 
     _current_test = new_tests
     
     if request.method == "POST":
         test_id = request.form.get('testid')
+        test_type = request.form.get('testtype')
+        # print(test_type)
         _current_test =  db.session.get(new_tests, test_id)
 
     peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
     global A_std
 
-    A_std= test.perform_test(_current_test)
+    A_std, image= test.perform_test(_current_test)
+    # print(A_std)
+
+    # print("{:.2f}".format(A_std))
+    list=[]
+    if test_type == "update":
+
+        m = _current_test.m
+        i = _current_test.i
+        conc_std = A_std * m + i
+        
+        list.append("{:.2f} {}".format(conc_std, _current_test.unit))
+        list.append("Not Applicable")
+        im = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        # Image.fromarray(image, "RGB").show()
+        _, encoded_image = cv2.imencode('.png', im)
+        encoded_image_string = base64.b64encode(encoded_image).decode('utf-8')
+        
+        x = np.linspace(0, ((2*_current_test.standard_concentration) - i) / m, 100)
+
+        # Calculate y values using the linear equation y = mx + c
+        y = m * x + i
+
+        # Plot the graph
+        plt.plot(x, y, color = 'blue')
+        plt.scatter(A_std, conc_std, color = 'green')
+        plt.xlabel('Absorbance')
+        plt.ylabel('Concentration')
+        # plt.title('Graph of y = {:.2f}x + {:.2f}'.format(m, i))
+        plt.grid(True)
+
+        
+        m = _current_test.standard_concentration / (A_std - (-i/m))
+        # i = _current_test.standard_concentration - (m * A_std)
+
+        _current_test.m = m
+
+        x = np.linspace(0, ((2*_current_test.standard_concentration) - i) / m, 100)
+
+        # Calculate y values using the linear equation y = mx + c
+        y = m * x + i
+        plt.plot(x, y, color = 'black')
+        image_buffer = BytesIO()
+        plt.savefig(image_buffer, format='png')
+        image_buffer.seek(0)
+        plt.clf()
+
+        # Convert the image file to a base64-encoded string
+        encoded_graph_string = base64.b64encode(image_buffer.getvalue()).decode('utf-8')
+
+        db.session.add(_current_test)
+        db.session.commit()
+        return render_template("test_done.html",list = list, image = encoded_image_string, graph = encoded_graph_string)
+
     return '', 204
 
 @app.route("/get_factors",methods=['GET','POST']) 
 def get_factors():
-    print("calculating factors")
+    # print("calculating factors")
 
     _current_test = new_tests
     
@@ -288,12 +429,12 @@ def get_factors():
 
     try:
         m = _current_test.standard_concentration / (A_std - A_blank)
-        i = _current_test.standard_concentration - m * A_std
+        i = _current_test.standard_concentration - (m * A_std)
 
         _current_test.m = m
         _current_test.i = i
     except:
-        print("float division error")
+        # print("float division error")
 
         _current_test.m = 0
         _current_test.i = 0
@@ -316,7 +457,7 @@ def delete_test():
             db.session.delete(test_details)
             db.session.commit()
     
-    print(int(db.session.query(func.max(new_tests.test_id)).first()[0]))
+    # print(int(db.session.query(func.max(new_tests.test_id)).first()[0]))
     stmt = update(sqlite_sequence).where(sqlite_sequence.name == "new_tests").values(seq = int(db.session.query(func.max(new_tests.test_id)).first()[0]))
     
     with db.engine.connect() as conn:
@@ -377,13 +518,13 @@ def update_test():
     if request.method == "POST":
         global test_name, wavelength #q is standard concentration
         test_id = request.form['testid']
-        edit = True #test being edited, not cretated
+
         test_update =  db.session.get(new_tests, test_id)
         if test_update == None: #test do not exist. Add new test
             test_update = new_tests()
             test_update.m = 0
             test_update.i = 0
-            edit = False #test being creaated, not edited
+
 
         test_name = test_update.test_name = request.form['testname']
         test_update.type = request.form['testmethod']
@@ -413,22 +554,24 @@ def update_test():
         except:
             pass
 
+
         db.session.add(test_update)
+
+        db.session.flush()  # Flush the changes to generate the primary key value
+        response_str = test_update.test_id # Access the primary key value
+
         db.session.commit()
 
-        # if edit == False:
-        #     return '', 204
-        # else:
-            # return render_template("test_edited.html"), {"Refresh": "3; url=list_of_biochemistry"}
+        reply = jsonify(response=response_str)
 
-        return '', 204
+        return reply
       
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 
-    print("cleaning")
+    # print("cleaning")
     run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
-    print('done')
+    # print('done')
     return "", 204
 
 

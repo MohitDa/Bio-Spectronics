@@ -20,8 +20,10 @@ class data:
 		# print(filt_floor)
 		filt_ceil = ceil(filt/10)*10
 		# print(filt_ceil)
-		R_f, G_f, B_f =  (data.dictR.get(filt_floor, data.dictR.get(510)), data.dictG.get(filt_floor, data.dictG.get(510)), data.dictB.get(filt_floor, data.dictB.get(510)))
-		R_c, G_c, B_c =  (data.dictR.get(filt_ceil, data.dictR.get(510)), data.dictG.get(filt_ceil, data.dictG.get(510)), data.dictB.get(filt_ceil, data.dictB.get(510)))
+		R_f, G_f, B_f =  (data.dictR.get(filt_floor, 1), data.dictG.get(filt_floor, 1), data.dictB.get(filt_floor, 1))
+		R_c, G_c, B_c =  (data.dictR.get(filt_ceil, 1), data.dictG.get(filt_ceil, 1), data.dictB.get(filt_ceil, 1))
+		# R_f, G_f, B_f =  (data.dictR.get(filt_floor, data.dictR.get(510)), data.dictG.get(filt_floor, data.dictG.get(510)), data.dictB.get(filt_floor, data.dictB.get(510)))
+		# R_c, G_c, B_c =  (data.dictR.get(filt_ceil, data.dictR.get(510)), data.dictG.get(filt_ceil, data.dictG.get(510)), data.dictB.get(filt_ceil, data.dictB.get(510)))
 		# print(R_f, G_f, B_f)
 		# print(R_c, G_c, B_c)
 		# print(filt%10)

@@ -1,6 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- <style>
+	.popup {
+		display: none;
+		position: fixed;
+		width: fit-content;
+		left: 40%;
+		/* margin-left: -150px; */
+		height: fit-content;
+		top: 50%;
+		margin-top: -400px;
+		background: #FFF;
+		border: 3px solid #007bff;
+		z-index: 20;
+	}
+
+	#popup:after {
+		position: fixed;
+		/* content: ""; */
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: -2;
+	}
+
+	#popup:before {
+		position: absolute;
+		/* content: ""; */
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: #FFF;
+		z-index: -1;
+	}
+</style> -->
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -153,60 +191,126 @@
 
 	<div class="row">
 		<div class="col-6">
+			<div class="row">
+				<div class="col-6">
+					<div class="card">
+						<h5 class="card-header">Test Results</h5>
+						<div class="card-body">
+							<ul class="list-group">
+								<li class="list-group-item">value = {{list["result"]}}</li>
+								<li class="list-group-item">flag = {{list["flag"]}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 
-			<div class="card">
-				<h5 class="card-header">Test Results</h5>
-				<div class="card-body">
-					<ul class="list-group">
-						{% for i in range(0,list | length ,2)%}
+				<div class="col-6">
+					<div class="card" style="width: fit-content; height: fit-content;">
+						<h5 class="card-header">Test Image</h5>
+						<div class="card-body">
+							<img src="data:image/png;base64,{{ image }}" alt="8-bit Image">
 
-						<li class="list-group-item">value = {{list[i]}}</li>
-
-						<li class="list-group-item">flag = {{list[i+1]}}</li>
-
-						{%endfor%}
-					</ul>
-
+						</div>
+					</div>
 
 				</div>
+			</div>
+
+			<div class="row">
+				<div class="column" style="padding: 10px;">
+					<button type="button" class="btn btn-primary " onclick="window.history.back()">Go Back</button>
+				</div>
+				<div class="column" style="padding: 10px;">
+					<button type="button" class="btn btn-primary " onclick="location.reload()">Retest</button>
+
+				</div>
+				<div class="column" style="padding: 10px;">
+					<button type="button" class="btn btn-primary " onclick="show('save_patient_data_popup');">Save and
+						Next</button>
+				</div>
+
+
+				<form id="save_result" action="\save_result" method = "post">
+					<div class="popup" id="save_patient_data_popup" style="display: none">
+
+						<div class="card-header">
+							Save Data
+						</div>
+
+						<div class="card-body" style="text-align: left;">
+
+							<div class="row">
+								<div class="col-6">
+
+									<div class="form-group">
+										<label class="col-form-label">Patient Name: </label>
+										<input type="text" value="" class="form-control" name="patientname">
+									</div>
+
+									<div class="form-group">
+										<label class="col-form-label">Remark: </label>
+										<input type="text" value="no" class="form-control" name="testremark">
+									</div>
+
+								</div>
+
+
+								<div class="form-group">
+									<label class="col-form-label">ID: </label>
+									<input type="text" value="" class="form-control" name="patientid">
+								</div>
+
+								<input type="hidden" value="{{list["test_id"]}}" class="form-control" name="testid">
+
+								<input type="hidden" value="{{list["result"]}}" class="form-control" name="testresult">
+
+								<input type="hidden" value="{{list["flag"]}}" class="form-control" name="testflag">
+
+								<button type="submit" class="btn btn-primary ">Save</button>
+
+							</div>
+
+						</div>
+					</div>
+				</form>
+
 			</div>
 
 		</div>
 
 		<div class="col-6">
 
-			<div class="card">
-				<h5 class="card-header">Test Image</h5>
-				<div class="card-body">
-					<img src="data:image/png;base64,{{ image }}" alt="8-bit Image">
-					</ul>
+			<div class="row">
 
-
+				<div class="card" style="width: fit-content; height: fit-content;">
+					<h5 class="card-header">Test Graph</h5>
+					<div class="card-body">
+						<img src="data:image/png;base64,{{ graph }}" alt="Graph">
+					</div>
 				</div>
 			</div>
 
 		</div>
 
-		<div class="col-6">
-
-			<div class="card">
-				<h5 class="card-header">Test Graph</h5>
-				<div class="card-body">
-					<img src="data:image/png;base64,{{ image }}" alt="8-bit Image">
-					</ul>
-
-
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-	<div class="row">
-		<form action="/list_of_biochemistry">
-			<button type="submit" class="btn btn-primary"> <- BACK </button>
-		</form>
 	</div>
 </body>
 
 </html>
+
+<script>
+
+	$ = function (id) {
+		return document.getElementById(id);
+	}
+
+	var fromNane = function (name) {
+		return document.getElementsByName(name);
+	}
+
+	var show = function (id) {
+		$(id).style.display = 'block';
+	}
+	var hide = function (id) {
+		$(id).style.display = 'none';
+	}
+</script>

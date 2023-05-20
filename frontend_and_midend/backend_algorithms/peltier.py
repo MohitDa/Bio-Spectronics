@@ -8,7 +8,7 @@ from threading import Thread
 def set_peltier(type = "null", temp = 0):
     temp_set = [False]
 
-    print(type)
+    # print(type)
     t1 = Thread()
     if type == "visible":
         t1 = Thread(target=set_peltier_temperature,args=(temp,19,0x5A,temp_set))
@@ -18,15 +18,16 @@ def set_peltier(type = "null", temp = 0):
         t1 = Thread(target=set_peltier_temperature,args=(temp,18,0x5B,temp_set))
         t1.start()
         
-    else:
-        print("else")
+    # else:
+        # print("else")
     
     print("Setting Peltier Temp")
 
     while temp_set[0] == False:
         pass
-        # print(t1.is_alive())
+    print("temp set")
     
+    # if 
     # print(t1.is_alive())
 
     # t1.join()
