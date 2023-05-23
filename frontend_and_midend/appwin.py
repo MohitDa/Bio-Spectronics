@@ -650,3 +650,126 @@ if __name__ == '__main__':
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
+
+# Traceback (most recent call last):
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2548, in __call__
+#     return self.wsgi_app(environ, start_response)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2528, in wsgi_app
+#     response = self.handle_exception(e)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2525, in wsgi_app
+#     response = self.full_dispatch_request()
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1822, in full_dispatch_request
+#     rv = self.handle_user_exception(e)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1820, in full_dispatch_request
+#     rv = self.dispatch_request()
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1796, in dispatch_request
+#     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+#   File "D:\System\Documents\GitHub\Bio-Spectronics\frontend_and_midend\appwin.py", line 175, in test_done
+#     Image.open(image)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\PIL\Image.py", line 3137, in open
+#     fp = io.BytesIO(fp.read())
+# AttributeError: 'tuple' object has no attribute 'read'
+# 127.0.0.1 - - [23/May/2023 18:07:09] "GET /test_done?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:07:09] "GET /test_done?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:07:09] "GET /test_done?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:07:09] "GET /test_done?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+# 127.0.0.1 - - [23/May/2023 18:13:15] "GET / HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:13:15] "GET /static/css/index.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:15] "GET /static/logo.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:15] "GET /static/bgimg.jfif HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:16] "GET /list_of_biochemistry HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:13:16] "GET /static/list_of_tests.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:16] "GET /static/logo.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:19] "POST /start_test HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:13:19] "GET /static/list_of_tests.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:19] "GET /static/logo.png HTTP/1.1" 304 -
+# opening image
+# 127.0.0.1 - - [23/May/2023 18:13:33] "POST /test_done HTTP/1.1" 500 -
+# Traceback (most recent call last):
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\PIL\Image.py", line 3135, in open
+#     fp.seek(0)
+# AttributeError: 'numpy.ndarray' object has no attribute 'seek'
+
+# During handling of the above exception, another exception occurred:
+
+# Traceback (most recent call last):
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2548, in __call__
+#     return self.wsgi_app(environ, start_response)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2528, in wsgi_app
+#     response = self.handle_exception(e)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 2525, in wsgi_app
+#     response = self.full_dispatch_request()
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1822, in full_dispatch_request
+#     rv = self.handle_user_exception(e)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1820, in full_dispatch_request
+#     rv = self.dispatch_request()
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\flask\app.py", line 1796, in dispatch_request
+#     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+#   File "D:\System\Documents\GitHub\Bio-Spectronics\frontend_and_midend\appwin.py", line 191, in test_done
+#     Image.open(image)
+#   File "C:\Users\patha\AppData\Roaming\Python\Python39\site-packages\PIL\Image.py", line 3137, in open
+#     fp = io.BytesIO(fp.read())
+# AttributeError: 'numpy.ndarray' object has no attribute 'read'
+# 127.0.0.1 - - [23/May/2023 18:13:33] "GET /test_done?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:33] "GET /test_done?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:13:33] "GET /test_done?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 304 -
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+# 127.0.0.1 - - [23/May/2023 18:15:16] "GET / HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:15:17] "GET /static/bgimg.jfif HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:17] "GET /static/logo.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:17] "GET /static/css/index.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:18] "GET /list_of_biochemistry HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:15:18] "GET /static/list_of_tests.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:18] "GET /static/logo.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:20] "POST /start_test HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:15:21] "GET /static/list_of_tests.css HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:21] "GET /static/logo.png HTTP/1.1" 304 -
+# 127.0.0.1 - - [23/May/2023 18:15:31] "POST /test_done HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:15:31] "GET /static/css/test_done.css HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:15:31] "GET /favicon.ico HTTP/1.1" 404 -
+# 127.0.0.1 - - [23/May/2023 18:16:19] "POST /test_done HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:16:19] "GET /static/css/test_done.css HTTP/1.1" 304 -
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+# 127.0.0.1 - - [23/May/2023 18:16:56] "POST /test_done HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:16:56] "GET /static/css/test_done.css HTTP/1.1" 304 -
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+# 127.0.0.1 - - [23/May/2023 18:17:36] "POST /test_done HTTP/1.1" 200 -
+# 127.0.0.1 - - [23/May/2023 18:17:36] "GET /static/css/test_done.css HTTP/1.1" 304 -
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+#  * Detected change in 'D:\\System\\Documents\\GitHub\\Bio-Spectronics\\frontend_and_midend\\appwin.py', reloading
+#  * Restarting with stat
+#  * Debugger is active!
+#  * Debugger PIN: 399-787-034
+
+#  *  History restored 
+
+# Microsoft Windows [Version 10.0.22621.1702]
+# (c) Microsoft Corporation. All rights reserved.
+
+# D:\System\Documents\GitHub\Bio-Spectronics>
+#  *  History restored 
+
+# Microsoft Windows [Version 10.0.22621.1702]
+# (c) Microsoft Corporation. All rights reserved.
+
+# D:\System\Documents\GitHub\Bio-Spectronics>type .gitignore 
+# database.db
+# appwin.py
+# logs\
