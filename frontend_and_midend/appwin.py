@@ -1,6 +1,9 @@
 # from asyncio.windows_events import NULL
 import os, numpy as np, base64, cv2, matplotlib
+
+import random
 from io import BytesIO
+
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -14,6 +17,7 @@ from sqlalchemy.sql import func
 from sqlalchemy import  insert, select, update
 import analyzer
 from time import sleep
+
 app = Flask(__name__)   # Create an instance of flask called "app"
 
 import math
@@ -21,8 +25,8 @@ import sys
 sys.path.insert(1, '/backend_algorithms')
 
 
-from backend_algorithms import Backend_codes , run_motor, peltier, test
-backend = Backend_codes.backend()
+# from backend_algorithms import Backend_codes , run_motor, peltier, test
+# backend = Backend_codes.backend()
 # import backend_algorithms.run_motor #pump actions
 # import backend_algorithms.peltier   #peltier
 # import backend_algorithms.Sens
@@ -165,9 +169,28 @@ def test_done():
         m = _current_test.m
         i = _current_test.i
         # print(m, i)
-        peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
-    
-        A_sample, image = test.perform_test(_current_test)
+        # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+
+        ##################################################################################################
+        cap = cv2.VideoCapture(0)
+        ret, frame = cap.read()
+
+        # Convert frame to PIL Image
+        pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        #pil_image.show()  # Display the image
+        #sleep(1)
+        # Save the image as a NumPy array
+        image = np.array(pil_image)
+
+        # Release the capture and close the windows
+        cap.release()
+        cv2.destroyAllWindows()
+        ##################################################################################################
+        
+        A_sample = random.randint(0, 10)* 0.01
+        # print("opening image")
+        # Image.open(image)
+        # print("image open")
 
         result = m * A_sample + i
         # print("result: " +str(result))
@@ -255,9 +278,25 @@ def water():
         # sleep(3)
         
     # global R_w, G_w, B_w
-    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+    # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
-    ax0, image =backend.get_rgb()
+    ax0 = [random.randint(0, 256), random.randint(0, 256), random.randint(0, 256)]
+        
+    ##################################################################################################
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+
+    # Convert frame to PIL Image
+    pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    #pil_image.show()  # Display the image
+    #sleep(1)
+    # Save the image as a NumPy array
+    image = np.array(pil_image)
+
+    # Release the capture and close the windows
+    cap.release()
+    cv2.destroyAllWindows()
+    ##################################################################################################
  
     R_w = ax0[2]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
     G_w = ax0[1]/((ax0[0]**2 + ax0[1]**2 + ax0[2]**2)**0.5)
@@ -286,11 +325,27 @@ def reagent_blank():
         # print(test_type)
         _current_test =  db.session.get(tests, test_id)
     # print(test_type)
-    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+    # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
 
     global A_blank
 
-    A_blank, image = test.perform_test(_current_test)
+    ##################################################################################################
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+
+    # Convert frame to PIL Image
+    pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    #pil_image.show()  # Display the image
+    #sleep(1)
+    # Save the image as a NumPy array
+    image = np.array(pil_image)
+
+    # Release the capture and close the windows
+    cap.release()
+    cv2.destroyAllWindows()
+    ##################################################################################################
+    
+    A_blank = random.randint(0, 10)* 0.01
 
     # print("{:.2f}".format(A_blank))
     list = dict(result = "", flag = "" , test_id = _current_test.test_id)
@@ -357,11 +412,27 @@ def standard():
         # print(test_type)
         _current_test =  db.session.get(tests, test_id)
 
-    peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
+    # peltier.set_peltier(type = "visible", temp = _current_test.temp)  #Setting Peltier Tempreature
     
     global A_std
 
-    A_std, image= test.perform_test(_current_test)
+    ##################################################################################################
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+
+    # Convert frame to PIL Image
+    pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    #pil_image.show()  # Display the image
+    #sleep(1)
+    # Save the image as a NumPy array
+    image = np.array(pil_image)
+
+    # Release the capture and close the windows
+    cap.release()
+    cv2.destroyAllWindows()
+    ##################################################################################################
+
+    A_std =  random.randint(0, 10)* 0.01
     # print(A_std)
 
     # print("{:.2f}".format(A_std))
@@ -569,9 +640,9 @@ def update_test():
 @app.route("/clean",methods=['GET','POST'])
 def clean():
 
-    # print("cleaning")
-    run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
-    # print('done')
+    print("cleaning")
+    # run_motor.run_pump(pump = 1, direction = "forward", duration = 5)
+    print('done')
     return "", 204
 
 
