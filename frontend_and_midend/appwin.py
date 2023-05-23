@@ -255,7 +255,6 @@ def save_result():
     # test_done()
     return render_template("perform_test.html", test = _current_test)
 
-
 @app.route("/add_new_test",methods=['GET','POST'])
 def add_new_test():
     new_test = tests()
