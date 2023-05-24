@@ -30,15 +30,15 @@
     <div style="display: flex;   width: 100%;">
       <!-- <img class="center1" src="/static/logo.png" width="90" height="90">
       <div class="submit_btn display-4">List of Biochemistry</div> -->
-      
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="/static/logo.png" alt="Logo" width="90" height="90" class="d-inline-block align-text-top">
-          <span class="submit_btn display-4">List of Biochemistry</span>
-        </a>
-      </div>
-    </nav>
+
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="/static/logo.png" alt="Logo" width="90" height="90" class="d-inline-block align-text-top">
+            <span class="submit_btn display-4">List of Biochemistry</span>
+          </a>
+        </div>
+      </nav>
     </div>
 
 
@@ -46,7 +46,7 @@
     <button class="btn btn-outline-secondary" type="submit">Search</button> -->
     <input class="control" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-secondary" type="submit">Search</button>
-<!--   
+    <!--   
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       
       <div class="container-fluid">
@@ -65,8 +65,8 @@
 
     <!-- action="/test_done" -->
 
-    <form class="row" method="post" action="/start_test" id="test_list">  
-      
+    <form class="row" method="post" action="/start_test" id="test_form">
+
       <div class="col-6">
 
         <div class="card">
@@ -79,7 +79,8 @@
               {% for visible in tests_visible %}
               <div class="checkbox">
                 <label class="checkbox-wrapper">
-                  <input type="radio" class="checkbox-input " name="test_list" value="{{visible.test_id}}" />
+                  <input type="radio" class="checkbox-input " name="test_list" id="checked_test"
+                    value="{{visible.test_id}}" />
                   <span class="checkbox-tile card_gl">
                     <span>{{ visible.test_name }}</span>
                   </span>
@@ -88,8 +89,7 @@
 
               <div class="form-group" style="display:none">
                 <label class="col-form-label">Test Name Old:</label>
-                <input type="text" value="{{visible.test_id}}" class="form-control" name="testid" 
-                  required>
+                <input type="text" value="{{visible.test_id}}" class="form-control" name="testid" required>
               </div>
 
               {%endfor%}
@@ -161,25 +161,25 @@
     <!-- </form>
   </main> -->
 
-  <!-- data-toggle="modal" data-target="#wait_modal" -->
+    <!-- data-toggle="modal" data-target="#wait_modal" -->
 
     <div class="footer-buttons">
-      <input id="submitbtn" class="btn btn-info submit_btn" type="submit" value="Test" form="test_list" > 
+      <input id="submitbtn" class="btn btn-info submit_btn" type="submit" value="Test" form="test_form">
 
       <form type="submit" method="post" action="/add_new_test" id="add_new_test">
         <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="add_new_test">Add new
           test</button>
       </form>
-      
-      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#edit_test_modal">Edit
-        test</button>
+
+      <button id="edit_test_button" class="btn btn-info submit_btn" type="submit" form="test_form">Edit Test </button>
 
       <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#delete_test_modal">Delete
         test</button>
-        <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#stdval_modal">Measure
+      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#stdval_modal">Measure
         std. value</button>
 
-      <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="clean" data-target="#clean_modal">Clean
+      <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="clean"
+        data-target="#clean_modal">Clean
       </button>
     </div>
 
@@ -228,7 +228,7 @@
               </div>
               <div class="row">
                 <div class="col-6">
-                
+
                   <div class="form-group">
                     <label class="col-form-label">Enter Std Val</label>
                     <input type="number" value="37" class="form-control" name="test_temperature" required>
@@ -266,27 +266,16 @@
             <form method="post" id="edit_test" action="/edit_test">
 
               <!-- generate buttons for all visible test in database -->
-              {% for visible in tests_visible %}
+              <!-- {% for visible in tests_visible %} -->
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="flexCheckDefault" name="test_list"
-                  value = {{visible.test_id}} />
+                  value={{visible.test_id}} />
                 <label class="form-check-label" for="flexCheckDefault">
-                  {{visible.test_name}}
+                  <!-- {{visible.test_name}} -->
                 </label>
 
               </div>
-              {%endfor%}
-
-              <!-- generate buttons for all uv test in database -->
-              {% for uv in tests_uv %}
-              <div class="form-check">
-                <input class="form-check-input" type="radio" id="flexCheckDefault" name="test_list" 
-                  value = {{uv.test_id}} />
-                <label class="form-check-label" for="flexCheckDefault">
-                  {{uv.test_name}}
-                </label>
-              </div>
-              {%endfor%}
+              <!-- {%endfor%} -->
 
 
             </form>
@@ -355,13 +344,13 @@
       </div>
     </div>
 
-<!--stdval modal-->
+    <!--stdval modal-->
 
 
-<!--clean modal-->
-<!-- <div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!--clean modal-->
+    <!-- <div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true"> -->
-<!-- <div class="modal-dialog" role="document">
+    <!-- <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Cleaning in Progress...</h5>
@@ -379,21 +368,21 @@ aria-hidden="true"> -->
 </div> -->
 
 
-<!--clean modal-->
-<div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Cleaning in Progress...</h5>
-      
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <form class="row" type="submit" method="post" action="/clean" id="clean"></form>
-    </div>
-  </div>
-</div>
+    <!--clean modal-->
+    <div class="modal fade" id="clean_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Cleaning in Progress...</h5>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <form class="row" type="submit" method="post" action="/clean" id="clean"></form>
+          </div>
+        </div>
+      </div>
 
 </body>
 
@@ -420,22 +409,15 @@ aria-hidden="true">
   $('#delete_test_modal').on('show.bs.modal', function (event) {
 
   })
-  // $('#submitbtn').click (function (e) {
-  //  e.preventDefault(); //will stop the link href to call the blog page
 
-  //  setTimeout(
-  // function() {
-  //   window.location.replace("http://127.0.0.1:5000/test_done");
-  // }, 5000);
+  jQuery(document).ready(function () {
+    jQuery("#edit_test_button").click(function () {
+      event.preventDefault();
+      jQuery("#test_form").attr("action", "/edit_test");
+      jQuery('#test_form').submit();
+    });
+  });
 
-// });
-// $('#test_list').submit(function (e) {
-//    var form = this;
-//    e.preventDefault();
-//    setTimeout(function () {
-//     form.submit();
-//    }, 5000); // in milliseconds
-//   });
 </script>
 
 </html>

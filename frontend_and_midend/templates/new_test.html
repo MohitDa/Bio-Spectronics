@@ -5,64 +5,66 @@
   /* div {
     margin-bottom: 10px;
   } */
-  label{
+  label {
     display: block;
     position: relative;
     width: 50%;
     text-align: left;
   }
+
   input {
     display: block;
     position: relative;
     width: 50%;
     text-align: left;
   }
+
   .popup {
-  display: none;
-  position: fixed;
-  width: fit-content;
-  left: 40%;
-  /* margin-left: -150px; */
-  height: fit-content;
-  top: 50%;
-  margin-top: -400px;
-  background: #FFF;
-  border: 3px solid #007bff;
-  z-index: 20;
-}
+    display: none;
+    position: fixed;
+    width: fit-content;
+    left: 40%;
+    /* margin-left: -150px; */
+    height: fit-content;
+    top: 50%;
+    margin-top: -400px;
+    background: #FFF;
+    border: 3px solid #007bff;
+    z-index: 20;
+  }
 
-#popup:after {
-  position: fixed;
-  /* content: ""; */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: -2;
-}
+  #popup:after {
+    position: fixed;
+    /* content: ""; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -2;
+  }
 
-#popup:before {
-  position: absolute;
-  /* content: ""; */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #FFF;
-  z-index: -1;
-}
+  #popup:before {
+    position: absolute;
+    /* content: ""; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #FFF;
+    z-index: -1;
+  }
 
-#myDiv {
-  display: none;
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
+  #myDiv {
+    display: none;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
 
-/* button {
+  /* button {
     margin-top: 50px;
     background-color: rgba(255,255,255,0.3);
     border: 3px solid #F04A49;
@@ -70,14 +72,11 @@
     font-size: 25px;
     padding: 10px 20px;
      */
-/* } */
-
+  /* } */
 </style>
 
 <head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,24 +99,28 @@
 <body>
   <div class="card text-align">
     <div class="card-header">
-        New test
+      New test
     </div>
     <div class="card-body">
-      
-      <form method="post" action="/reagent_blank"  id = "blank_form">
-        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "blank_form_testid" required>
-      </form>  
-      <form method="post" action="/water" id = "water_form" >
-        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "water_form_testid" required>
+
+      <form method="post" action="/reagent_blank" id="blank_form">
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id="blank_form_testid"
+          required>
+      </form>
+      <form method="post" action="/water" id="water_form">
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id="water_form_testid"
+          required>
       </form>
 
-      <form method="post" action="/standard" id = "standard_form">
-        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "standard_form_testid" required>
+      <form method="post" action="/standard" id="standard_form">
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid"
+          id="standard_form_testid" required>
       </form>
-      <form method="post" action="/get_factors" id = "factors_form">
-        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid" id = "factors_form_testid" required>
+      <form method="post" action="/get_factors" id="factors_form">
+        <input type="hidden" value="{{edit_test["test_id"]}}" class="form-control" name="testid"
+          id="factors_form_testid" required>
       </form>
-      
+
       <form method="post" id="new_test" action="/update_test">
         <!-- <div class="row">
           <div class="form-group">
@@ -134,23 +137,22 @@
         <div class="row">
           <div class="col-6">
             <!-- <div class="row"> -->
-              <div class="form-group">
-                <label class="col-form-label">Chemistry:</label>
-                <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname"
-                  required>
-              </div>
-              <div class="form-group" style="display:none">
-                <label class="col-form-label">Test Name Old:</label>
-                <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" 
-                  required>
-              </div>
-              
+            <div class="form-group">
+              <label class="col-form-label">Chemistry:</label>
+              <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname" required>
+            </div>
+            <div class="form-group" style="display:none">
+              <label class="col-form-label">Test Name Old:</label>
+              <input type="text" value="{{edit_test["test_id"]}}" class="form-control" name="testid" required>
+            </div>
+
             <!-- </div> -->
 
             <div class="form-group">
               <label class="col-form-label">Method:</label>
-              <select type="text"  class="form-control" name="testmethod" required>
-                <option selected value="{{edit_test["test_type"]}}" > {{"Current Method: " + edit_test['test_type']}}  </option>
+              <select type="text" class="form-control" name="testmethod" required>
+                <option selected value="{{edit_test["test_type"]}}"> {{"Current Method: " + edit_test['test_type']}}
+                </option>
                 <option value="EP">End Point</option>
                 <option value="TP">Two Point</option>
                 <option value="Kinetic">Kinetic</option>
@@ -162,12 +164,14 @@
             </div>
             <div class="form-group">
               <label class="col-form-label">Wavelength 1:</label>
-              <input type="number" value="{{edit_test["test_wavelength1"]}}" class="form-control" name="testwavelength1">
+              <input type="number" value="{{edit_test["test_wavelength1"]}}" class="form-control"
+                name="testwavelength1">
             </div>
-            
+
             <div class="form-group">
               <label class="col-form-label">Wavelength 2:</label>
-              <input type="number" value="{{edit_test["test_wavelength2"]}}" class="form-control" name="testwavelength2">
+              <input type="number" value="{{edit_test["test_wavelength2"]}}" class="form-control"
+                name="testwavelength2">
             </div>
             <div class="form-group">
               <label class="col-form-label">Blank:</label>
@@ -176,21 +180,26 @@
                 <option value="Water">Water</option>
               </Select>
             </div>
-            <div class="form-group" >
+            <div class="form-group">
               <label class="col-form-label">Standard:</label>
-              <input type="checkbox" checked id = 'std_button' style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard"  onchange= "ifchecked('std_button', 'factor_id' ,'conc_button');">
+              <input type="checkbox" checked id='std_button' style="margin: 0; padding: 0; height: 20px; width: 20px;"
+                class="form-control" name="teststandard"
+                onchange="ifchecked('std_button', 'factor_id' ,'conc_button');">
             </div>
 
             <div class="form-group" id="factor_id" style="display: none;">
-              
-                <label class="col-form-label">factor:</label>
-                <input type="number" value="{{edit_test["m"]}}" class="form-control" name="testwavelength2" onclick="show('next_button_div');">
-             
+
+              <label class="col-form-label">factor:</label>
+              <input type="number" value="{{edit_test["m"]}}" class="form-control" name="testwavelength2"
+                onclick="show('next_button_div');">
+
             </div>
 
 
-            <div class="form-group" id = 'conc_button'>
-              <button type="submit" onclick="show('std_settings');" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">Conc.</button>
+            <div class="form-group" id='conc_button'>
+              <button type="submit" onclick="show('std_settings');"
+                style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary"
+                form="std_conc">Conc.</button>
             </div>
 
 
@@ -201,16 +210,16 @@
                 <option value="Water">Water</option>
               </Select>
             </div>
-            
+
             <div class="popup" id="std_settings">
               <!-- <div class="card text-center"> -->
-                <div class="card-header">
-                  Std. Input 
-                </div>
+              <div class="card-header">
+                Std. Input
+              </div>
 
-                <div class="card-body" style="text-align: left;">
-                  <!-- <form method="post" id="edit_test" action="/update_test"> -->
-                    <!-- <div class="row">
+              <div class="card-body" style="text-align: left;">
+                <!-- <form method="post" id="edit_test" action="/update_test"> -->
+                <!-- <div class="row">
                       <div class="form-group">
                         <label class="col-form-label">Test Name:</label>
                         <input type="text" value="{{edit_test["test_name"]}}" class="form-control" name="testname"
@@ -222,135 +231,147 @@
                           required>
                       </div>
                     </div> -->
-                    <div class="row">
-                      <div class="col-6">
-                          
-                        <div class="form-group" >
-                          <label class="col-form-label">Point: </label>
-                          <input type="number"  value="1" step="1" class="form-control" name="testpoint">
-                        </div>
+                <div class="row">
+                  <div class="col-6">
 
-                        <div class="form-group">
-                          <label class="col-form-label">Type:</label>
-                          <input type="text" value="linear" class="form-control" name="testtype" >
-                        </div>
-
-                      </div>
-
-                      <div class="col-6">
-                        <div class="form-group" >
-                          <label class="col-form-label">Repeat: </label>
-                          <input type="number"  value="1" step="1" class="form-control" name="testrepeat">
-                        </div>
-                      </div>
-                      
+                    <div class="form-group">
+                      <label class="col-form-label">Point: </label>
+                      <input type="number" value="1" step="1" class="form-control" name="testpoint">
                     </div>
 
-                    Conc.
-
-                    <div class="row">
-                        <div class="col-6">
-                          <div class="form-group" >
-                            <label class="col-form-label">1:</label>
-                            <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testconc1" required >
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">3:</label>
-                            <input type="number" value="0" class="form-control" name="testconc3" required > 
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">5:</label>
-                            <input type="number" value="0" class="form-control" name="testconc5" required>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">7:</label>
-                            <input type="number" value="0" class="form-control" name="testconc7" required>
-                          </div>
-
-                        </div>
-
-                        <div class="col-6">
-                          <div class="form-group">
-                            <label class="col-form-label">2:</label>
-                            <input type="number" value="0" class="form-control" name="testconc2" required>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">4:</label>
-                            <input type="number" value="0" class="form-control" name="testconc4" required>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">6:</label>
-                            <input type="number" value="0" class="form-control" name="testconc6" required>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-form-label">8:</label>
-                            <input type="number" value="0" class="form-control" name="testconc8" required>
-                          </div>
-
-                        </div>
-
+                    <div class="form-group">
+                      <label class="col-form-label">Type:</label>
+                      <input type="text" value="linear" class="form-control" name="testtype">
                     </div>
 
-                    <div class="row">
-                      <div class="form-group" >
-                        <button type="submit" onclick="hide('std_settings'); show('next_button_div');" style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary" form="std_conc">OK</button>
-                      </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="col-form-label">Repeat: </label>
+                      <input type="number" value="1" step="1" class="form-control" name="testrepeat">
                     </div>
+                  </div>
 
-                    
-
-                  <!-- </form> -->
-                  
                 </div>
+
+                Conc.
+
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="col-form-label">1:</label>
+                      <input type="number" value="{{edit_test["q"]}}" class="form-control" name="testconc1" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">3:</label>
+                      <input type="number" value="0" class="form-control" name="testconc3" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">5:</label>
+                      <input type="number" value="0" class="form-control" name="testconc5" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">7:</label>
+                      <input type="number" value="0" class="form-control" name="testconc7" required>
+                    </div>
+
+                  </div>
+
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="col-form-label">2:</label>
+                      <input type="number" value="0" class="form-control" name="testconc2" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">4:</label>
+                      <input type="number" value="0" class="form-control" name="testconc4" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">6:</label>
+                      <input type="number" value="0" class="form-control" name="testconc6" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-form-label">8:</label>
+                      <input type="number" value="0" class="form-control" name="testconc8" required>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="form-group">
+                    <button type="submit"
+                      onclick="hide('std_settings'); show('next_button_div');"
+                      style="margin: 0%; width: fit-content; display: block;" value="submit" class="btn btn-primary"
+                      form="std_conc">OK</button>
+                  </div>
+                </div>
+
+
+
+                <!-- </form> -->
+
+              </div>
 
               <!-- </div> -->
             </div>
 
-            <div class="form-group" >
+            <div class="form-group">
               <label class="col-form-label">QC:</label>
-              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control" name="teststandard">
+              <input type="checkbox" style="margin: 0; padding: 0; height: 20px; width: 20px;" class="form-control"
+                name="teststandard">
             </div>
 
-            <div class="form-group" style="top: -50px; display: none ;" id="next_button_div">
-              <button  type="submit" value="OK" class="btn btn-primary "  form="new_test" onclick="show('factor_calculation_parameters'); hide('next_button')" id="next_button"  >Next</button>
+            <div class="form-group" id="next_button_div" style="top: -50px; display: none ;">
+
+              <!-- <div class="col-6"> -->
+              <button class="btn btn-primary" id="next_button" form="new_test"
+                onclick="show('factor_calculation_parameters'); hide('next_button'); hide('save_without_caliberaton_button');"
+                data-toggle="modal" data-target="#wait_modal">Caliberate</button>
+              <!-- </div> -->
+
+              <!-- <div class="col-6"  > -->
+              <button class="btn btn-primary" id = "save_without_caliberaton_button" form="new_test" onclick="function delayedFunction(){ location.replace('/list_of_biochemistry')}; setTimeout(delayedFunction,50);"> Without Caliberation</button>
+              
+              <!-- </div> -->
+
             </div>
-            
 
           </div>
 
 
           <div class="col-6">
-            < Reference >
-            <div class="form-group">
-              <label class="col-form-label">Low:</label>
-              <input type="number" step="0.001" value="{{edit_test["test_result_low"]}}" class="form-control"
-                name="testlevellow" required>
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">High:</label>
-              <input type="number" step="0.001" value="{{edit_test["test_result_high"]}}" class="form-control"
-                name="testlevelhigh" required>
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Unit:</label>
-              <input type="text" value="{{edit_test["test_unit"]}}" class="form-control"
-                name="testunit">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Decimal:</label>
-              <input type="number" value="2" class="form-control" name="testdecimal">
-            </div>
-            <div class="form-group">
-              <label class="col-form-label">Delay Time:</label>
-              <input type="number" value="{{edit_test["test_sample_rest_time"]}}" class="form-control"
-                name="testdelaytime">
-            </div>
-            {% if ((edit_test["test_type"] == "TP") or (edit_test["test_type"] == "Kinetic"))%}
-            <div class="form-group">
-              <label class="col-form-label">Measuring Time:</label>
-              <input type="number" value="{{edit_test["test_test_time"]}}" class="form-control"
-                name="testtesttime">
-            </div>
+            < Reference>
+              <div class="form-group">
+                <label class="col-form-label">Low:</label>
+                <input type="number" step="0.001" value="{{edit_test["test_result_low"]}}" class="form-control"
+                  name="testlevellow" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">High:</label>
+                <input type="number" step="0.001" value="{{edit_test["test_result_high"]}}" class="form-control"
+                  name="testlevelhigh" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Unit:</label>
+                <input type="text" value="{{edit_test["test_unit"]}}" class="form-control" name="testunit">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Decimal:</label>
+                <input type="number" value="2" class="form-control" name="testdecimal">
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Delay Time:</label>
+                <input type="number" value="{{edit_test["test_sample_rest_time"]}}" class="form-control"
+                  name="testdelaytime">
+              </div>
+              {% if ((edit_test["test_type"] == "TP") or (edit_test["test_type"] == "Kinetic"))%}
+              <div class="form-group">
+                <label class="col-form-label">Measuring Time:</label>
+                <input type="number" value="{{edit_test["test_test_time"]}}" class="form-control" name="testtesttime">
+              </div>
               {% if edit_test["test_type"] == "Kinetic" %}
               <div class="form-group">
                 <label class="col-form-label">Delay Between Absorbance:</label>
@@ -358,69 +379,74 @@
                   name="testdelaybetweenimages">
               </div>
               {% endif %}
-            {% endif %}
-            <div class="form-group">
-              <label class="col-form-label">Volume:</label>
-              <input type="text" value="100uL" class="form-control" name="testvolume">
-            </div>
+              {% endif %}
+              <div class="form-group">
+                <label class="col-form-label">Volume:</label>
+                <input type="text" value="100uL" class="form-control" name="testvolume">
+              </div>
 
-            <div class="form-group" style="display: none">
-              <input class="" type="hidden" name="testB_w" value="-1">
-            </div>
+              <div class="form-group" style="display: none">
+                <input class="" type="hidden" name="testB_w" value="-1">
+              </div>
 
-            
+
 
           </div>
 
         </div>
 
         <div class="row">
-          
-          <div class="form-group" id = "factor_calculation_parameters" style="top: -50px; display: none;">
-            
+
+          <div class="form-group" id="factor_calculation_parameters" style="top: -50px; display: none;">
+
             <!-- <div class="col-6"> -->
-              <button  class="btn btn-primary" id="water_button" form = "water_form" onclick="enable('reagent_blank_button');" data-toggle="modal" data-target="#wait_modal">Water</button>
+            <button class="btn btn-primary" id="water_button" form="water_form"
+              onclick="enable('reagent_blank_button');" data-toggle="modal" data-target="#wait_modal">Water</button>
             <!-- </div> -->
 
             <!-- <div class="col-6"  > -->
-              <button  class="btn btn-primary" id="reagent_blank_button" disabled form = "blank_form" onclick="enable('standard_button');" data-toggle="modal" data-target="#wait_modal">Reagent Blank</button>
+            <button class="btn btn-primary" id="reagent_blank_button" disabled form="blank_form"
+              onclick="enable('standard_button');" data-toggle="modal" data-target="#wait_modal">Reagent Blank</button>
             <!-- </div> -->
-            
+
             <!-- <div class="col-6"   > -->
-              <button  class="btn btn-primary" id="standard_button" form = "standard_form" disabled onclick="enable('save_button');" data-toggle="modal" data-target="#wait_modal">Standard</button>
+            <button class="btn btn-primary" id="standard_button" form="standard_form" disabled
+              onclick="enable('save_button');" data-toggle="modal" data-target="#wait_modal">Standard</button>
             <!-- </div> -->
-            
+
             <!-- <div class="col-6" > -->
-              <button  type="submit" id="save_button"  value="submit" class="btn btn-primary" disabled form="factors_form">Save</button> 
-              <!-- data-toggle="modal" data-target="#save_modal" -->
+            <button type="submit" id="save_button" value="submit" class="btn btn-primary" disabled
+              form="factors_form">Save</button>
+            <!-- data-toggle="modal" data-target="#save_modal" -->
             <!-- </div> -->
           </div>
 
         </div>
 
       </form>
-      
+
     </div>
 
   </div>
 
-   <!-- choose uv or visible modal form -->
-   <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting Temperature and Performing Test</h5>
-         <button id = "popup_close_button" type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-     </div>
-   </div> 
- </div>
+  <!-- choose uv or visible modal form -->
+  <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting
+            Temperature and Performing Test</h5>
+          <button id="popup_close_button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
- <!-- choose uv or visible modal form -->
- <!-- <div class="modal fade" id="save_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- choose uv or visible modal form -->
+  <!-- <div class="modal fade" id="save_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -439,92 +465,92 @@
 </html>
 
 <script>
-$ = function(id) {
-  return document.getElementById(id);
-}
+  $ = function (id) {
+    return document.getElementById(id);
+  }
 
-var fromNane = function(name) {
-  return document.getElementsByName(name);
-}
+  var fromNane = function (name) {
+    return document.getElementsByName(name);
+  }
 
-var show = function(id) {
-	$(id).style.display ='block';
-}
-var hide = function(id) {
-	$(id).style.display ='none';
-}
+  var show = function (id) {
+    $(id).style.display = 'block';
+  }
+  var hide = function (id) {
+    $(id).style.display = 'none';
+  }
 
-var enable = function(id) {
-	$(id).disabled = false;
+  var enable = function (id) {
+    $(id).disabled = false;
 
-}
-var disable = function(id) {
-	$(id).disabled=true;
-}
+  }
+  var disable = function (id) {
+    $(id).disabled = true;
+  }
 
-var ifchecked = function(chechId, hideId, showId ) {
-    
-    if($(chechId).checked) {
-        hide(hideId);
-        show(showId);
-        // console.log("checked")
+  var ifchecked = function (chechId, hideId, showId) {
+
+    if ($(chechId).checked) {
+      hide(hideId);
+      show(showId);
+      // console.log("checked")
     }
 
-    else  {
+    else {
       show(hideId);
       hide(showId);
     }
-};
+  };
 
-jQuery(document).ready(function() {
-  jQuery("#wait_modal").hide();
-  
-});
+  jQuery(document).ready(function () {
+    jQuery("#wait_modal").hide();
+
+  });
 
 
-jQuery("#water_form, #blank_form, #standard_form").submit(function(event) {
-  event.preventDefault();  // Prevent the default form submission behavior
-  
-  var formId = jQuery(this).attr("id");
-  var divId = "popup_close_button";
-  console.log(formId);
-  console.log("Form ID");
-  var formData = jQuery(this).serialize();
-  console.log(formData);
-  
-  jQuery("#" + divId).show();
+  jQuery("#water_form, #blank_form, #standard_form").submit(function (event) {
+    event.preventDefault();  // Prevent the default form submission behavior
 
-  // Send an AJAX request to the server
-  jQuery.ajax({
-    url: jQuery(this).attr("action"),
-    type: "POST",
-    data: formData,
-    success: function(data, textStatus, jqXHR) {
-      if (jqXHR.status === 204) {
-        console.log(formId);
-        jQuery("#" + divId).click();
+    var formId = jQuery(this).attr("id");
+    var divId = "popup_close_button";
+    console.log(formId);
+    console.log("Form ID");
+    var formData = jQuery(this).serialize();
+    console.log(formData);
+
+    jQuery("#" + divId).show();
+
+    // Send an AJAX request to the server
+    jQuery.ajax({
+      url: jQuery(this).attr("action"),
+      type: "POST",
+      data: formData,
+      success: function (data, textStatus, jqXHR) {
+        if (jqXHR.status === 204) {
+          console.log(formId);
+          jQuery("#" + divId).click();
+        }
       }
-    }
+    });
   });
-});
 
-jQuery("#new_test").submit(function(event) {
-  event.preventDefault();  // Prevent the default form submission behavior
-  
-  var formData = jQuery(this).serialize();
+  jQuery("#new_test").submit(function () {
+    event.preventDefault();  // Prevent the default form submission behavior
 
-  jQuery.ajax({
-    url: jQuery(this).attr("action"),
-    type: "POST",
-    data: formData,
-    success: function(data) {
-      console.log(data.response)
-      jQuery("#water_form_testid").val(data.response);
-      jQuery("#blank_form_testid").val(data.response);
-      jQuery("#standard_form_testid").val(data.response);
-      jQuery("#factors_form_testid").val(data.response);
-    }
+    var formData = jQuery(this).serialize();
+
+    jQuery.ajax({
+      url: jQuery(this).attr("action"),
+      type: "POST",
+      data: formData,
+      success: function (data) {
+        console.log(data.response)
+        jQuery("#water_form_testid").val(data.response);
+        jQuery("#blank_form_testid").val(data.response);
+        jQuery("#standard_form_testid").val(data.response);
+        jQuery("#factors_form_testid").val(data.response);
+      }
+    });
   });
-});
 
 </script>

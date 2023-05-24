@@ -109,6 +109,7 @@ class sqlite_sequence(db.Model):
 
 @app.route("/")
 def index():
+    db.create_all()
     return render_template("index.html"), {"Refresh": "1; url=list_of_biochemistry"}
 
 @app.route("/list_of_biochemistry")

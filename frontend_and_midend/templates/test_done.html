@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- <style>
+<style>
 	.popup {
 		display: none;
 		position: fixed;
 		width: fit-content;
-		left: 40%;
+		left: 30%;
 		/* margin-left: -150px; */
 		height: fit-content;
 		top: 50%;
-		margin-top: -400px;
+		margin-top: -100px;
 		background: #FFF;
-		border: 3px solid #007bff;
+		border: 3px solid #000000;
 		z-index: 20;
 	}
 
@@ -37,9 +37,10 @@
 		background: #FFF;
 		z-index: -1;
 	}
-</style> -->
+</style>
 
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -221,7 +222,8 @@
 					<button type="button" class="btn btn-primary " onclick="window.history.back()">Go Back</button>
 				</div>
 				<div class="column" style="padding: 10px;">
-					<button type="button" class="btn btn-primary " onclick="location.reload()">Retest</button>
+					<button type="button" class="btn btn-primary " id="retest"
+						onclick="location.reload()">Retest</button>
 
 				</div>
 				<div class="column" style="padding: 10px;">
@@ -230,21 +232,30 @@
 				</div>
 
 
-				<form id="save_result" action="\save_result" method = "post">
+				<form id="save_result" action="\save_result" method="post">
 					<div class="popup" id="save_patient_data_popup" style="display: none">
 
 						<div class="card-header">
 							Save Data
 						</div>
 
-						<div class="card-body" style="text-align: left;">
+						<div class="card-body">
+
 
 							<div class="row">
+
+								<div class="form-group">
+									<label class="col-form-label">ID: </label>
+									<input type="text" value="" class="form-control" name="patientid" id="patientid">
+								</div>
+
+
 								<div class="col-6">
 
 									<div class="form-group">
 										<label class="col-form-label">Patient Name: </label>
-										<input type="text" value="" class="form-control" name="patientname">
+										<input type="text" value="" class="form-control" name="patientname"
+											id="patientname">
 									</div>
 
 									<div class="form-group">
@@ -254,11 +265,6 @@
 
 								</div>
 
-
-								<div class="form-group">
-									<label class="col-form-label">ID: </label>
-									<input type="text" value="" class="form-control" name="patientid">
-								</div>
 
 								<input type="hidden" value="{{list["test_id"]}}" class="form-control" name="testid">
 
@@ -313,4 +319,59 @@
 	var hide = function (id) {
 		$(id).style.display = 'none';
 	}
+
+	jQuery(document).ready(function () {
+		jQuery('#patientid').on('change', function () {
+			var inputValue = jQuery(this).val();
+			var formData = jQuery(this).serialize();
+			console.log(formData);
+			jQuery.ajax({
+				url: "\get_patient_name_or_id",
+				type: "POST",
+				data: formData,
+				success: function (data) {
+					// console.log(data.response)
+					jQuery("#patientname").val(data.response);
+				}
+			});
+		});
+	});
+
+	jQuery(document).ready(function () {
+		jQuery('#patientname').on('change', function () {
+			var inputValue = jQuery(this).val();
+			var formData = jQuery(this).serialize();
+			console.log(formData);
+			jQuery.ajax({
+				url: "\get_patient_name_or_id",
+				type: "POST",
+				data: formData,
+				success: function (data) {
+					// console.log(data.response)
+					jQuery("#patientid").val(data.response);
+				}
+			});
+		});
+	});
+
+	jQuery(document).ready(function () {
+		jQuery("#save_result").submit(function () {
+			event.preventDefault();  // Prevent the default form submission behavior
+
+			var formId = jQuery(this).attr("id");
+			var formData = jQuery(this).serialize();
+			console.log(formData)
+			jQuery.ajax({
+				url: jQuery(this).attr("action"),
+				type: "POST",
+				data: formData,
+				success: function (data, textStatus, jqXHR) {
+					if (jqXHR.status === 204) {
+						hide("save_patient_data_popup");
+					}
+				}
+			});
+		});
+	});
+
 </script>
