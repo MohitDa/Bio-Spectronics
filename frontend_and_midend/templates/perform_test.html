@@ -5,56 +5,58 @@
   /* div {
     margin-bottom: 10px;
   } */
-  label{
+  label {
     display: block;
     position: relative;
     width: 50%;
     text-align: left;
   }
+
   input {
     display: block;
     position: relative;
     width: 50%;
     text-align: left;
   }
+
   .popup {
-  display: none;
-  position: fixed;
-  width: fit-content;
-  left: 40%;
-  /* margin-left: -150px; */
-  height: fit-content;
-  top: 50%;
-  margin-top: -400px;
-  background: #FFF;
-  border: 3px solid #007bff;
-  z-index: 20;
-}
+    display: none;
+    position: fixed;
+    width: fit-content;
+    left: 40%;
+    /* margin-left: -150px; */
+    height: fit-content;
+    top: 50%;
+    margin-top: -400px;
+    background: #FFF;
+    border: 3px solid #007bff;
+    z-index: 20;
+  }
 
-#popup:after {
-  position: fixed;
-  /* content: ""; */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: -2;
-}
+  #popup:after {
+    position: fixed;
+    /* content: ""; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -2;
+  }
 
-#popup:before {
-  position: absolute;
-  /* content: ""; */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #FFF;
-  z-index: -1;
-}
+  #popup:before {
+    position: absolute;
+    /* content: ""; */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #FFF;
+    z-index: -1;
+  }
 
 
-/* button {
+  /* button {
     margin-top: 50px;
     background-color: rgba(255,255,255,0.3);
     border: 3px solid #F04A49;
@@ -62,8 +64,7 @@
     font-size: 25px;
     padding: 10px 20px;
      */
-/* } */
-
+  /* } */
 </style>
 
 <head>
@@ -88,128 +89,133 @@
 
 
 <body>
-    <div class="header">
-        <img src="/static/logo.png" width="70" height="70">
-        
+  <div class="header">
+    <img src="/static/logo.png" width="70" height="70">
+
+  </div>
+  <h2 class="test-head">
+    Test
+  </h2>
+
+  <div class="test-field">
+    <h2> {{"Chemistry: " + test.test_name}} </h2>
+
+  </div>
+
+
+  <form id="test_form" action="/test_done" method="POST">
+    <input type="hidden" name="testid" id="testid" value={{test.test_id}}>
+  </form>
+  <form id="blank_form" action="/reagent_blank" method="POST">
+    <input type="hidden" name="testid" id="testid" value={{test.test_id}}>
+    <input type="hidden" name="testtype" id="testtype" value="update">
+  </form>
+  <form id="standard_form" action="/standard" method="POST">
+    <input type="hidden" name="testid" id="testid" value={{test.test_id}}>
+    <input type="hidden" name="testtype" id="testtype" value="update">
+  </form>
+  <form id="clean_form" action="/clean" method="POST"><input type="hidden" name="testid" id="testid"
+      value={{test.test_id}}></form>
+
+  <div class="list-btn testtwo-btn">
+
+    <!-- <form action="/water" id = "water_form"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form> -->
+
+    <button form="blank_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Blank</button>
+    <button form="test_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Sample</button>
+    <button form="standard_form" class="btn btn-primary " data-toggle="modal"
+      data-target="#wait_modal">Standard</button>
+    <button class="btn btn-primary ">QC1</button>
+    <button class="btn btn-primary ">QC2</button>
+    <button form="clean_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Wash</button>
+    <button type="button" class="btn btn-primary ">No.</button>
+    <button type="button" class="btn btn-primary ">Dilute</button>
+    <button type="button" class="btn btn-primary ">Online</button>
+    <button class="btn btn-primary " onclick="location.replace('\list_of_biochemistry')">Go Back</button>
+  </div>
+
+  </div>
+
+
+  <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting
+            Temperature and Performing Test</h5>
+          <button id="popup_close_button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
     </div>
-    <h2 class="test-head">
-        Test
-    </h2>
-
-    <div class="test-field">
-        <h2> {{"Chemistry: " + test.test_name}} </h2>
-        
-    </div>
-
-
-    <form id="test_form" action="/test_done" method="POST" ><input type="hidden" name="testid" id="testid" value={{test.test_id}} ></form>
-    <form id="blank_form" action="/reagent_blank"  method="POST">
-      <input type="hidden" name="testid" id="testid" value= {{test.test_id}} >
-      <input type="hidden" name="testtype" id="testtype" value = "update" >
-    </form>
-    <form id="standard_form" action="/standard" method="POST" >
-      <input type="hidden" name="testid" id="testid" value= {{test.test_id}} >
-      <input type="hidden" name="testtype" id="testtype" value = "update" ></form>
-    <form id="clean_form" action="/clean" method="POST" ><input type="hidden" name="testid" id="testid" value= {{test.test_id}} ></form>
-
-
-    <div class="list-btn testtwo-btn">
-
-      <!-- <form action="/water" id = "water_form"><input type="hidden" value="new_test.testwavelength1.value" name="wavelength"></form> -->
-      
-        <button form = "blank_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Blank</button>
-        <button form = "test_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Sample</button>
-        <button form = "standard_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Standard</button> 
-        <button class="btn btn-primary ">QC1</button>
-        <button class="btn btn-primary ">QC2</button>
-        <button form = "clean_form" class="btn btn-primary " data-toggle="modal" data-target="#wait_modal">Wash</button>
-        <button type="button" class="btn btn-primary ">No.</button>
-        <button type="button" class="btn btn-primary ">Dilute</button>
-        <button type="button" class="btn btn-primary ">Online</button>
-        <button type="button" class="btn btn-primary " onclick="window.history.back()">Go Back</button>
-    </div>
-
-    </div>
-
-    <!-- choose uv or visible modal form -->
-   <div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please Wait..Setting Temperature and Performing Test</h5>
-         <button id = "popup_close_button" type="button" class="close" data-dismiss="modal" aria-label="Close">
-           <span aria-hidden="true">&times;</span>
-         </button>
-       </div>
-     </div>
-   </div> 
- </div>
+  </div>
 
 </body>
 
 </html>
 
 <script>
-jQuery(document).ready(function() {
-  jQuery("#wait_modal").hide();
-  
-  // jQuery("#save_modal").hide();
-});
+  jQuery(document).ready(function () {
+    jQuery("#wait_modal").hide();
 
-
-//   jQuery("#test_form, #blank_form, #standard_form, #clean_form").submit(function(event) {
-//   // event.preventDefault();  // Prevent the default form submission behavior
-  
-//   var formId = jQuery(this).attr("id");
-//   var divId = "popup_close_button";
-//   console.log(formId);
-//   // if(formId == "factors_form"){
-//   //   divId = "popup_close_button";
-//   // }
-//   // else{
-//   //   divId = "popup_close_button_save";
-//   // }
-  
-//   jQuery("#" + divId).show();
-
-//   // Send an AJAX request to the server
-//   jQuery.ajax({
-//     url: jQuery(this).attr("action"),
-//     type: "POST",
-//     success: function(data, textStatus, jqXHR) {
-//       if (jqXHR.status === 204) {
-//         console.log(formId);
-//         // Hide the div if the server returned a 204 response
-//         jQuery("#" + divId).click();
-//       }
-//     }
-//   });
-// });
-
-jQuery("#clean_form").submit(function(event) {
-  event.preventDefault();  // Prevent the default form submission behavior
-  
-  var formId = jQuery(this).attr("id");
-  var divId = "popup_close_button";
-  console.log(formId);
-  console.log("Form ID");
-  var formData = jQuery(this).serialize();
-  console.log(formData);
-  
-  jQuery("#" + divId).show();
-
-  // Send an AJAX request to the server
-  jQuery.ajax({
-    url: jQuery(this).attr("action"),
-    type: "POST",
-    data: formData,
-    success: function(data, textStatus, jqXHR) {
-      if (jqXHR.status === 204) {
-        console.log(formId);
-        jQuery("#" + divId).click();
-      }
-    }
+    // jQuery("#save_modal").hide();
   });
-});
+
+
+  //   jQuery("#test_form, #blank_form, #standard_form, #clean_form").submit(function(event) {
+  //   // event.preventDefault();  // Prevent the default form submission behavior
+
+  //   var formId = jQuery(this).attr("id");
+  //   var divId = "popup_close_button";
+  //   console.log(formId);
+  //   // if(formId == "factors_form"){
+  //   //   divId = "popup_close_button";
+  //   // }
+  //   // else{
+  //   //   divId = "popup_close_button_save";
+  //   // }
+
+  //   jQuery("#" + divId).show();
+
+  //   // Send an AJAX request to the server
+  //   jQuery.ajax({
+  //     url: jQuery(this).attr("action"),
+  //     type: "POST",
+  //     success: function(data, textStatus, jqXHR) {
+  //       if (jqXHR.status === 204) {
+  //         console.log(formId);
+  //         // Hide the div if the server returned a 204 response
+  //         jQuery("#" + divId).click();
+  //       }
+  //     }
+  //   });
+  // });
+
+  jQuery("#clean_form").submit(function () {
+    event.preventDefault();  // Prevent the default form submission behavior
+
+    var formId = jQuery(this).attr("id");
+    var divId = "popup_close_button";
+    console.log(divId);
+    console.log("Form ID");
+    var formData = jQuery(this).serialize();
+    console.log(formData);
+
+    jQuery("#" + divId).show();
+
+    // Send an AJAX request to the server
+    jQuery.ajax({
+      url: jQuery(this).attr("action"),
+      type: "POST",
+      data: formData,
+      success: function (data, textStatus, jqXHR) {
+        if (jqXHR.status === 204) {
+          console.log("done");
+          jQuery("#" + divId).click();
+        }
+      }
+    });
+  });
 </script>

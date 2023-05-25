@@ -13,7 +13,7 @@
 
 .card-header{
     background-color: #9d3c3c;
-    color: rgb(255, 243, 227);
+    color: #ece8dd;
   
 }
 
@@ -23,4 +23,12 @@ padding: 50px;
 
 .card{
     border: 2px solid black;
+}
+
+.modal{
+    background-color: rgba(255, 222, 173, 0);
+}
+
+.fade{
+    background-color: rgba(255, 222, 173, 0);
 }

@@ -15,7 +15,7 @@ body {
   /* background: #820000;  */
   background: #e8e2d3;
   /* background: -webkit-linear-gradient(to right, #820000, #820000); */
-  background: linear-gradient(to right, #7fc3cd, #7fc3cd);
+  background: linear-gradient(to right, #ece8dd, #ece8dd);
   /* background: #ECE8DD;  */
   /* background: rgba( 236, 232, 221, 0.25 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -105,7 +105,7 @@ form#send textarea {
 
 form#send input:focus,
 form#send textarea:focus {
-  border-bottom: 1px solid rgb(63, 173, 168);
+  border-bottom: 1px solid #ece8dd;
 }
 
 form#send label {
@@ -119,7 +119,7 @@ form#send label {
 
 form#send input:focus+label,
 form#send textarea:focus+label {
-  color: rgb(63, 173, 168);
+  color: #ece8dd;
 }
 
 form#send .txt {

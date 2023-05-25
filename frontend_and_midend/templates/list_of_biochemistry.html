@@ -413,8 +413,41 @@ aria-hidden="true"> -->
   jQuery(document).ready(function () {
     jQuery("#edit_test_button").click(function () {
       event.preventDefault();
-      jQuery("#test_form").attr("action", "/edit_test");
-      jQuery('#test_form').submit();
+      var data = jQuery("#test_form").serialize();
+
+      var params = new URLSearchParams(data);
+
+      // Get the value of the specific variable
+      var test_id = params.get("test_list");
+      console.log(test_id);
+      if (test_id == null) {
+        alert("please select test");
+      }
+      else {
+        jQuery("#test_form").attr("action", "/edit_test");
+        jQuery('#test_form').submit();
+      }
+
+    });
+  });
+
+  jQuery(document).ready(function () {
+    jQuery("#submitbtn").click(function () {
+      event.preventDefault();
+      var data = jQuery("#test_form").serialize();
+
+      var params = new URLSearchParams(data);
+
+      // Get the value of the specific variable
+      var test_id = params.get("test_list");
+      console.log(test_id);
+      if (test_id == null) {
+        alert("please select test");
+      }
+      else {
+        jQuery("#test_form").attr("action", "/start_test");
+        jQuery("#test_form").submit();
+      }
     });
   });
 
