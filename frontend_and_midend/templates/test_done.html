@@ -2,7 +2,6 @@
 <html lang="en">
 
 <style>
-
 	.popup {
 		display: none;
 		position: fixed;
@@ -41,7 +40,7 @@
 </style>
 
 <head>
-	
+
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -230,15 +229,34 @@
 				</div>
 			</div>
 
-			<div class="modal" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			<div class="modal" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_wait_modal"
 				aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel" style="color: rgb(21, 133, 6);">Please
+							<h5 class="modal-title" id="exampleModalLabel_wait_modal" style="color: rgb(21, 133, 6);">Please
 								Wait..Setting
 								Temperature and Performing Test</h5>
-							<button id="popup_close_button" type="button" class="close" data-dismiss="modal"
+							<!-- <button id="popup_close_button" type="button" class="close" data-dismiss="modal"
+								aria-label="Close"> -->
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal" id="data_save_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_data_saved_modal"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel_data_saved_modal" style="color: rgb(21, 133, 6);">
+								Data Saved
+								<br>
+								Perform Next Test
+							</h5>
+							<button id="data_save_modal_popup_close_button" type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -246,6 +264,8 @@
 					</div>
 				</div>
 			</div>
+
+			
 
 			<div class="row">
 				<div class="column" style="padding: 10px;">
@@ -258,12 +278,13 @@
 				{% if list["flag"] != "Not Applicable" %}
 
 				<div class="column" style="padding: 10px;">
-					<button type="button" class="btn btn-primary " id="retest" data-toggle="modal"
+					<button type="button" class="btn btn-primary " id="retest_button" data-toggle="modal"
 						data-target="#wait_modal" onclick="location.reload();">Retest</button>
 
 				</div>
 				<div class="column" style="padding: 10px;">
-					<button type="button" class="btn btn-primary " onclick="show('save_patient_data_popup');">Save and
+					<button type="button" id="save_and_next_button" class="btn btn-primary "
+						onclick="show('save_patient_data_popup');">Save and
 						Next</button>
 				</div>
 
@@ -310,7 +331,8 @@
 
 								<input type="hidden" value="{{list['flag']}}" class="form-control" name="testflag">
 
-								<button type="submit" class="btn btn-primary ">Save</button>
+								<button type="submit" class="btn btn-primary " id="save_data_button" data-toggle="modal"
+									data-target="#data_save_modal">Save</button>
 
 							</div>
 
@@ -403,16 +425,30 @@
 			var formId = jQuery(this).attr("id");
 			var formData = jQuery(this).serialize();
 			console.log(formData)
-			jQuery.ajax({
-				url: jQuery(this).attr("action"),
-				type: "POST",
-				data: formData,
-				success: function (data, textStatus, jqXHR) {
-					if (jqXHR.status === 204) {
-						hide("save_patient_data_popup");
+			var params = new URLSearchParams(formData);
+
+			// Get the value of the specific variable
+			var patientid = params.get("patientid");
+			if (patientid == "") {
+				jQuery("#exampleModalLabel_data_saved_modal").text("Please Enter Patient Data Correctly");
+			}
+			else {
+				jQuery("#exampleModalLabel_data_saved_modal").text("Data Saved. Perform Next Test");
+				jQuery.ajax({
+					url: jQuery(this).attr("action"),
+					type: "POST",
+					data: formData,
+					success: function (data, textStatus, jqXHR) {
+						if (jqXHR.status === 204) {
+							
+							hide("save_patient_data_popup");
+							jQuery("#save_and_next_button").attr('onclick', 'location.reload();');
+							jQuery("#save_and_next_button").text("Next Test");
+							hide("retest_button");
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 	});
 

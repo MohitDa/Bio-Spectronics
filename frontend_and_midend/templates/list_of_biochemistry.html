@@ -164,23 +164,31 @@
     <!-- data-toggle="modal" data-target="#wait_modal" -->
 
     <div class="footer-buttons">
-      <input id="submitbtn" class="btn btn-info submit_btn" type="submit" value="Test" form="test_form">
+      <input id="submitbtn" class="btn btn-primary" type="submit" value="Test" form="test_form">
 
-      <form type="submit" method="post" action="/add_new_test" id="add_new_test">
-        <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="add_new_test">Add new
-          test</button>
+      <form type="submit" method="post" action="/add_new_test" id="add_new_test_form">
+        <button type="submit" class="btn btn-primary">Add new
+          Test</button>
       </form>
 
-      <button id="edit_test_button" class="btn btn-info submit_btn" type="submit" form="test_form">Edit Test </button>
+      <button id="edit_test_button" class="btn btn-primary" type="submit" form="test_form">Edit Test </button>
 
-      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#delete_test_modal">Delete
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_test_modal">Delete
         test</button>
-      <button type="button" class="btn btn-info submit_btn " data-toggle="modal" data-target="#stdval_modal">Measure
-        std. value</button>
 
-      <button type="submit" class="btn btn-info submit_btn " data-toggle="modal" form="clean"
+      <form type="submit" method="post" action="/add_new_patient" id="add_new_patient_form">
+        <button type="submit" class="btn btn-primary ">Add new
+          Patient</button>
+      </form>
+
+      <button type="submit" class="btn btn-primary" data-toggle="modal" form="clean"
         data-target="#clean_modal">Clean
       </button>
+
+      <form type="submit" method="post" action="/result" id="result_form">
+        <button type="submit" class="btn btn-primary">Result</button>
+      </form>
+
     </div>
 
     <!-- <button type="button" class="btn btn-info submit_btn"  value="Submit" form="test_list">Delete test</button>
