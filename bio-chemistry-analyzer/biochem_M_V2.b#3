@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="12.5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -156,22 +156,23 @@
 </layers>
 <board>
 <plain>
-<wire x1="-0.127" y1="0" x2="86.975" y2="0" width="0" layer="20"/>
-<wire x1="86.975" y1="0" x2="86.975" y2="100" width="0" layer="20"/>
-<wire x1="86.975" y1="100" x2="-0.127" y2="100" width="0" layer="20"/>
+<wire x1="-0.127" y1="0" x2="111.105" y2="0" width="0" layer="20"/>
+<wire x1="111.105" y1="0" x2="111.105" y2="100" width="0" layer="20"/>
+<wire x1="111.105" y1="100" x2="-0.127" y2="100" width="0" layer="20"/>
 <wire x1="-0.127" y1="100" x2="-0.127" y2="0" width="0" layer="20"/>
 <hole x="2.794" y="96.901" drill="4"/>
-<hole x="43.434" y="-19.939" drill="4"/>
-<hole x="106.68" y="-10.16" drill="4"/>
+<hole x="14.9225" y="22.86" drill="4"/>
 <hole x="83.185" y="96.52" drill="4"/>
-<text x="5.207" y="71.755" size="0.889" layer="25" ratio="10" rot="R180">5V</text>
-<text x="10.795" y="71.755" size="0.889" layer="25" ratio="10" rot="R180">3.3V</text>
-<text x="32.5755" y="56.769" size="1.778" layer="25" ratio="10" rot="R90">Bio-Chemistry Analyzer
-V2.2
--Aditya Pathak</text>
-<dimension x1="86.975" y1="0" x2="86.975" y2="100" x3="103.759" y3="50" textsize="1.778" layer="47"/>
-<rectangle x1="72.0725" y1="76.2" x2="76.5175" y2="79.375" layer="21"/>
+<text x="1.27" y="68.3895" size="0.889" layer="25" ratio="10" rot="R270">5V</text>
+<text x="10.795" y="68.8975" size="0.889" layer="25" ratio="10" rot="R270">3.3V</text>
+<text x="34.4805" y="56.769" size="1.778" layer="25" ratio="10" rot="R90">Bio-Chemistry Analyzer
+V2.2</text>
+<rectangle x1="71.4375" y1="81.5975" x2="75.8825" y2="84.7725" layer="21"/>
 <dimension x1="86.975" y1="100" x2="-0.127" y2="100" x3="43.424" y3="110.49" textsize="1.778" layer="47" dtype="horizontal"/>
+<wire x1="103.505" y1="139.3825" x2="103.505" y2="187.3825" width="0" layer="20"/>
+<wire x1="103.505" y1="187.3825" x2="-24.495" y2="187.3825" width="0" layer="20"/>
+<wire x1="-24.495" y1="187.3825" x2="-24.495" y2="139.3825" width="0" layer="20"/>
+<wire x1="-24.495" y1="139.3825" x2="103.505" y2="139.3825" width="0" layer="20"/>
 </plain>
 <libraries>
 <library name="st-microelectronics" urn="urn:adsk.eagle:library:368">
@@ -2084,6 +2085,116 @@ W = angled&lt;p&gt;
 </package>
 </packages>
 </library>
+<library name="MDD3A">
+<packages>
+<package name="FOOTPRINT">
+<wire x1="0" y1="41.914" x2="0" y2="0" width="0.127" layer="21"/>
+<wire x1="0" y1="0" x2="48.266" y2="0" width="0.127" layer="21"/>
+<wire x1="48.266" y1="0" x2="48.26" y2="41.914" width="0.127" layer="21"/>
+<wire x1="48.26" y1="41.914" x2="0" y2="41.914" width="0.127" layer="21"/>
+<pad name="M1A" x="4.445" y="33.655" drill="1.6" shape="long"/>
+<pad name="M1B" x="4.445" y="28.575" drill="1.6" shape="long"/>
+<pad name="VB+" x="4.445" y="23.495" drill="1.6" shape="long"/>
+<pad name="VB-" x="4.445" y="18.415" drill="1.6" shape="long"/>
+<pad name="M2A" x="4.445" y="13.335" drill="1.6" shape="long"/>
+<pad name="M2B" x="4.445" y="8.255" drill="1.6" shape="long"/>
+<wire x1="44.45" y1="21.59" x2="44.45" y2="22.86" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="22.86" x2="45.085" y2="23.495" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="23.495" x2="46.355" y2="23.495" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="23.495" x2="46.99" y2="22.86" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="23.495" x2="44.45" y2="24.13" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="24.13" x2="44.45" y2="25.4" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="25.4" x2="45.085" y2="26.035" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="26.035" x2="46.355" y2="26.035" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="26.035" x2="46.99" y2="25.4" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="25.4" x2="46.99" y2="24.13" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="24.13" x2="46.355" y2="23.495" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="18.415" x2="44.45" y2="19.05" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="19.05" x2="44.45" y2="20.32" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="20.32" x2="45.085" y2="20.955" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="20.955" x2="46.355" y2="20.955" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="20.955" x2="46.99" y2="20.32" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="20.32" x2="46.99" y2="19.05" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="19.05" x2="46.355" y2="18.415" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="21.59" x2="45.085" y2="20.955" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="20.955" x2="46.99" y2="21.59" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="22.86" x2="46.99" y2="21.59" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="13.97" x2="44.45" y2="15.24" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="15.24" x2="45.085" y2="15.875" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="15.875" x2="46.355" y2="15.875" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="15.875" x2="46.99" y2="15.24" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="15.875" x2="44.45" y2="16.51" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="16.51" x2="44.45" y2="17.78" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="17.78" x2="45.085" y2="18.415" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="18.415" x2="46.355" y2="18.415" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="18.415" x2="46.99" y2="17.78" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="17.78" x2="46.99" y2="16.51" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="16.51" x2="46.355" y2="15.875" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="13.335" x2="46.355" y2="13.335" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="13.97" x2="45.085" y2="13.335" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="13.335" x2="46.99" y2="13.97" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="15.24" x2="46.99" y2="13.97" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="26.67" x2="44.45" y2="27.94" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="27.94" x2="45.085" y2="28.575" width="0.1524" layer="21"/>
+<wire x1="45.085" y1="28.575" x2="46.355" y2="28.575" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="28.575" x2="46.99" y2="27.94" width="0.1524" layer="21"/>
+<wire x1="44.45" y1="26.67" x2="45.085" y2="26.035" width="0.1524" layer="21"/>
+<wire x1="46.355" y1="26.035" x2="46.99" y2="26.67" width="0.1524" layer="21"/>
+<wire x1="46.99" y1="27.94" x2="46.99" y2="26.67" width="0.1524" layer="21"/>
+<pad name="M2BIN" x="45.72" y="14.605" drill="1.016" shape="octagon" rot="R180"/>
+<pad name="M2AIN" x="45.72" y="17.145" drill="1.016" shape="octagon" rot="R180"/>
+<pad name="GND" x="45.72" y="19.685" drill="1.016" shape="octagon" rot="R180"/>
+<pad name="5V" x="45.72" y="22.225" drill="1.016" shape="octagon" rot="R180"/>
+<pad name="M1BIN" x="45.72" y="24.765" drill="1.016" shape="octagon" rot="R180"/>
+<pad name="M1AIN" x="45.72" y="27.305" drill="1.016" shape="octagon" rot="R180"/>
+<rectangle x1="45.466" y1="24.511" x2="45.974" y2="25.019" layer="51" rot="R90"/>
+<rectangle x1="45.466" y1="21.971" x2="45.974" y2="22.479" layer="51" rot="R90"/>
+<rectangle x1="45.466" y1="19.431" x2="45.974" y2="19.939" layer="51" rot="R90"/>
+<rectangle x1="45.466" y1="16.891" x2="45.974" y2="17.399" layer="51" rot="R90"/>
+<rectangle x1="45.466" y1="14.351" x2="45.974" y2="14.859" layer="51" rot="R90"/>
+<rectangle x1="45.466" y1="27.051" x2="45.974" y2="27.559" layer="51" rot="R90"/>
+<text x="38.1" y="26.67" size="1.27" layer="21">M1Ain</text>
+<text x="38.1" y="24.13" size="1.27" layer="21">M1Bin</text>
+<text x="38.1" y="16.51" size="1.27" layer="21">M2Ain</text>
+<text x="38.1" y="13.97" size="1.27" layer="21">M2Bin</text>
+<text x="38.1" y="21.59" size="1.27" layer="21">5v</text>
+<text x="38.1" y="19.05" size="1.27" layer="21">GND</text>
+<text x="7.62" y="33.02" size="1.27" layer="21">M1A</text>
+<text x="7.62" y="27.94" size="1.27" layer="21">M1B</text>
+<text x="7.62" y="22.86" size="1.27" layer="21">VB+</text>
+<text x="7.62" y="17.78" size="1.27" layer="21">VB-</text>
+<text x="7.62" y="12.7" size="1.27" layer="21">M2A</text>
+<text x="7.62" y="7.62" size="1.27" layer="21">M2B</text>
+</package>
+</packages>
+</library>
+<library name="holes" urn="urn:adsk.eagle:library:237">
+<description>&lt;b&gt;Mounting Holes and Pads&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="3,0-PAD" urn="urn:adsk.eagle:footprint:14251/1" library_version="2">
+<description>&lt;b&gt;MOUNTING PAD&lt;/b&gt; 3.0 mm, round</description>
+<wire x1="-2.159" y1="0" x2="0" y2="-2.159" width="2.4892" layer="51" curve="90" cap="flat"/>
+<wire x1="0" y1="2.159" x2="2.159" y2="0" width="2.4892" layer="51" curve="-90" cap="flat"/>
+<circle x="0" y="0" radius="3.429" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="0.762" width="0.4572" layer="51"/>
+<circle x="0" y="0" radius="3.556" width="1.016" layer="39"/>
+<circle x="0" y="0" radius="3.556" width="1.016" layer="40"/>
+<circle x="0" y="0" radius="3.556" width="1.016" layer="43"/>
+<circle x="0" y="0" radius="1.6" width="0.2032" layer="21"/>
+<pad name="B3,0" x="0" y="0" drill="3" diameter="5.842"/>
+<text x="-1.27" y="-3.81" size="1.27" layer="48">3,0</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="3,0-PAD" urn="urn:adsk.eagle:package:14280/1" type="box" library_version="2">
+<description>MOUNTING PAD 3.0 mm, round</description>
+<packageinstances>
+<packageinstance name="3,0-PAD"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -2091,6 +2202,8 @@ W = angled&lt;p&gt;
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0" drill="0">
+</class>
+<class number="1" name="power" width="1.778" drill="0">
 </class>
 </classes>
 <designrules name="default *">
@@ -2298,183 +2411,151 @@ design rules under a new name.</description>
 <attribute name="TYPE" value="" x="17.78" y="71.755" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="20.701" y="59.055" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="L293D" library="st-microelectronics" library_urn="urn:adsk.eagle:library:368" package="DIL16" package3d_urn="urn:adsk.eagle:package:26820/1" value="L293D" x="23.495" y="40.005" smashed="yes" rot="R90">
-<attribute name="MF" value="" x="83.185" y="64.135" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MPN" value="L293D" x="83.185" y="64.135" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="24.13" y="37.338" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="OC_FARNELL" value="9589619" x="83.185" y="64.135" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_NEWARK" value="56P8249" x="83.185" y="64.135" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="POPULARITY" value="16" x="83.185" y="64.135" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="24.13" y="32.512" size="1.27" layer="27" ratio="10" rot="R90"/>
+<element name="L293D" library="st-microelectronics" library_urn="urn:adsk.eagle:library:368" package="DIL16" package3d_urn="urn:adsk.eagle:package:26820/1" value="L293D" x="25.0825" y="40.9575" smashed="yes" rot="R90">
+<attribute name="MF" value="" x="84.7725" y="65.0875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MPN" value="L293D" x="84.7725" y="65.0875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="25.7175" y="38.2905" size="1.27" layer="25" ratio="10" rot="R90"/>
+<attribute name="OC_FARNELL" value="9589619" x="84.7725" y="65.0875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_NEWARK" value="56P8249" x="84.7725" y="65.0875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="POPULARITY" value="16" x="84.7725" y="65.0875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="25.7175" y="33.4645" size="1.27" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="J1" library="61201021621" package="61201021621" value="61201021621" x="7.62" y="83.185" smashed="yes" rot="R90">
-<attribute name="AVAILABILITY" value="In Stock" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="DESCRIPTION" value=" Connector Header Through Hole 10 position 0.100 (2.54mm) " x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MF" value="Wurth Elektronik" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MP" value="61201021621" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="2.07" y="80.645" size="1.27" layer="25" rot="R90"/>
-<attribute name="PACKAGE" value="None" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="PRICE" value="None" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/61201021621/?ref=eda" x="50.8" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="13.97" y="80.645" size="1.27" layer="27" rot="R90"/>
+<element name="J1" library="61201021621" package="61201021621" value="61201021621" x="7.9375" y="83.185" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" Connector Header Through Hole 10 position 0.100 (2.54mm) " x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Wurth Elektronik" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="61201021621" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="2.3875" y="80.645" size="1.27" layer="25" rot="R90"/>
+<attribute name="PACKAGE" value="None" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/61201021621/?ref=eda" x="51.1175" y="150.495" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="14.2875" y="80.645" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="Q4-T" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="44.45" y="15.5575" smashed="yes" grouprefs="LAMPGRP">
-<attribute name="AVAILABILITY" value="In Stock" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Infineon Technologies" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="IRFZ44N" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PACKAGE" value="TO-220-3 Infineon" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="63.5" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="39.12" y="12.83" size="1.27" layer="27" align="top-left"/>
+<element name="Q4-T" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="44.45" y="15.875" smashed="yes" grouprefs="LAMPGRP">
+<attribute name="AVAILABILITY" value="In Stock" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Infineon Technologies" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="IRFZ44N" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PACKAGE" value="TO-220-3 Infineon" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="63.5" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="39.12" y="13.1475" size="1.27" layer="27" align="top-left"/>
 </element>
-<element name="Q4-T4" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="32.385" y="15.5575" smashed="yes" grouprefs="LEDGRP">
-<attribute name="AVAILABILITY" value="In Stock" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Infineon Technologies" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="IRFZ44N" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PACKAGE" value="TO-220-3 Infineon" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="62.865" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="27.055" y="12.83" size="1.27" layer="27" align="top-left"/>
+<element name="Q4-T4" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="32.385" y="15.875" smashed="yes" grouprefs="LEDGRP">
+<attribute name="AVAILABILITY" value="In Stock" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Infineon Technologies" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="IRFZ44N" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PACKAGE" value="TO-220-3 Infineon" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="62.865" y="-53.975" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="27.055" y="13.1475" size="1.27" layer="27" align="top-left"/>
 </element>
-<element name="Q4-T5" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="20.32" y="15.5575" smashed="yes" grouprefs="PELT1GRP">
-<attribute name="AVAILABILITY" value="In Stock" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Infineon Technologies" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="IRFZ44N" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PACKAGE" value="TO-220-3 Infineon" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="62.23" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="14.99" y="12.83" size="1.27" layer="27" align="top-left"/>
+<element name="10KR2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="40.005" y="8.763" smashed="yes" rot="R90" grouprefs="LAMPGRP">
+<attribute name="NAME" x="38.7096" y="6.223" size="0.9906" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="48" x="123.824959375" y="83.6929875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="123.824959375" y="83.6929875" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="40.4876" y="7.1374" size="0.9906" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="Q4-T6" library="IRFZ44N" package="TO254P1016X419X2286-3" value="IRFZ44N" x="56.515" y="15.5575" smashed="yes" grouprefs="PELT2GRP">
-<attribute name="AVAILABILITY" value="In Stock" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" N-Channel 55 V 49A (Tc) 94W (Tc) Through Hole TO-220AB " x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Infineon Technologies" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="IRFZ44N" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PACKAGE" value="TO-220-3 Infineon" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/IRFZ44N/?ref=eda" x="109.855" y="-54.2925" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="51.185" y="12.83" size="1.27" layer="27" align="top-left"/>
+<element name="10KR3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="27.94" y="8.763" smashed="yes" rot="R90" grouprefs="LEDGRP">
+<attribute name="NAME" x="26.6446" y="6.223" size="0.9906" layer="25" ratio="10" rot="R90"/>
+<attribute name="POPULARITY" value="48" x="111.76" y="53.213" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="111.76" y="53.213" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="28.4226" y="7.1374" size="0.9906" layer="27" ratio="10" rot="R90"/>
 </element>
-<element name="10KR2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="40.005" y="6.5405" smashed="yes" rot="R90" grouprefs="LAMPGRP">
-<attribute name="NAME" x="38.7096" y="4.0005" size="0.9906" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="48" x="123.824959375" y="81.4704875" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="123.824959375" y="81.4704875" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="40.4876" y="4.9149" size="0.9906" layer="27" ratio="10" rot="R90"/>
+<element name="5V" library="Connector" package="1X03" package3d_urn="urn:adsk.eagle:package:22458/2" value="PINHD-1X3" x="6.35" y="66.04" smashed="yes" rot="R180">
+<attribute name="CATEGORY" value="CONNECTOR" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANUFACTURER" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MPN" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OPERATING_TEMP" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PART_STATUS" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="ROHS_COMPLIANT" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SERIES" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="THERMALLOSS" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="TYPE" value="" x="-68.58" y="135.89" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="10.16" y="69.215" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="10KR3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="27.94" y="6.5405" smashed="yes" rot="R90" grouprefs="LEDGRP">
-<attribute name="NAME" x="26.6446" y="4.0005" size="0.9906" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="48" x="111.76" y="50.9905" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="111.76" y="50.9905" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="28.4226" y="4.9149" size="0.9906" layer="27" ratio="10" rot="R90"/>
+<element name="12VPWR" library="TB010-508-02BE" package="CUI_TB010-508-02BE" value="TB010-508-02BE" x="77.47" y="8.89" smashed="yes">
+<attribute name="AVAILABILITY" value="Good" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="CUI_PURCHASE_URL" value="https://www.cuidevices.com/product/interconnect/connectors/terminal-blocks/tb010-508-series?utm_source=snapeda.com&amp;utm_medium=referral&amp;utm_campaign=snapedaBOM" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="2~24 Poles, Screw Type, Horizontal, 5.08 Pitch, 26~12 (AWG), Terminal Block Connector" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="CUI Devices" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="TB010-508-02BE" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="76.454" y="1.016" size="1.27" layer="25" ratio="18"/>
+<attribute name="PACKAGE" value="None" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TB010-508-02BE/?ref=eda" x="77.47" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="75.565" y="6.985" size="1.016" layer="27" ratio="10"/>
 </element>
-<element name="10KR4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="15.875" y="6.7945" smashed="yes" rot="R90" grouprefs="PELT1GRP">
-<attribute name="NAME" x="14.5796" y="4.2545" size="0.9906" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="48" x="99.695" y="61.4045" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="99.695" y="61.4045" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="16.3576" y="5.1689" size="0.9906" layer="27" ratio="10" rot="R90"/>
+<element name="5VPWR" library="TB010-508-02BE" package="CUI_TB010-508-02BE" value="TB010-508-02BE" x="66.04" y="8.89" smashed="yes">
+<attribute name="AVAILABILITY" value="Good" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="CUI_PURCHASE_URL" value="https://www.cuidevices.com/product/interconnect/connectors/terminal-blocks/tb010-508-series?utm_source=snapeda.com&amp;utm_medium=referral&amp;utm_campaign=snapedaBOM" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="2~24 Poles, Screw Type, Horizontal, 5.08 Pitch, 26~12 (AWG), Terminal Block Connector" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="CUI Devices" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="TB010-508-02BE" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="65.659" y="1.016" size="1.27" layer="25" ratio="18"/>
+<attribute name="PACKAGE" value="None" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TB010-508-02BE/?ref=eda" x="66.04" y="8.89" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="64.135" y="6.985" size="1.016" layer="27" ratio="10"/>
 </element>
-<element name="10KR1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="0204/7" package3d_urn="urn:adsk.eagle:package:23498/2" value="" x="52.07" y="6.7945" smashed="yes" rot="R90" grouprefs="PELT2GRP">
-<attribute name="NAME" x="50.7746" y="4.2545" size="0.9906" layer="25" ratio="10" rot="R90"/>
-<attribute name="POPULARITY" value="48" x="135.89" y="71.5645" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="135.89" y="71.5645" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="52.5526" y="5.1689" size="0.9906" layer="27" ratio="10" rot="R90"/>
+<element name="VOLTAGESELECTOR1" library="Connector" package="1X03" package3d_urn="urn:adsk.eagle:package:22458/2" value="PINHD-1X3" x="6.35" y="69.215" smashed="yes">
+<attribute name="CATEGORY" value="CONNECTOR" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="OPERATING_TEMP" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="PART_STATUS" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="ROHS_COMPLIANT" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="SERIES" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="THERMALLOSS" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="TYPE" value="" x="6.35" y="69.215" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="2.54" y="66.04" size="1.27" layer="27"/>
 </element>
-<element name="5V" library="Connector" package="1X03" package3d_urn="urn:adsk.eagle:package:22458/2" value="PINHD-1X3" x="6.985" y="64.77" smashed="yes" rot="R180">
-<attribute name="CATEGORY" value="CONNECTOR" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DESCRIPTION" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MANUFACTURER" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MPN" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="OPERATING_TEMP" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PART_STATUS" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="ROHS_COMPLIANT" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="SERIES" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="THERMALLOSS" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="TYPE" value="" x="-67.945" y="134.62" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="10.795" y="67.945" size="1.27" layer="27" rot="R180"/>
+<element name="JP1" library="Connector" package="1X20" package3d_urn="urn:adsk.eagle:package:22441/2" value="PINHD-1X20" x="53.34" y="54.61" smashed="yes" rot="R270">
+<attribute name="CATEGORY" value="CONNECTOR" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MANUFACTURER" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MPN" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="OPERATING_TEMP" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PART_STATUS" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="ROHS_COMPLIANT" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SERIES" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="THERMALLOSS" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="TYPE" value="" x="53.34" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="50.165" y="80.01" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="12VPWR" library="TB010-508-02BE" package="CUI_TB010-508-02BE" value="TB010-508-02BE" x="66.3575" y="6.35" smashed="yes">
-<attribute name="AVAILABILITY" value="Good" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="CUI_PURCHASE_URL" value="https://www.cuidevices.com/product/interconnect/connectors/terminal-blocks/tb010-508-series?utm_source=snapeda.com&amp;utm_medium=referral&amp;utm_campaign=snapedaBOM" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="2~24 Poles, Screw Type, Horizontal, 5.08 Pitch, 26~12 (AWG), Terminal Block Connector" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="CUI Devices" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="TB010-508-02BE" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="65.3415" y="-1.524" size="1.27" layer="25" ratio="18"/>
-<attribute name="PACKAGE" value="None" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TB010-508-02BE/?ref=eda" x="66.3575" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="64.4525" y="4.445" size="1.016" layer="27" ratio="10"/>
+<element name="JP2" library="Connector" package="1X20" package3d_urn="urn:adsk.eagle:package:22441/2" value="PINHD-1X20" x="37.465" y="54.61" smashed="yes" rot="R90">
+<attribute name="CATEGORY" value="CONNECTOR" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MANUFACTURER" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MPN" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OPERATING_TEMP" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PART_STATUS" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="ROHS_COMPLIANT" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SERIES" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="THERMALLOSS" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="TYPE" value="" x="37.465" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="40.64" y="29.21" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="5VPWR" library="TB010-508-02BE" package="CUI_TB010-508-02BE" value="TB010-508-02BE" x="78.4225" y="6.35" smashed="yes">
-<attribute name="AVAILABILITY" value="Good" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="CUI_PURCHASE_URL" value="https://www.cuidevices.com/product/interconnect/connectors/terminal-blocks/tb010-508-series?utm_source=snapeda.com&amp;utm_medium=referral&amp;utm_campaign=snapedaBOM" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="2~24 Poles, Screw Type, Horizontal, 5.08 Pitch, 26~12 (AWG), Terminal Block Connector" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="CUI Devices" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="TB010-508-02BE" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="78.0415" y="-1.524" size="1.27" layer="25" ratio="18"/>
-<attribute name="PACKAGE" value="None" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/TB010-508-02BE/?ref=eda" x="78.4225" y="6.35" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="76.5175" y="4.445" size="1.016" layer="27" ratio="10"/>
+<element name="STEPPERDRIVER" library="DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" package="IC_DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" value="DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" x="71.4375" y="73.279" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="Not in stock" x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" Stepper, Bipolar 8.2 ~ 45VDC Supply 1.5A 8.2 ~ 45V Load " x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="Pololu" x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="DRV8825 STEPPER MOTOR DRIVER CARRIER" x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="70.5485" y="80.645" size="1.27" layer="25" rot="R270"/>
+<attribute name="PACKAGE" value="None" x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="88.4555" y="46.609" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="VOLTAGESELECTOR1" library="Connector" package="1X03" package3d_urn="urn:adsk.eagle:package:22458/2" value="PINHD-1X3" x="6.985" y="69.215" smashed="yes">
-<attribute name="CATEGORY" value="CONNECTOR" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="OPERATING_TEMP" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="PART_STATUS" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="ROHS_COMPLIANT" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="SERIES" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="THERMALLOSS" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="TYPE" value="" x="6.985" y="69.215" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="3.175" y="66.04" size="1.27" layer="27"/>
-</element>
-<element name="JP1" library="Connector" package="1X20" package3d_urn="urn:adsk.eagle:package:22441/2" value="PINHD-1X20" x="51.435" y="54.61" smashed="yes" rot="R270">
-<attribute name="CATEGORY" value="CONNECTOR" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="DESCRIPTION" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MANUFACTURER" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MPN" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="OPERATING_TEMP" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="PART_STATUS" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="ROHS_COMPLIANT" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SERIES" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="THERMALLOSS" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="TYPE" value="" x="51.435" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="48.26" y="80.01" size="1.27" layer="27" rot="R270"/>
-</element>
-<element name="JP2" library="Connector" package="1X20" package3d_urn="urn:adsk.eagle:package:22441/2" value="PINHD-1X20" x="35.56" y="54.61" smashed="yes" rot="R90">
-<attribute name="CATEGORY" value="CONNECTOR" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="DESCRIPTION" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MANUFACTURER" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MPN" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OPERATING_TEMP" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="PART_STATUS" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="ROHS_COMPLIANT" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SERIES" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SUB-CATEGORY" value="PIN-HEADER" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="THERMALLOSS" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="TYPE" value="" x="35.56" y="54.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="38.735" y="29.21" size="1.27" layer="27" rot="R90"/>
-</element>
-<element name="STEPPERDRIVER" library="DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" package="IC_DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" value="DRV8825_STEPPER_MOTOR_DRIVER_CARRIER" x="73.66" y="58.674" smashed="yes" rot="R180">
-<attribute name="AVAILABILITY" value="Not in stock" x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DESCRIPTION" value=" Stepper, Bipolar 8.2 ~ 45VDC Supply 1.5A 8.2 ~ 45V Load " x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MF" value="Pololu" x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MP" value="DRV8825 STEPPER MOTOR DRIVER CARRIER" x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="72.771" y="66.04" size="1.27" layer="25" rot="R270"/>
-<attribute name="PACKAGE" value="None" x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PRICE" value="None" x="90.678" y="32.004" size="1.778" layer="27" rot="R180" display="off"/>
-</element>
-<element name="U$1" library="mp1584" package="DC-BRICK" value="MP1584" x="67.31" y="37.1475" smashed="yes" rot="R270"/>
-<element name="C2" library="adafruit" package="B45181A" value="" x="65.0875" y="81.915" smashed="yes">
-<attribute name="NAME" x="63.1825" y="84.455" size="1.27" layer="25" ratio="10"/>
-<attribute name="VALUE" x="68.1355" y="80.264" size="1.27" layer="27" ratio="10"/>
+<element name="U$1" library="mp1584" package="DC-BRICK" value="MP1584" x="63.8175" y="56.1975" smashed="yes" rot="R270"/>
+<element name="C2" library="adafruit" package="B45181A" value="" x="65.479521875" y="59.679134375" smashed="yes" rot="R180">
+<attribute name="NAME" x="68.590865625" y="60.717021875" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="VALUE" x="62.431521875" y="61.330134375" size="1.27" layer="27" ratio="10" rot="R180"/>
 </element>
 <element name="SWITCH1" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="8.255" y="57.785" smashed="yes" rot="R90">
 <attribute name="NAME" x="3.13" y="53.685" size="1.27" layer="25" rot="R90"/>
@@ -2488,75 +2569,67 @@ design rules under a new name.</description>
 <attribute name="NAME" x="3.13" y="36.8575" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="11.38" y="35.905" size="1.27" layer="27" rot="R90" align="top-left"/>
 </element>
-<element name="PUMP2" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="8.255" y="31.115" smashed="yes" rot="R90">
-<attribute name="NAME" x="3.13" y="27.9675" size="1.27" layer="25" rot="R90"/>
-<attribute name="VALUE" x="11.38" y="27.015" size="1.27" layer="27" rot="R90" align="top-left"/>
+<element name="PELT2" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="57.9374" y="6.985" smashed="yes" grouprefs="PELT2GRP">
+<attribute name="NAME" x="55.4249" y="2.9025" size="1.27" layer="25"/>
+<attribute name="VALUE" x="53.8374" y="3.86" size="1.27" layer="27" align="top-left"/>
 </element>
-<element name="PELT1" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="21.59" y="7.9375" smashed="yes" grouprefs="PELT1GRP">
-<attribute name="NAME" x="19.0775" y="0.68" size="1.27" layer="25"/>
-<attribute name="VALUE" x="17.49" y="4.8125" size="1.27" layer="27" align="top-left"/>
+<element name="LAMP" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="45.8216" y="6.985" smashed="yes" grouprefs="LAMPGRP">
+<attribute name="NAME" x="43.6266" y="2.9025" size="1.27" layer="25"/>
+<attribute name="VALUE" x="41.7216" y="3.86" size="1.27" layer="27" align="top-left"/>
 </element>
-<element name="PELT2" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="57.785" y="7.9375" smashed="yes" grouprefs="PELT2GRP">
-<attribute name="NAME" x="54.955" y="0.9975" size="1.27" layer="25"/>
-<attribute name="VALUE" x="53.685" y="4.8125" size="1.27" layer="27" align="top-left"/>
-</element>
-<element name="LAMP" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="45.72" y="7.9375" smashed="yes" grouprefs="LAMPGRP">
-<attribute name="NAME" x="43.525" y="0.68" size="1.27" layer="25"/>
-<attribute name="VALUE" x="41.62" y="4.8125" size="1.27" layer="27" align="top-left"/>
-</element>
-<element name="LED" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="33.655" y="7.9375" smashed="yes" grouprefs="LEDGRP">
-<attribute name="NAME" x="31.7775" y="0.68" size="1.27" layer="25"/>
-<attribute name="VALUE" x="29.555" y="4.8125" size="1.27" layer="27" align="top-left"/>
+<element name="LED" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="33.8074" y="6.985" smashed="yes" grouprefs="LEDGRP">
+<attribute name="NAME" x="32.2474" y="2.9025" size="1.27" layer="25"/>
+<attribute name="VALUE" x="29.7074" y="3.86" size="1.27" layer="27" align="top-left"/>
 </element>
 <element name="FAN3" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="8.255" y="4.445" smashed="yes" rot="R90">
 <attribute name="NAME" x="3.13" y="2.25" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="11.38" y="0.345" size="1.27" layer="27" rot="R90" align="top-left"/>
 </element>
-<element name="J11" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="21.59" y="90.805" smashed="yes" rot="R180">
-<attribute name="AVAILABILITY" value="In Stock" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MF" value="JST" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="28.04" y="86.68" size="1.27" layer="25" rot="R180"/>
-<attribute name="PACKAGE" value="None" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PRICE" value="None" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="21.59" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="28.04" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
+<element name="MLX2" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="49.53" y="90.805" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="JST" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="47.2075" y="94.93" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="49.53" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="55.98" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
 </element>
-<element name="J12" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="36.195" y="90.805" smashed="yes" rot="R180">
-<attribute name="AVAILABILITY" value="In Stock" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MF" value="JST" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="NAME" x="42.01" y="86.68" size="1.27" layer="25" rot="R180"/>
-<attribute name="PACKAGE" value="None" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PRICE" value="None" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="36.195" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="VALUE" x="42.645" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
+<element name="MLX1" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="34.925" y="90.805" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="JST" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="32.92" y="95.2475" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="34.925" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="41.375" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
 </element>
-<element name="J13" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="73.025" y="90.805" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="JST" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="66.575" y="94.93" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="73.025" y="90.805" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="66.575" y="86.68" size="1.27" layer="27" align="top-left"/>
+<element name="STEPPER" library="B4B-XH-A_LF__SN_" package="JST_B4B-XH-A(LF)(SN)" value="B4B-XH-A(LF)(SN)" x="64.135" y="90.805" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, VERTICAL, 4WAY; Pitch Spacing: 2.5mm; No. of Contacts: 4Contacts; Gender: Header; Product Range: XH Series; Contact Termination Type: Through Hole; No. of Rows: 1Rows; Contact Plating: Tin Plated Contacts; Contact Material: Brass; SVHC: No SVHC (17-Dec-2015); Contact Resistance: 10mohm; Current Rating: 3A; Insulation Resistance: 1000Mohm; Operating Temperature Max: 85°C; Operating Temperature Min: -25°C; Voltage Rating VAC: 250V; Wire Size AWG Max: 22AWG; Wire Size AWG Min: 30AWG; Withstand Voltage: 1000V " x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="JST" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="B4B-XH-A  (LF)(SN)" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="67.7275" y="96.5225" size="1.27" layer="25" rot="R180"/>
+<attribute name="PACKAGE" value="None" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/B4B-XH-A  (LF)(SN)/?ref=eda" x="64.135" y="90.805" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="70.585" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
 </element>
-<element name="ENCOADER" library="B4B-XH-A_LF__SN_" package="B3B" value="B3B" x="50.165" y="89.535" smashed="yes" rot="R180">
-<attribute name="NAME" x="55.345" y="86.68" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="55.345" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
+<element name="ENCOADER" library="B4B-XH-A_LF__SN_" package="B3B" value="B3B" x="20.955" y="89.535" smashed="yes" rot="R180">
+<attribute name="NAME" x="16.7275" y="95.565" size="1.27" layer="25"/>
+<attribute name="VALUE" x="26.135" y="94.93" size="1.27" layer="27" rot="R180" align="top-left"/>
 </element>
-<element name="SV1" library="20 pin rpi connector" package="FE20-2" package3d_urn="urn:adsk.eagle:package:8184/1" value="" x="43.18" y="54.61" smashed="yes" rot="R270">
-<attribute name="MF" value="" x="43.18" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MPN" value="" x="43.18" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="NAME" x="46.609" y="74.93" size="1.27" layer="25" ratio="10" rot="R270"/>
-<attribute name="OC_FARNELL" value="unknown" x="43.18" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="OC_NEWARK" value="unknown" x="43.18" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="POPULARITY" value="0" x="43.18" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="VALUE" x="38.481" y="80.01" size="1.27" layer="27" ratio="10" rot="R270"/>
+<element name="SV1" library="20 pin rpi connector" package="FE20-2" package3d_urn="urn:adsk.eagle:package:8184/1" value="" x="45.085" y="54.61" smashed="yes" rot="R270">
+<attribute name="MF" value="" x="45.085" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MPN" value="" x="45.085" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="48.514" y="74.93" size="1.27" layer="25" ratio="10" rot="R270"/>
+<attribute name="OC_FARNELL" value="unknown" x="45.085" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="OC_NEWARK" value="unknown" x="45.085" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="POPULARITY" value="0" x="45.085" y="54.61" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="40.386" y="80.01" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
 <element name="FAN1" library="B4B-XH-A_LF__SN_" package="B4BXH2" value="B4B-XH-2PIN2PIN" x="8.255" y="22.225" smashed="yes" rot="R90">
 <attribute name="NAME" x="3.13" y="19.7125" size="1.27" layer="25" rot="R90"/>
@@ -2566,15 +2639,40 @@ design rules under a new name.</description>
 <attribute name="NAME" x="3.13" y="10.8225" size="1.27" layer="25" rot="R90"/>
 <attribute name="VALUE" x="11.38" y="9.235" size="1.27" layer="27" rot="R90" align="top-left"/>
 </element>
-<element name="J2" library="USB1135-15-9-L-B_REVA1" package="GCT_USB1135-15-9-L-B_REVA1" value="USB1135-15-9-L-B_REVA1" x="112.7125" y="25.4" smashed="yes" rot="R90">
-<attribute name="AVAILABILITY" value="In Stock" x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="DESCRIPTION" value=" USB 3.0 type A Connector Full size Horizontal Plug, 6.95mm profile, 9 Pins, Through hole, Top mount, High mating cycle, charging receptacle " x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MF" value="Global Connector Technology" x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="MP" value="USB1135-15-9-L-B" x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="NAME" x="105.0925" y="17.78" size="1.27" layer="25" rot="R90"/>
-<attribute name="PACKAGE" value="None" x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="PRICE" value="None" x="112.7125" y="25.4" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="106.9975" y="17.653" size="1.27" layer="27" rot="R90"/>
+<element name="J2" library="USB1135-15-9-L-B_REVA1" package="GCT_USB1135-15-9-L-B_REVA1" value="USB1135-15-9-L-B_REVA1" x="98.1075" y="12.7" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" USB 3.0 type A Connector Full size Horizontal Plug, 6.95mm profile, 9 Pins, Through hole, Top mount, High mating cycle, charging receptacle " x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Global Connector Technology" x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="USB1135-15-9-L-B" x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="90.4875" y="20.32" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="98.1075" y="12.7" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="90.3605" y="18.415" size="1.27" layer="27"/>
+</element>
+<element name="U$2" library="MDD3A" package="FOOTPRINT" value="MDD3A" x="0" y="-42.545" smashed="yes"/>
+<element name="H9" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-84.1375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="20.32" y="-91.7575" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H10" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-96.8375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="34.29" y="-104.4575" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H11" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="40.64" y="150.8125" smashed="yes">
+<attribute name="POPULARITY" value="17" x="60.96" y="129.2225" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H12" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-122.2375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="34.29" y="-143.8275" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H13" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-134.9375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="20.32" y="-170.4975" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H14" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-147.6375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="34.29" y="-183.1975" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H15" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-160.3375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="20.32" y="-209.8675" size="1.778" layer="27" display="off"/>
+</element>
+<element name="H16" library="holes" library_urn="urn:adsk.eagle:library:237" package="3,0-PAD" package3d_urn="urn:adsk.eagle:package:14280/1" value="MOUNT-PAD-ROUND3.0" x="0" y="-173.0375" smashed="yes">
+<attribute name="POPULARITY" value="17" x="34.29" y="-222.5675" size="1.778" layer="27" display="off"/>
 </element>
 </elements>
 <signals>
@@ -2589,10 +2687,6 @@ design rules under a new name.</description>
 <contactref element="ADC" pad="2"/>
 <contactref element="Q4-T4" pad="3"/>
 <contactref element="10KR3" pad="1"/>
-<contactref element="Q4-T5" pad="3"/>
-<contactref element="10KR4" pad="1"/>
-<contactref element="Q4-T6" pad="3"/>
-<contactref element="10KR1" pad="1"/>
 <contactref element="12VPWR" pad="1"/>
 <contactref element="5VPWR" pad="1"/>
 <contactref element="JP1" pad="3"/>
@@ -2606,16 +2700,16 @@ design rules under a new name.</description>
 <contactref element="STEPPERDRIVER" pad="9"/>
 <contactref element="STEPPERDRIVER" pad="15"/>
 <polygon width="0.1524" layer="16">
-<vertex x="0" y="99.695"/>
+<vertex x="0" y="100.0125"/>
 <vertex x="0" y="0"/>
 <vertex x="86.995" y="0"/>
-<vertex x="86.995" y="99.695"/>
+<vertex x="86.995" y="100.0125"/>
 </polygon>
 <polygon width="0.1524" layer="1">
-<vertex x="0" y="99.695"/>
+<vertex x="0" y="100.33"/>
 <vertex x="0" y="0"/>
 <vertex x="86.995" y="0"/>
-<vertex x="86.995" y="99.695"/>
+<vertex x="86.995" y="100.33"/>
 </polygon>
 <contactref element="U$1" pad="IN1-"/>
 <contactref element="U$1" pad="IN2-"/>
@@ -2623,8 +2717,8 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="OUT2-"/>
 <contactref element="C2" pad="-"/>
 <contactref element="FAN3" pad="1"/>
-<contactref element="J11" pad="3"/>
-<contactref element="J12" pad="3"/>
+<contactref element="MLX2" pad="3"/>
+<contactref element="MLX1" pad="3"/>
 <contactref element="ENCOADER" pad="1"/>
 <contactref element="SV1" pad="5"/>
 <contactref element="SV1" pad="10"/>
@@ -2640,43 +2734,119 @@ design rules under a new name.</description>
 <contactref element="J2" pad="4"/>
 <contactref element="J2" pad="S1"/>
 <contactref element="J2" pad="S2"/>
-<wire x1="20.34" y1="91.33" x2="34.945" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="41.91" y1="30.48" x2="44.45" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="6.35" y1="88.265" x2="20.34" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="81.78" y1="35.6475" x2="81.78" y2="16.6475" width="0" layer="19" extent="1-1"/>
+<contactref element="H10" pad="B3,0"/>
+<contactref element="H12" pad="B3,0"/>
+<contactref element="H14" pad="B3,0"/>
+<contactref element="H16" pad="B3,0"/>
+<contactref element="U$2" pad="GND"/>
+<wire x1="0" y1="-147.6375" x2="0" y2="-173.0375" width="0" layer="19" extent="1-1"/>
+<wire x1="0" y1="-122.2375" x2="0" y2="-147.6375" width="0" layer="19" extent="1-1"/>
+<wire x1="0" y1="-96.8375" x2="0" y2="-122.2375" width="0" layer="19" extent="1-1"/>
+<wire x1="45.72" y1="-22.86" x2="0" y2="-96.8375" width="0" layer="19" extent="1-1"/>
+<wire x1="40.005" y1="4.953" x2="45.72" y2="-22.86" width="0" layer="19" extent="1-1"/>
+<wire x1="34.925" y1="15.875" x2="40.005" y2="4.953" width="0" layer="19" extent="1-1"/>
+<wire x1="46.99" y1="15.875" x2="34.925" y2="15.875" width="0" layer="19" extent="1-1"/>
+<wire x1="27.94" y1="4.953" x2="40.005" y2="4.953" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="30.48" x2="34.925" y2="15.875" width="0" layer="19" extent="1-1"/>
+<wire x1="43.815" y1="30.48" x2="37.465" y2="30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="38.1" x2="43.815" y2="30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="43.18" x2="46.355" y2="38.1" width="0" layer="19" extent="1-1"/>
+<wire x1="43.815" y1="48.26" x2="46.355" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="48.26" x2="43.815" y2="48.26" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="43.18" x2="46.355" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="38.1" x2="53.34" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="55.88" x2="43.815" y2="48.26" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="55.88" x2="46.355" y2="55.88" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="63.5" x2="53.34" y2="55.88" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="63.5" x2="53.34" y2="63.5" width="0" layer="19" extent="1-1"/>
+<wire x1="43.815" y1="68.58" x2="46.355" y2="63.5" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="73.66" x2="43.815" y2="68.58" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="68.58" x2="43.815" y2="68.58" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="73.66" x2="46.355" y2="73.66" width="0" layer="19" extent="1-1"/>
+<wire x1="28.8925" y1="42.2275" x2="37.465" y2="48.26" width="0" layer="19" extent="1-1"/>
+<wire x1="28.8925" y1="39.6875" x2="28.8925" y2="42.2275" width="0" layer="19" extent="1-1"/>
+<wire x1="21.2725" y1="42.2275" x2="28.8925" y2="42.2275" width="0" layer="19" extent="1-1"/>
+<wire x1="21.2725" y1="39.6875" x2="21.2725" y2="42.2275" width="0" layer="19" extent="1-1"/>
+<wire x1="64.209521875" y1="59.679134375" x2="53.34" y2="55.88" width="0" layer="19" extent="1-1"/>
+<wire x1="65.0875" y1="66.929" x2="64.209521875" y2="59.679134375" width="0" layer="19" extent="1-1"/>
+<wire x1="65.0875" y1="82.169" x2="53.34" y2="73.66" width="0" layer="19" extent="1-1"/>
+<wire x1="78.2875" y1="54.6975" x2="64.209521875" y2="59.679134375" width="0" layer="19" extent="1-1"/>
+<wire x1="79.6875" y1="54.6975" x2="78.2875" y2="54.6975" width="0" layer="19" extent="1-1"/>
+<wire x1="48.28" y1="91.33" x2="46.355" y2="73.66" width="0" layer="19" extent="1-1"/>
+<wire x1="33.675" y1="91.33" x2="48.28" y2="91.33" width="0" layer="19" extent="1-1"/>
+<wire x1="23.435" y1="91.33" x2="33.675" y2="91.33" width="0" layer="19" extent="1-1"/>
+<wire x1="6.6675" y1="88.265" x2="23.435" y2="91.33" width="0" layer="19" extent="1-1"/>
+<wire x1="79.6875" y1="35.6975" x2="79.6875" y2="54.6975" width="0" layer="19" extent="1-1"/>
+<wire x1="78.2875" y1="35.6975" x2="79.6875" y2="35.6975" width="0" layer="19" extent="1-1"/>
+<wire x1="7.78" y1="3.045" x2="27.94" y2="4.953" width="0" layer="19" extent="1-1"/>
+<wire x1="7.78" y1="11.935" x2="7.78" y2="3.045" width="0" layer="19" extent="1-1"/>
+<wire x1="7.78" y1="20.825" x2="7.78" y2="11.935" width="0" layer="19" extent="1-1"/>
+<wire x1="66.04" y1="8.89" x2="46.99" y2="15.875" width="0" layer="19" extent="1-1"/>
+<wire x1="77.47" y1="8.89" x2="66.04" y2="8.89" width="0" layer="19" extent="1-1"/>
+<wire x1="91.5375" y1="12.7" x2="77.47" y2="8.89" width="0" layer="19" extent="1-1"/>
+<wire x1="98.1075" y1="16.2" x2="91.5375" y2="12.7" width="0" layer="19" extent="1-1"/>
+<wire x1="101.6075" y1="14.7" x2="98.1075" y2="16.2" width="0" layer="19" extent="1-1"/>
+<wire x1="104.6775" y1="12.7" x2="101.6075" y2="14.7" width="0" layer="19" extent="1-1"/>
+<wire x1="17.78" y1="62.865" x2="37.465" y2="68.58" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="3.3V">
+<signal name="3.3V" class="1">
 <contactref element="5V" pad="1"/>
 <contactref element="VOLTAGESELECTOR1" pad="3"/>
 <contactref element="JP2" pad="20"/>
 <contactref element="SV1" pad="2"/>
-<wire x1="41.91" y1="78.74" x2="35.56" y2="78.74" width="1.016" layer="16"/>
-<wire x1="9.525" y1="69.215" x2="35.56" y2="78.74" width="0" layer="19" extent="1-1"/>
-<wire x1="9.525" y1="64.77" x2="9.525" y2="69.215" width="0" layer="19" extent="1-1"/>
+<wire x1="8.89" y1="69.215" x2="8.89" y2="66.04" width="2.032" layer="16"/>
+<wire x1="37.465" y1="78.74" x2="43.815" y2="78.74" width="1.778" layer="16"/>
+<wire x1="8.89" y1="69.215" x2="12.065" y2="72.39" width="1.778" layer="1"/>
+<wire x1="12.065" y1="72.39" x2="12.065" y2="82.2325" width="1.778" layer="1"/>
+<wire x1="16.1925" y1="86.36" x2="12.065" y2="82.2325" width="1.778" layer="1"/>
+<wire x1="37.465" y1="78.74" x2="29.845" y2="86.36" width="1.778" layer="1"/>
+<wire x1="29.845" y1="86.36" x2="16.1925" y2="86.36" width="1.778" layer="1"/>
+<contactref element="H15" pad="B3,0"/>
+<wire x1="8.89" y1="66.04" x2="0" y2="-160.3375" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SDA">
 <contactref element="ADC" pad="4"/>
 <contactref element="JP2" pad="19"/>
-<contactref element="J11" pad="1"/>
-<contactref element="J12" pad="1"/>
+<contactref element="MLX2" pad="1"/>
+<contactref element="MLX1" pad="1"/>
 <contactref element="SV1" pad="4"/>
-<wire x1="35.56" y1="76.2" x2="41.91" y2="76.2" width="1.016" layer="16"/>
-<wire x1="25.34" y1="91.33" x2="39.945" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="35.56" y1="76.2" x2="39.945" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="17.78" y1="67.945" x2="25.34" y2="91.33" width="0" layer="19" extent="1-1"/>
+<wire x1="29.845" y1="76.2" x2="37.465" y2="76.2" width="1.016" layer="1"/>
+<wire x1="17.78" y1="67.945" x2="21.59" y2="67.945" width="1.016" layer="1"/>
+<wire x1="21.59" y1="67.945" x2="29.845" y2="76.2" width="1.016" layer="1"/>
+<wire x1="37.465" y1="76.2" x2="40.005" y2="76.2" width="1.016" layer="1"/>
+<wire x1="40.005" y1="76.2" x2="43.815" y2="76.2" width="1.016" layer="1"/>
+<wire x1="38.675" y1="91.33" x2="38.675" y2="85.725" width="1.016" layer="1"/>
+<wire x1="40.58" y1="85.725" x2="40.58" y2="76.775" width="1.016" layer="1"/>
+<wire x1="40.58" y1="76.775" x2="40.005" y2="76.2" width="1.016" layer="1"/>
+<wire x1="53.28" y1="91.33" x2="53.28" y2="89.1575" width="1.016" layer="1"/>
+<wire x1="49.8475" y1="85.725" x2="40.58" y2="85.725" width="1.016" layer="1"/>
+<wire x1="40.58" y1="85.725" x2="38.675" y2="85.725" width="1.016" layer="1"/>
+<wire x1="53.28" y1="89.1575" x2="49.8475" y2="85.725" width="1.016" layer="1"/>
 </signal>
 <signal name="SCL">
 <contactref element="ADC" pad="3"/>
 <contactref element="JP2" pad="18"/>
-<contactref element="J11" pad="2"/>
-<contactref element="J12" pad="2"/>
+<contactref element="MLX2" pad="2"/>
+<contactref element="MLX1" pad="2"/>
 <contactref element="SV1" pad="6"/>
-<wire x1="41.91" y1="73.66" x2="35.56" y2="73.66" width="1.016" layer="16"/>
-<wire x1="22.84" y1="91.33" x2="37.445" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="35.56" y1="73.66" x2="37.445" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="17.78" y1="65.405" x2="35.56" y2="73.66" width="0" layer="19" extent="1-1"/>
+<wire x1="43.815" y1="73.66" x2="37.465" y2="73.66" width="1.016" layer="16"/>
+<wire x1="37.465" y1="73.66" x2="34.925" y2="73.66" width="1.016" layer="16"/>
+<wire x1="32.385" y1="76.2" x2="32.385" y2="85.725" width="1.016" layer="16"/>
+<wire x1="32.385" y1="85.725" x2="34.29" y2="87.63" width="1.016" layer="16"/>
+<wire x1="49.53" y1="87.63" x2="50.8" y2="88.9" width="1.016" layer="16"/>
+<wire x1="50.8" y1="88.9" x2="50.8" y2="91.31" width="1.016" layer="16"/>
+<wire x1="50.8" y1="91.31" x2="50.78" y2="91.33" width="1.016" layer="16"/>
+<wire x1="34.925" y1="73.66" x2="32.385" y2="76.2" width="1.016" layer="16"/>
+<wire x1="34.29" y1="87.63" x2="35.56" y2="87.63" width="1.016" layer="16"/>
+<wire x1="35.56" y1="87.63" x2="49.53" y2="87.63" width="1.016" layer="16"/>
+<wire x1="36.175" y1="91.33" x2="36.175" y2="88.245" width="1.016" layer="16"/>
+<wire x1="36.175" y1="88.245" x2="35.56" y2="87.63" width="1.016" layer="16"/>
+<wire x1="17.78" y1="65.405" x2="17.9578" y2="65.5828" width="1.016" layer="1"/>
+<wire x1="17.9578" y1="65.5828" x2="22.1014875" y2="65.5828" width="1.016" layer="1"/>
+<wire x1="22.1014875" y1="65.5828" x2="30.1786875" y2="73.66" width="1.016" layer="1"/>
+<wire x1="30.1786875" y1="73.66" x2="37.465" y2="73.66" width="1.016" layer="1"/>
 </signal>
-<signal name="12V">
+<signal name="12V" class="1">
 <contactref element="L293D" pad="8"/>
 <contactref element="12VPWR" pad="2"/>
 <contactref element="STEPPERDRIVER" pad="16"/>
@@ -2684,346 +2854,485 @@ design rules under a new name.</description>
 <contactref element="U$1" pad="IN1+"/>
 <contactref element="C2" pad="+"/>
 <contactref element="LED" pad="2"/>
-<wire x1="67.31" y1="49.784" x2="63.8175" y2="81.915" width="0" layer="19" extent="1-1"/>
-<wire x1="68.71" y1="35.6475" x2="67.31" y2="49.784" width="0" layer="19" extent="1-1"/>
-<wire x1="70.11" y1="35.6475" x2="68.71" y2="35.6475" width="0" layer="19" extent="1-1"/>
-<wire x1="27.305" y1="48.895" x2="68.71" y2="35.6475" width="0" layer="19" extent="1-1"/>
-<wire x1="34.755" y1="8.4125" x2="27.305" y2="48.895" width="0" layer="19" extent="1-1"/>
-<wire x1="71.4375" y1="6.35" x2="34.755" y2="8.4125" width="0" layer="19" extent="1-1"/>
+<wire x1="66.6175" y1="54.6975" x2="65.2175" y2="54.6975" width="2.032" layer="16"/>
+<wire x1="66.6175" y1="44.825" x2="82.55" y2="28.8925" width="1.778" layer="16"/>
+<wire x1="66.6175" y1="54.6975" x2="66.6175" y2="44.825" width="1.778" layer="16"/>
+<wire x1="82.55" y1="28.8925" x2="82.55" y2="8.89" width="1.778" layer="16"/>
+<wire x1="34.9074" y1="7.46" x2="34.925" y2="7.4424" width="1.778" layer="1"/>
+<wire x1="34.925" y1="7.4424" x2="34.925" y2="4.1275" width="1.778" layer="1"/>
+<wire x1="34.925" y1="4.1275" x2="36.83" y2="2.2225" width="1.778" layer="1"/>
+<wire x1="82.55" y1="8.240925" x2="82.55" y2="8.89" width="1.778" layer="1"/>
+<wire x1="82.55" y1="8.240925" x2="76.531575" y2="2.2225" width="1.778" layer="1"/>
+<wire x1="36.83" y1="2.2225" x2="76.531575" y2="2.2225" width="1.778" layer="1"/>
+<wire x1="28.8925" y1="49.8475" x2="28.8925" y2="50.165" width="1.778" layer="1"/>
+<wire x1="28.8925" y1="50.165" x2="25.7175" y2="53.34" width="1.778" layer="1"/>
+<wire x1="25.7175" y1="53.34" x2="20.0025" y2="53.34" width="1.778" layer="1"/>
+<wire x1="10.795" y1="44.1325" x2="10.795" y2="6.0325" width="1.778" layer="1"/>
+<wire x1="10.795" y1="6.0325" x2="14.605" y2="2.2225" width="1.778" layer="1"/>
+<wire x1="14.605" y1="2.2225" x2="36.83" y2="2.2225" width="1.778" layer="1"/>
+<wire x1="20.0025" y1="53.34" x2="10.795" y2="44.1325" width="1.778" layer="1"/>
+<wire x1="66.749521875" y1="63.996978125" x2="66.3575" y2="64.389" width="1.778" layer="16"/>
+<wire x1="65.0875" y1="64.389" x2="66.3575" y2="64.389" width="1.778" layer="16"/>
+<wire x1="66.749521875" y1="63.996978125" x2="66.749521875" y2="59.679134375" width="1.778" layer="16"/>
+<wire x1="66.749521875" y1="59.679134375" x2="66.749521875" y2="54.829521875" width="1.778" layer="16"/>
+<wire x1="66.6175" y1="54.6975" x2="66.749521875" y2="54.829521875" width="1.778" layer="16"/>
+<contactref element="H11" pad="B3,0"/>
+<wire x1="34.9074" y1="7.46" x2="40.64" y2="150.8125" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A0">
 <contactref element="J1" pad="1"/>
 <contactref element="ADC" pad="7"/>
-<wire x1="8.89" y1="78.105" x2="17.78" y2="75.565" width="0" layer="19" extent="1-1"/>
+<wire x1="17.78" y1="75.565" x2="13.335" y2="75.565" width="1.016" layer="16"/>
+<wire x1="10.795" y1="78.105" x2="9.2075" y2="78.105" width="1.016" layer="16"/>
+<wire x1="13.335" y1="75.565" x2="10.795" y2="78.105" width="1.016" layer="16"/>
 </signal>
 <signal name="N$8">
 <contactref element="J1" pad="2"/>
 <contactref element="VOLTAGESELECTOR1" pad="2"/>
-<wire x1="6.985" y1="69.215" x2="6.35" y2="78.105" width="0" layer="19" extent="1-1"/>
+<wire x1="6.6675" y1="78.105" x2="6.6675" y2="69.5325" width="1.016" layer="16"/>
+<wire x1="6.35" y1="69.215" x2="6.6675" y2="69.5325" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-PUMP1-1">
 <contactref element="JP2" pad="6"/>
 <contactref element="L293D" pad="10"/>
 <contactref element="SV1" pad="30"/>
-<wire x1="35.56" y1="43.18" x2="41.91" y2="43.18" width="1.016" layer="16"/>
-<wire x1="19.685" y1="46.355" x2="35.56" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="43.18" x2="43.815" y2="43.18" width="1.016" layer="16"/>
+<wire x1="27.6225" y1="52.3875" x2="32.0675" y2="52.3875" width="1.016" layer="16"/>
+<wire x1="32.0675" y1="52.3875" x2="34.417" y2="50.038" width="1.016" layer="16"/>
+<wire x1="34.417" y1="44.15734375" x2="35.39434375" y2="43.18" width="1.016" layer="16"/>
+<wire x1="35.39434375" y1="43.18" x2="37.465" y2="43.18" width="1.016" layer="16"/>
+<wire x1="27.6225" y1="52.3875" x2="22.5425" y2="47.3075" width="1.016" layer="16"/>
+<wire x1="21.2725" y1="47.3075" x2="22.5425" y2="47.3075" width="1.016" layer="16"/>
+<wire x1="34.417" y1="50.038" x2="34.417" y2="44.15734375" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-PUMP1-2">
-<contactref element="JP2" pad="5"/>
 <contactref element="L293D" pad="15"/>
-<contactref element="SV1" pad="32"/>
-<wire x1="41.91" y1="40.64" x2="35.56" y2="40.64" width="1.016" layer="16"/>
-<wire x1="19.685" y1="33.655" x2="35.56" y2="40.64" width="0" layer="19" extent="1-1"/>
+<contactref element="JP2" pad="2"/>
+<contactref element="SV1" pad="38"/>
+<wire x1="21.2725" y1="34.6075" x2="19.3675" y2="34.6075" width="1.016" layer="1"/>
+<wire x1="19.3675" y1="34.6075" x2="18.0975" y2="33.3375" width="1.016" layer="1"/>
+<wire x1="18.0975" y1="30.48" x2="20.0025" y2="28.575" width="1.016" layer="1"/>
+<wire x1="20.0025" y1="28.575" x2="30.1625" y2="28.575" width="1.016" layer="1"/>
+<wire x1="34.6075" y1="33.02" x2="37.465" y2="33.02" width="1.016" layer="1"/>
+<wire x1="18.0975" y1="33.3375" x2="18.0975" y2="30.48" width="1.016" layer="1"/>
+<wire x1="30.1625" y1="28.575" x2="34.6075" y2="33.02" width="1.016" layer="1"/>
+<wire x1="37.465" y1="33.02" x2="43.815" y2="33.02" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-PUMP2-2">
 <contactref element="L293D" pad="2"/>
-<wire x1="29.845" y1="33.655" x2="27.305" y2="33.655" width="1.016" layer="16"/>
-<wire x1="34.29" y1="38.1" x2="29.845" y2="33.655" width="1.016" layer="16"/>
-<contactref element="JP2" pad="2"/>
-<contactref element="SV1" pad="38"/>
-<wire x1="35.56" y1="33.02" x2="41.91" y2="33.02" width="0" layer="19" extent="1-1"/>
-<wire x1="34.29" y1="38.1" x2="35.56" y2="33.02" width="0" layer="19" extent="16-16"/>
+<contactref element="JP2" pad="4"/>
+<contactref element="SV1" pad="34"/>
+<wire x1="28.8925" y1="34.6075" x2="30.7975" y2="34.6075" width="1.016" layer="1"/>
+<wire x1="34.29" y1="38.1" x2="37.465" y2="38.1" width="1.016" layer="1"/>
+<wire x1="30.7975" y1="34.6075" x2="34.29" y2="38.1" width="1.016" layer="1"/>
+<wire x1="37.465" y1="38.1" x2="43.815" y2="38.1" width="1.016" layer="16"/>
 </signal>
 <signal name="PUMP2-2">
 <contactref element="L293D" pad="3"/>
-<contactref element="PUMP2" pad="1"/>
-<wire x1="7.78" y1="29.715" x2="27.305" y2="36.195" width="0" layer="19" extent="1-1"/>
+<wire x1="27.6225" y1="26.67" x2="32.385" y2="31.4325" width="1.016" layer="16"/>
+<wire x1="32.385" y1="31.4325" x2="32.385" y2="35.56" width="1.016" layer="16"/>
+<wire x1="32.385" y1="35.56" x2="30.7975" y2="37.1475" width="1.016" layer="16"/>
+<wire x1="30.7975" y1="37.1475" x2="28.8925" y2="37.1475" width="1.016" layer="16"/>
+<wire x1="10.925" y1="29.715" x2="13.97" y2="26.67" width="1.016" layer="16"/>
+<wire x1="13.97" y1="26.67" x2="27.6225" y2="26.67" width="1.016" layer="16"/>
 </signal>
 <signal name="PUMP2-1">
 <contactref element="L293D" pad="6"/>
-<contactref element="PUMP2" pad="2"/>
-<wire x1="7.78" y1="32.215" x2="27.305" y2="43.815" width="0" layer="19" extent="1-1"/>
+<wire x1="25.0825" y1="31.4325" x2="22.86" y2="29.21" width="1.016" layer="16"/>
+<wire x1="22.86" y1="29.21" x2="16.51" y2="29.21" width="1.016" layer="16"/>
+<wire x1="28.8925" y1="44.7675" x2="26.3525" y2="44.7675" width="1.016" layer="16"/>
+<wire x1="26.3525" y1="44.7675" x2="25.0825" y2="43.4975" width="1.016" layer="16"/>
+<wire x1="25.0825" y1="43.4975" x2="25.0825" y2="31.4325" width="1.016" layer="16"/>
+<wire x1="16.51" y1="29.21" x2="13.505" y2="32.215" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-PUMP2-1">
 <contactref element="L293D" pad="7"/>
-<contactref element="JP2" pad="4"/>
-<contactref element="SV1" pad="34"/>
-<wire x1="35.56" y1="38.1" x2="41.91" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="27.305" y1="46.355" x2="35.56" y2="38.1" width="0" layer="19" extent="1-1"/>
+<contactref element="JP2" pad="5"/>
+<contactref element="SV1" pad="32"/>
+<wire x1="28.8925" y1="47.3075" x2="31.115" y2="47.3075" width="1.016" layer="16"/>
+<wire x1="31.115" y1="47.3075" x2="32.0675" y2="46.355" width="1.016" layer="16"/>
+<wire x1="32.0675" y1="43.63315625" x2="35.06065625" y2="40.64" width="1.016" layer="16"/>
+<wire x1="35.06065625" y1="40.64" x2="37.465" y2="40.64" width="1.016" layer="16"/>
+<wire x1="32.0675" y1="46.355" x2="32.0675" y2="43.63315625" width="1.016" layer="16"/>
+<wire x1="37.465" y1="40.64" x2="43.815" y2="40.64" width="1.016" layer="16"/>
 </signal>
 <signal name="PUMP1-1">
 <contactref element="L293D" pad="11"/>
 <contactref element="PUMP1" pad="2"/>
-<wire x1="7.78" y1="41.105" x2="19.685" y2="43.815" width="0" layer="19" extent="1-1"/>
+<wire x1="21.2725" y1="44.7675" x2="14.2875" y2="44.7675" width="1.016" layer="16"/>
+<wire x1="14.2875" y1="44.7675" x2="10.625" y2="41.105" width="1.016" layer="16"/>
+<wire x1="10.625" y1="41.105" x2="7.78" y2="41.105" width="1.016" layer="16"/>
 </signal>
 <signal name="PUMP1-2">
 <contactref element="L293D" pad="14"/>
 <contactref element="PUMP1" pad="1"/>
-<wire x1="7.78" y1="38.605" x2="19.685" y2="36.195" width="0" layer="19" extent="1-1"/>
+<wire x1="21.2725" y1="37.1475" x2="16.1925" y2="37.1475" width="1.016" layer="16"/>
+<wire x1="14.735" y1="38.605" x2="7.78" y2="38.605" width="1.016" layer="16"/>
+<wire x1="16.1925" y1="37.1475" x2="14.735" y2="38.605" width="1.016" layer="16"/>
 </signal>
 <signal name="LED">
 <contactref element="Q4-T4" pad="2"/>
 <contactref element="LED" pad="1"/>
-<wire x1="32.255" y1="8.4125" x2="32.385" y2="15.5575" width="0" layer="19" extent="1-1"/>
+<wire x1="32.385" y1="15.875" x2="32.4035" y2="15.8565" width="1.016" layer="16"/>
+<wire x1="32.4074" y1="7.46" x2="32.4035" y2="7.4639" width="1.016" layer="16"/>
+<wire x1="32.4035" y1="15.8565" x2="32.4035" y2="7.4639" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-LED">
 <contactref element="JP1" pad="9"/>
 <contactref element="Q4-T4" pad="1"/>
 <contactref element="10KR3" pad="2"/>
 <contactref element="SV1" pad="17"/>
-<wire x1="51.435" y1="58.42" x2="44.45" y2="58.42" width="1.016" layer="16"/>
-<wire x1="29.845" y1="15.5575" x2="29.845" y2="12.2555" width="1.016" layer="16"/>
-<wire x1="29.845" y1="12.2555" x2="27.94" y2="10.3505" width="1.016" layer="16"/>
-<wire x1="29.845" y1="15.5575" x2="29.8635" y2="15.576" width="1.016" layer="16"/>
-<wire x1="29.8635" y1="15.576" x2="29.8635" y2="16.60194375" width="1.016" layer="16"/>
-<wire x1="29.8635" y1="16.60194375" x2="34.85155625" y2="21.59" width="1.016" layer="16"/>
-<wire x1="54.356" y1="57.404" x2="53.34" y2="58.42" width="1.016" layer="16"/>
-<wire x1="53.34" y1="58.42" x2="51.435" y2="58.42" width="1.016" layer="16"/>
-<wire x1="34.85155625" y1="21.59" x2="50.132625" y2="21.59" width="1.016" layer="16"/>
-<wire x1="50.132625" y1="21.59" x2="54.356" y2="25.813375" width="1.016" layer="16"/>
-<wire x1="54.356" y1="25.813375" x2="54.356" y2="57.404" width="1.016" layer="16"/>
+<wire x1="53.34" y1="58.42" x2="46.355" y2="58.42" width="1.016" layer="16"/>
+<wire x1="29.845" y1="15.875" x2="29.845" y2="14.478" width="1.016" layer="16"/>
+<wire x1="29.845" y1="14.478" x2="27.94" y2="12.573" width="1.016" layer="16"/>
+<wire x1="29.845" y1="15.875" x2="29.8635" y2="15.8935" width="1.016" layer="16"/>
+<wire x1="29.8635" y1="15.8935" x2="29.8635" y2="18.82444375" width="1.016" layer="16"/>
+<wire x1="29.8635" y1="18.82444375" x2="36.12155625" y2="25.0825" width="1.016" layer="16"/>
+<wire x1="56.261" y1="57.404" x2="55.245" y2="58.42" width="1.016" layer="16"/>
+<wire x1="55.245" y1="58.42" x2="53.34" y2="58.42" width="1.016" layer="16"/>
+<wire x1="36.12155625" y1="25.0825" x2="52.990125" y2="25.0825" width="1.016" layer="16"/>
+<wire x1="52.990125" y1="25.0825" x2="56.261" y2="28.353375" width="1.016" layer="16"/>
+<wire x1="56.261" y1="28.353375" x2="56.261" y2="57.404" width="1.016" layer="16"/>
 </signal>
 <signal name="GPIO-LAMP">
 <contactref element="JP1" pad="8"/>
 <contactref element="Q4-T" pad="1"/>
 <contactref element="10KR2" pad="2"/>
 <contactref element="SV1" pad="15"/>
-<wire x1="44.45" y1="60.96" x2="51.435" y2="60.96" width="1.016" layer="16"/>
-<wire x1="41.91" y1="16.58344375" x2="44.37655625" y2="19.05" width="1.016" layer="16"/>
-<wire x1="56.388" y1="59.182" x2="54.61" y2="60.96" width="1.016" layer="16"/>
-<wire x1="54.61" y1="60.96" x2="51.435" y2="60.96" width="1.016" layer="16"/>
-<wire x1="41.91" y1="15.5575" x2="41.91" y2="16.58344375" width="1.016" layer="16"/>
-<wire x1="44.37655625" y1="19.05" x2="51.7363125" y2="19.05" width="1.016" layer="16"/>
-<wire x1="51.7363125" y1="19.05" x2="56.388" y2="23.7016875" width="1.016" layer="16"/>
-<wire x1="56.388" y1="23.7016875" x2="56.388" y2="59.182" width="1.016" layer="16"/>
-<wire x1="40.005" y1="10.3505" x2="41.91" y2="15.5575" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="60.96" x2="53.34" y2="60.96" width="1.016" layer="16"/>
+<wire x1="41.91" y1="18.80594375" x2="44.37655625" y2="21.2725" width="1.016" layer="16"/>
+<wire x1="58.293" y1="59.182" x2="56.515" y2="60.96" width="1.016" layer="16"/>
+<wire x1="56.515" y1="60.96" x2="53.34" y2="60.96" width="1.016" layer="16"/>
+<wire x1="41.91" y1="15.875" x2="41.91" y2="18.80594375" width="1.016" layer="16"/>
+<wire x1="44.37655625" y1="21.2725" x2="53.0063125" y2="21.2725" width="1.016" layer="16"/>
+<wire x1="53.0063125" y1="21.2725" x2="58.293" y2="26.5591875" width="1.016" layer="16"/>
+<wire x1="58.293" y1="26.5591875" x2="58.293" y2="59.182" width="1.016" layer="16"/>
+<wire x1="41.91" y1="15.875" x2="41.91" y2="14.478" width="1.016" layer="16"/>
+<wire x1="41.91" y1="14.478" x2="40.005" y2="12.573" width="1.016" layer="16"/>
 </signal>
 <signal name="LAMP">
 <contactref element="Q4-T" pad="2"/>
 <contactref element="LAMP" pad="1"/>
-<wire x1="44.32" y1="8.4125" x2="44.45" y2="15.5575" width="0" layer="19" extent="1-1"/>
+<wire x1="44.45" y1="15.875" x2="44.45" y2="7.4884" width="1.016" layer="16"/>
+<wire x1="44.45" y1="7.4884" x2="44.4216" y2="7.46" width="1.016" layer="16"/>
 </signal>
-<signal name="5V">
+<signal name="5V" class="1">
 <contactref element="L293D" pad="16"/>
 <contactref element="L293D" pad="1"/>
 <contactref element="L293D" pad="9"/>
 <contactref element="5V" pad="3"/>
 <contactref element="5VPWR" pad="2"/>
 <contactref element="VOLTAGESELECTOR1" pad="1"/>
-<contactref element="PELT1" pad="2"/>
 <contactref element="PELT2" pad="2"/>
 <contactref element="SWITCH1" pad="2"/>
 <contactref element="SWITCH2" pad="2"/>
 <contactref element="FAN3" pad="2"/>
-<contactref element="J11" pad="4"/>
-<contactref element="J12" pad="4"/>
+<contactref element="MLX2" pad="4"/>
+<contactref element="MLX1" pad="4"/>
 <contactref element="ENCOADER" pad="3"/>
 <contactref element="FAN1" pad="2"/>
 <contactref element="FAN2" pad="2"/>
 <contactref element="J2" pad="1"/>
-<wire x1="32.445" y1="91.33" x2="47.645" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="17.84" y1="91.33" x2="32.445" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="4.445" y1="69.215" x2="17.84" y2="91.33" width="0" layer="19" extent="1-1"/>
-<wire x1="4.445" y1="64.77" x2="4.445" y2="69.215" width="0" layer="19" extent="1-1"/>
-<wire x1="7.78" y1="58.885" x2="4.445" y2="64.77" width="0" layer="19" extent="1-1"/>
-<wire x1="7.78" y1="49.995" x2="7.78" y2="58.885" width="0" layer="19" extent="1-1"/>
-<wire x1="19.685" y1="48.895" x2="7.78" y2="49.995" width="0" layer="19" extent="1-1"/>
-<wire x1="19.685" y1="31.115" x2="19.685" y2="48.895" width="0" layer="19" extent="1-1"/>
-<wire x1="27.305" y1="31.115" x2="19.685" y2="31.115" width="0" layer="19" extent="1-1"/>
-<wire x1="7.78" y1="23.325" x2="19.685" y2="31.115" width="0" layer="19" extent="1-1"/>
-<wire x1="7.78" y1="14.435" x2="7.78" y2="23.325" width="0" layer="19" extent="1-1"/>
-<wire x1="7.78" y1="5.545" x2="7.78" y2="14.435" width="0" layer="19" extent="1-1"/>
-<wire x1="22.69" y1="8.4125" x2="7.78" y2="5.545" width="0" layer="19" extent="1-1"/>
-<wire x1="58.885" y1="8.4125" x2="22.69" y2="8.4125" width="0" layer="19" extent="1-1"/>
-<wire x1="110.7125" y1="21.9" x2="58.885" y2="8.4125" width="0" layer="19" extent="1-1"/>
-<wire x1="83.5025" y1="6.35" x2="110.7125" y2="21.9" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="PELT2">
-<contactref element="JP1" pad="6"/>
-<contactref element="Q4-T6" pad="1"/>
-<contactref element="10KR1" pad="2"/>
-<contactref element="SV1" pad="11"/>
-<wire x1="44.45" y1="66.04" x2="51.435" y2="66.04" width="1.016" layer="16"/>
-<wire x1="51.435" y1="66.04" x2="53.34" y2="66.04" width="1.016" layer="16"/>
-<wire x1="53.34" y1="66.04" x2="58.42" y2="60.96" width="1.016" layer="16"/>
-<wire x1="53.975" y1="17.145" x2="53.975" y2="15.5575" width="1.016" layer="16"/>
-<wire x1="58.42" y1="60.96" x2="58.42" y2="21.59" width="1.016" layer="16"/>
-<wire x1="58.42" y1="21.59" x2="53.975" y2="17.145" width="1.016" layer="16"/>
-<wire x1="52.07" y1="10.6045" x2="53.975" y2="15.5575" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="PELT1">
-<contactref element="JP2" pad="3"/>
-<contactref element="Q4-T5" pad="1"/>
-<contactref element="10KR4" pad="2"/>
-<contactref element="SV1" pad="36"/>
-<wire x1="41.91" y1="35.56" x2="35.56" y2="35.56" width="1.016" layer="16"/>
-<wire x1="17.78" y1="15.5575" x2="17.7985" y2="15.576" width="1.016" layer="16"/>
-<wire x1="17.7985" y1="15.576" x2="17.7985" y2="16.60194375" width="1.016" layer="16"/>
-<wire x1="17.7985" y1="16.60194375" x2="25.32655625" y2="24.13" width="1.016" layer="16"/>
-<wire x1="25.32655625" y1="24.13" x2="29.21" y2="24.13" width="1.016" layer="16"/>
-<wire x1="29.21" y1="24.13" x2="31.75" y2="26.67" width="1.016" layer="16"/>
-<wire x1="34.58154375" y1="35.3822" x2="35.3822" y2="35.3822" width="1.016" layer="16"/>
-<wire x1="35.3822" y1="35.3822" x2="35.56" y2="35.56" width="1.016" layer="16"/>
-<wire x1="31.75" y1="32.55065625" x2="34.58154375" y2="35.3822" width="1.016" layer="16"/>
-<wire x1="31.75" y1="26.67" x2="31.75" y2="32.55065625" width="1.016" layer="16"/>
-<wire x1="15.875" y1="10.6045" x2="17.78" y2="15.5575" width="0" layer="19" extent="1-1"/>
+<wire x1="7.78" y1="58.885" x2="4.275" y2="58.885" width="2.032" layer="16"/>
+<wire x1="4.275" y1="58.885" x2="3.81" y2="58.42" width="2.032" layer="16"/>
+<wire x1="3.81" y1="58.42" x2="3.81" y2="50.165" width="2.032" layer="16"/>
+<wire x1="7.78" y1="49.995" x2="3.98" y2="49.995" width="2.032" layer="16"/>
+<wire x1="3.98" y1="49.995" x2="3.81" y2="50.165" width="2.032" layer="16"/>
+<wire x1="3.81" y1="69.215" x2="3.81" y2="66.04" width="2.032" layer="16"/>
+<wire x1="3.81" y1="66.04" x2="3.81" y2="58.42" width="2.032" layer="16"/>
+<wire x1="7.78" y1="23.325" x2="3.9575" y2="23.325" width="2.032" layer="16"/>
+<wire x1="3.9575" y1="23.325" x2="3.81" y2="23.1775" width="2.032" layer="16"/>
+<wire x1="7.78" y1="5.545" x2="5.25" y2="5.545" width="2.032" layer="16"/>
+<wire x1="5.25" y1="5.545" x2="3.81" y2="6.985" width="2.032" layer="16"/>
+<wire x1="3.81" y1="6.985" x2="3.81" y2="14.605" width="2.032" layer="16"/>
+<wire x1="3.81" y1="14.605" x2="3.81" y2="23.1775" width="2.032" layer="16"/>
+<wire x1="7.78" y1="14.435" x2="3.98" y2="14.435" width="2.032" layer="16"/>
+<wire x1="3.98" y1="14.435" x2="3.81" y2="14.605" width="2.032" layer="16"/>
+<wire x1="71.12" y1="8.89" x2="71.12" y2="4.445" width="1.778" layer="16"/>
+<wire x1="24.4475" y1="2.2225" x2="59.055" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="68.8975" y1="2.2225" x2="59.055" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="71.12" y1="4.445" x2="68.8975" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="22.8424" y1="3.8276" x2="24.4475" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="59.0374" y1="7.46" x2="59.0374" y2="2.2401" width="1.778" layer="16"/>
+<wire x1="59.0374" y1="2.2401" x2="59.055" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="7.78" y1="5.545" x2="10.6475" y2="5.545" width="1.778" layer="16"/>
+<wire x1="13.97" y1="2.2225" x2="24.4475" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="10.6475" y1="5.545" x2="13.97" y2="2.2225" width="1.778" layer="16"/>
+<wire x1="3.81" y1="23.1775" x2="3.81" y2="35.2425" width="2.032" layer="16"/>
+<wire x1="3.81" y1="50.165" x2="3.81" y2="35.2425" width="2.032" layer="16"/>
+<wire x1="3.81" y1="69.215" x2="3.81" y2="89.8525" width="1.778" layer="16"/>
+<wire x1="5.2875" y1="91.33" x2="13.0175" y2="91.33" width="1.778" layer="16"/>
+<wire x1="3.81" y1="89.8525" x2="5.2875" y2="91.33" width="1.778" layer="16"/>
+<wire x1="13.0175" y1="91.33" x2="17.89" y2="96.2025" width="1.778" layer="16"/>
+<wire x1="41.275" y1="96.2025" x2="31.115" y2="96.2025" width="1.778" layer="16"/>
+<wire x1="31.115" y1="96.2025" x2="17.89" y2="96.2025" width="1.778" layer="16"/>
+<wire x1="45.78" y1="91.33" x2="45.78" y2="91.6975" width="1.778" layer="16"/>
+<wire x1="45.78" y1="91.6975" x2="41.275" y2="96.2025" width="1.778" layer="16"/>
+<wire x1="31.175" y1="91.33" x2="31.175" y2="96.1425" width="1.778" layer="16"/>
+<wire x1="31.175" y1="96.1425" x2="31.115" y2="96.2025" width="1.778" layer="16"/>
+<wire x1="21.2725" y1="32.0675" x2="17.78" y2="32.0675" width="1.778" layer="16"/>
+<wire x1="17.78" y1="32.0675" x2="14.9735" y2="34.874" width="1.778" layer="16"/>
+<wire x1="4.1785" y1="34.874" x2="3.81" y2="35.2425" width="1.778" layer="16"/>
+<wire x1="14.9735" y1="34.874" x2="4.1785" y2="34.874" width="1.778" layer="16"/>
+<wire x1="21.2725" y1="32.0675" x2="28.8925" y2="32.0675" width="1.778" layer="1"/>
+<wire x1="7.78" y1="49.995" x2="21.125" y2="49.995" width="1.778" layer="16"/>
+<wire x1="21.125" y1="49.995" x2="21.2725" y2="49.8475" width="1.778" layer="16"/>
+<wire x1="18.435" y1="91.33" x2="13.0175" y2="91.33" width="1.778" layer="16"/>
+<contactref element="H13" pad="B3,0"/>
+<contactref element="U$2" pad="5V"/>
+<wire x1="45.72" y1="-20.32" x2="0" y2="-134.9375" width="0" layer="19" extent="1-1"/>
+<wire x1="59.0374" y1="7.46" x2="45.72" y2="-20.32" width="0" layer="19" extent="1-1"/>
+<wire x1="94.6075" y1="14.7" x2="71.12" y2="8.89" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="PELTIER2">
-<contactref element="Q4-T6" pad="2"/>
 <contactref element="PELT2" pad="1"/>
-<wire x1="56.385" y1="8.4125" x2="56.515" y2="15.5575" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="PELTIER1">
-<contactref element="Q4-T5" pad="2"/>
-<contactref element="PELT1" pad="1"/>
-<wire x1="20.19" y1="8.4125" x2="20.32" y2="15.5575" width="0" layer="19" extent="1-1"/>
+<wire x1="56.5374" y1="7.46" x2="56.515" y2="7.4824" width="1.016" layer="16"/>
 </signal>
 <signal name="N$10">
 <contactref element="ADC" pad="1"/>
 <contactref element="5V" pad="2"/>
-<wire x1="6.985" y1="64.77" x2="17.78" y2="60.325" width="0" layer="19" extent="1-1"/>
+<wire x1="6.35" y1="66.04" x2="6.35" y2="64.77" width="1.016" layer="16"/>
+<wire x1="10.795" y1="60.325" x2="17.78" y2="60.325" width="1.016" layer="16"/>
+<wire x1="6.35" y1="64.77" x2="10.795" y2="60.325" width="1.016" layer="16"/>
 </signal>
 <signal name="SWITCH1">
 <contactref element="JP2" pad="14"/>
 <contactref element="SWITCH1" pad="1"/>
 <contactref element="SV1" pad="14"/>
-<wire x1="41.91" y1="63.5" x2="35.56" y2="63.5" width="1.016" layer="16"/>
-<wire x1="7.78" y1="56.385" x2="35.56" y2="63.5" width="0" layer="19" extent="1-1"/>
+<wire x1="43.815" y1="63.5" x2="37.465" y2="63.5" width="1.016" layer="16"/>
+<wire x1="7.78" y1="56.385" x2="18.285" y2="56.385" width="1.016" layer="16"/>
+<wire x1="25.4" y1="63.5" x2="37.465" y2="63.5" width="1.016" layer="16"/>
+<wire x1="18.285" y1="56.385" x2="25.4" y2="63.5" width="1.016" layer="16"/>
 </signal>
 <signal name="SWITCH2">
 <contactref element="JP2" pad="13"/>
 <contactref element="SWITCH2" pad="1"/>
 <contactref element="SV1" pad="16"/>
-<wire x1="35.56" y1="60.96" x2="41.91" y2="60.96" width="1.016" layer="16"/>
-<wire x1="7.78" y1="47.495" x2="35.56" y2="60.96" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="60.96" x2="43.815" y2="60.96" width="1.016" layer="16"/>
+<wire x1="7.78" y1="47.495" x2="8.002" y2="47.717" width="1.016" layer="1"/>
+<wire x1="8.002" y1="47.717" x2="8.72358125" y2="47.717" width="1.016" layer="1"/>
+<wire x1="21.96658125" y1="60.96" x2="37.465" y2="60.96" width="1.016" layer="1"/>
+<wire x1="8.72358125" y1="47.717" x2="21.96658125" y2="60.96" width="1.016" layer="1"/>
 </signal>
 <signal name="N$1">
 <contactref element="JP1" pad="1"/>
 <contactref element="SV1" pad="1"/>
-<wire x1="44.45" y1="78.74" x2="51.435" y2="78.74" width="1.016" layer="16"/>
+<wire x1="46.355" y1="78.74" x2="53.34" y2="78.74" width="1.016" layer="16"/>
 </signal>
 <signal name="N$2">
 <contactref element="JP1" pad="2"/>
 <contactref element="SV1" pad="3"/>
-<wire x1="51.435" y1="76.2" x2="44.45" y2="76.2" width="1.016" layer="16"/>
+<wire x1="53.34" y1="76.2" x2="46.355" y2="76.2" width="1.016" layer="16"/>
 </signal>
-<signal name="N$3">
+<signal name="PELT1B">
 <contactref element="JP1" pad="4"/>
 <contactref element="SV1" pad="7"/>
-<wire x1="44.45" y1="71.12" x2="51.435" y2="71.12" width="1.016" layer="16"/>
+<wire x1="46.355" y1="71.12" x2="53.34" y2="71.12" width="1.016" layer="16"/>
+<contactref element="U$2" pad="M1BIN"/>
+<wire x1="45.72" y1="-17.78" x2="46.355" y2="71.12" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$6">
+<signal name="PELT2B">
 <contactref element="JP1" pad="5"/>
 <contactref element="SV1" pad="9"/>
-<wire x1="51.435" y1="68.58" x2="44.45" y2="68.58" width="1.016" layer="16"/>
+<wire x1="53.34" y1="68.58" x2="46.355" y2="68.58" width="1.016" layer="16"/>
+<contactref element="U$2" pad="M2BIN"/>
+<wire x1="45.72" y1="-27.94" x2="46.355" y2="68.58" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$20">
 <contactref element="JP1" pad="16"/>
 <contactref element="SV1" pad="31"/>
-<wire x1="51.435" y1="40.64" x2="44.45" y2="40.64" width="1.016" layer="16"/>
+<wire x1="53.34" y1="40.64" x2="46.355" y2="40.64" width="1.016" layer="16"/>
 </signal>
 <signal name="N$26">
 <contactref element="JP2" pad="7"/>
 <contactref element="SV1" pad="28"/>
-<wire x1="41.91" y1="45.72" x2="35.56" y2="45.72" width="1.016" layer="16"/>
+<wire x1="43.815" y1="45.72" x2="37.465" y2="45.72" width="1.016" layer="16"/>
 </signal>
 <signal name="N$28">
 <contactref element="JP2" pad="9"/>
 <contactref element="SV1" pad="24"/>
-<wire x1="35.56" y1="50.8" x2="41.91" y2="50.8" width="1.016" layer="16"/>
+<wire x1="37.465" y1="50.8" x2="43.815" y2="50.8" width="1.016" layer="16"/>
 </signal>
 <signal name="N$29">
 <contactref element="JP2" pad="10"/>
 <contactref element="SV1" pad="22"/>
-<wire x1="41.91" y1="53.34" x2="35.56" y2="53.34" width="1.016" layer="16"/>
+<wire x1="43.815" y1="53.34" x2="37.465" y2="53.34" width="1.016" layer="16"/>
 </signal>
 <signal name="N$30">
 <contactref element="JP2" pad="11"/>
 <contactref element="SV1" pad="20"/>
-<wire x1="35.56" y1="55.88" x2="41.91" y2="55.88" width="1.016" layer="16"/>
+<wire x1="37.465" y1="55.88" x2="43.815" y2="55.88" width="1.016" layer="16"/>
 </signal>
 <signal name="N$31">
 <contactref element="JP2" pad="12"/>
 <contactref element="SV1" pad="18"/>
-<wire x1="41.91" y1="58.42" x2="35.56" y2="58.42" width="1.016" layer="16"/>
+<wire x1="43.815" y1="58.42" x2="37.465" y2="58.42" width="1.016" layer="16"/>
 </signal>
 <signal name="STEPRST">
 <contactref element="STEPPERDRIVER" pad="5"/>
 <contactref element="JP1" pad="14"/>
 <contactref element="SV1" pad="27"/>
-<wire x1="44.45" y1="45.72" x2="51.435" y2="45.72" width="1.016" layer="16"/>
-<wire x1="80.01" y1="59.944" x2="51.435" y2="45.72" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="45.72" x2="53.34" y2="45.72" width="1.016" layer="16"/>
+<wire x1="53.34" y1="45.72" x2="53.5178" y2="45.8978" width="1.016" layer="1"/>
+<wire x1="53.5178" y1="45.8978" x2="61.0892375" y2="45.8978" width="1.016" layer="1"/>
+<wire x1="69.1515" y1="53.9600625" x2="69.1515" y2="69.131825" width="1.016" layer="1"/>
+<wire x1="77.5965" y1="74.358" x2="77.7875" y2="74.549" width="1.016" layer="1"/>
+<wire x1="69.1515" y1="69.131825" x2="74.377675" y2="74.358" width="1.016" layer="1"/>
+<wire x1="74.377675" y1="74.358" x2="77.5965" y2="74.358" width="1.016" layer="1"/>
+<wire x1="61.0892375" y1="45.8978" x2="69.1515" y2="53.9600625" width="1.016" layer="1"/>
 </signal>
 <signal name="STEPSLP">
 <contactref element="STEPPERDRIVER" pad="6"/>
 <contactref element="JP1" pad="13"/>
 <contactref element="SV1" pad="25"/>
-<wire x1="51.435" y1="48.26" x2="44.45" y2="48.26" width="1.016" layer="16"/>
-<wire x1="51.435" y1="48.26" x2="80.01" y2="62.484" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="48.26" x2="46.355" y2="48.26" width="1.016" layer="16"/>
+<wire x1="53.34" y1="48.26" x2="53.5178" y2="48.4378" width="1.016" layer="1"/>
+<wire x1="53.5178" y1="48.4378" x2="56.85845625" y2="48.4378" width="1.016" layer="1"/>
+<wire x1="61.4685" y1="82.18949375" x2="63.79700625" y2="84.518" width="1.016" layer="1"/>
+<wire x1="63.79700625" y1="84.518" x2="68.60049375" y2="84.518" width="1.016" layer="1"/>
+<wire x1="56.85845625" y1="48.4378" x2="61.4685" y2="53.04784375" width="1.016" layer="1"/>
+<wire x1="61.4685" y1="53.04784375" x2="61.4685" y2="82.18949375" width="1.016" layer="1"/>
+<wire x1="76.02949375" y1="77.089" x2="77.7875" y2="77.089" width="1.016" layer="1"/>
+<wire x1="68.60049375" y1="84.518" x2="76.02949375" y2="77.089" width="1.016" layer="1"/>
 </signal>
 <signal name="STEPSTP">
 <contactref element="STEPPERDRIVER" pad="7"/>
 <contactref element="JP1" pad="12"/>
 <contactref element="SV1" pad="23"/>
-<wire x1="44.45" y1="50.8" x2="51.435" y2="50.8" width="1.016" layer="16"/>
-<wire x1="51.435" y1="50.8" x2="80.01" y2="65.024" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="50.8" x2="53.34" y2="50.8" width="1.016" layer="16"/>
+<wire x1="53.34" y1="50.8" x2="53.5178" y2="50.9778" width="1.016" layer="1"/>
+<wire x1="53.5178" y1="50.9778" x2="56.22345625" y2="50.9778" width="1.016" layer="1"/>
+<wire x1="62.32031875" y1="86.55" x2="70.07718125" y2="86.55" width="1.016" layer="1"/>
+<wire x1="56.22345625" y1="50.9778" x2="59.26003125" y2="54.014375" width="1.016" layer="1"/>
+<wire x1="59.26003125" y1="54.014375" x2="59.26003125" y2="83.4897125" width="1.016" layer="1"/>
+<wire x1="59.26003125" y1="83.4897125" x2="62.32031875" y2="86.55" width="1.016" layer="1"/>
+<wire x1="70.07718125" y1="86.55" x2="76.99818125" y2="79.629" width="1.016" layer="1"/>
+<wire x1="76.99818125" y1="79.629" x2="77.7875" y2="79.629" width="1.016" layer="1"/>
 </signal>
 <signal name="STEPDIR">
 <contactref element="STEPPERDRIVER" pad="8"/>
 <contactref element="JP1" pad="11"/>
 <contactref element="SV1" pad="21"/>
-<wire x1="44.45" y1="53.34" x2="51.435" y2="53.34" width="1.016" layer="16"/>
-<wire x1="51.435" y1="53.34" x2="80.01" y2="67.564" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="53.34" x2="53.34" y2="53.34" width="1.016" layer="16"/>
+<wire x1="53.34" y1="53.34" x2="53.5178" y2="53.5178" width="1.016" layer="1"/>
+<wire x1="53.5178" y1="53.5178" x2="55.27095625" y2="53.5178" width="1.016" layer="1"/>
+<wire x1="56.91053125" y1="84.6489" x2="60.84363125" y2="88.582" width="1.016" layer="1"/>
+<wire x1="60.84363125" y1="88.582" x2="71.23636875" y2="88.582" width="1.016" layer="1"/>
+<wire x1="55.27095625" y1="53.5178" x2="56.91053125" y2="55.157375" width="1.016" layer="1"/>
+<wire x1="56.91053125" y1="55.157375" x2="56.91053125" y2="84.6489" width="1.016" layer="1"/>
+<wire x1="77.7875" y1="82.169" x2="77.64936875" y2="82.169" width="1.016" layer="1"/>
+<wire x1="77.64936875" y1="82.169" x2="71.23636875" y2="88.582" width="1.016" layer="1"/>
 </signal>
 <signal name="M0">
 <contactref element="STEPPERDRIVER" pad="2"/>
 <contactref element="JP1" pad="20"/>
 <contactref element="SV1" pad="39"/>
-<wire x1="51.435" y1="30.48" x2="44.45" y2="30.48" width="1.016" layer="16"/>
-<wire x1="51.435" y1="30.48" x2="80.01" y2="52.324" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="30.48" x2="46.355" y2="30.48" width="1.016" layer="16"/>
+<wire x1="53.34" y1="30.48" x2="55.88" y2="30.48" width="1.016" layer="1"/>
+<wire x1="55.88" y1="30.48" x2="75.2475" y2="49.8475" width="1.016" layer="1"/>
+<wire x1="77.7875" y1="66.929" x2="76.5175" y2="66.929" width="1.016" layer="1"/>
+<wire x1="76.5175" y1="66.929" x2="75.2475" y2="65.659" width="1.016" layer="1"/>
+<wire x1="75.2475" y1="65.659" x2="75.2475" y2="49.8475" width="1.016" layer="1"/>
 </signal>
 <signal name="M1">
 <contactref element="STEPPERDRIVER" pad="3"/>
 <contactref element="JP1" pad="19"/>
 <contactref element="SV1" pad="37"/>
-<wire x1="44.45" y1="33.02" x2="51.435" y2="33.02" width="1.016" layer="16"/>
-<wire x1="51.435" y1="33.02" x2="80.01" y2="54.864" width="0" layer="19" extent="1-1"/>
+<wire x1="46.355" y1="33.02" x2="53.34" y2="33.02" width="1.016" layer="16"/>
+<wire x1="53.34" y1="33.02" x2="55.5463125" y2="33.02" width="1.016" layer="1"/>
+<wire x1="55.5463125" y1="33.02" x2="73.2155" y2="50.6891875" width="1.016" layer="1"/>
+<wire x1="77.7875" y1="69.469" x2="75.87105" y2="69.469" width="1.016" layer="1"/>
+<wire x1="75.87105" y1="69.469" x2="73.2155" y2="66.81345" width="1.016" layer="1"/>
+<wire x1="73.2155" y1="66.81345" x2="73.2155" y2="50.6891875" width="1.016" layer="1"/>
 </signal>
 <signal name="M2">
 <contactref element="STEPPERDRIVER" pad="4"/>
 <contactref element="JP1" pad="18"/>
 <contactref element="SV1" pad="35"/>
-<wire x1="51.435" y1="35.56" x2="44.45" y2="35.56" width="1.016" layer="16"/>
-<wire x1="51.435" y1="35.56" x2="80.01" y2="57.404" width="0" layer="19" extent="1-1"/>
+<wire x1="53.34" y1="35.56" x2="46.355" y2="35.56" width="1.016" layer="16"/>
+<wire x1="77.7875" y1="72.009" x2="75.2198625" y2="72.009" width="1.016" layer="1"/>
+<wire x1="75.2198625" y1="72.009" x2="71.1835" y2="67.9726375" width="1.016" layer="1"/>
+<wire x1="71.1835" y1="67.9726375" x2="71.1835" y2="51.530875" width="1.016" layer="1"/>
+<wire x1="55.212625" y1="35.56" x2="53.34" y2="35.56" width="1.016" layer="1"/>
+<wire x1="71.1835" y1="51.530875" x2="55.212625" y2="35.56" width="1.016" layer="1"/>
 </signal>
 <signal name="ENCOADERSIG">
 <contactref element="JP2" pad="17"/>
 <contactref element="ENCOADER" pad="2"/>
 <contactref element="SV1" pad="8"/>
-<wire x1="35.56" y1="71.12" x2="41.91" y2="71.12" width="1.016" layer="16"/>
-<wire x1="41.91" y1="71.12" x2="50.145" y2="91.33" width="0" layer="19" extent="1-1"/>
+<wire x1="37.465" y1="71.12" x2="43.815" y2="71.12" width="1.016" layer="16"/>
+<wire x1="37.465" y1="71.12" x2="33.655" y2="71.12" width="1.016" layer="16"/>
+<wire x1="20.935" y1="83.84" x2="20.935" y2="91.33" width="1.016" layer="16"/>
+<wire x1="33.655" y1="71.12" x2="20.935" y2="83.84" width="1.016" layer="16"/>
 </signal>
 <signal name="N$7">
 <contactref element="JP2" pad="15"/>
 <contactref element="SV1" pad="12"/>
-<wire x1="35.56" y1="66.04" x2="41.91" y2="66.04" width="1.016" layer="16"/>
+<wire x1="37.465" y1="66.04" x2="43.815" y2="66.04" width="1.016" layer="16"/>
 </signal>
 <signal name="A1">
 <contactref element="STEPPERDRIVER" pad="12"/>
-<contactref element="J13" pad="3"/>
-<wire x1="67.31" y1="59.944" x2="74.275" y2="90.28" width="0" layer="19" extent="1-1"/>
+<contactref element="STEPPER" pad="3"/>
+<wire x1="68.6" y1="82.7575" x2="62.885" y2="88.4725" width="1.016" layer="16"/>
+<wire x1="62.885" y1="91.33" x2="62.885" y2="88.4725" width="1.016" layer="16"/>
+<wire x1="68.6" y1="82.7575" x2="68.6" y2="76.7915" width="1.016" layer="16"/>
+<wire x1="68.6" y1="76.7915" x2="66.3575" y2="74.549" width="1.016" layer="16"/>
+<wire x1="65.0875" y1="74.549" x2="66.3575" y2="74.549" width="1.016" layer="16"/>
 </signal>
 <signal name="A2">
 <contactref element="STEPPERDRIVER" pad="11"/>
-<contactref element="J13" pad="4"/>
-<wire x1="67.31" y1="62.484" x2="76.775" y2="90.28" width="0" layer="19" extent="1-1"/>
+<contactref element="STEPPER" pad="4"/>
+<wire x1="60.385" y1="91.33" x2="60.385" y2="80.5215" width="1.016" layer="16"/>
+<wire x1="65.0875" y1="77.089" x2="63.8175" y2="77.089" width="1.016" layer="16"/>
+<wire x1="63.8175" y1="77.089" x2="60.385" y2="80.5215" width="1.016" layer="16"/>
 </signal>
 <signal name="B1">
 <contactref element="STEPPERDRIVER" pad="13"/>
-<contactref element="J13" pad="2"/>
-<wire x1="67.31" y1="57.404" x2="71.775" y2="90.28" width="0" layer="19" extent="1-1"/>
+<contactref element="STEPPER" pad="2"/>
+<wire x1="71.1" y1="83.71" x2="65.385" y2="89.425" width="1.016" layer="16"/>
+<wire x1="65.385" y1="91.33" x2="65.385" y2="89.425" width="1.016" layer="16"/>
+<wire x1="71.1" y1="83.71" x2="71.1" y2="76.1165" width="1.016" layer="16"/>
+<wire x1="65.0875" y1="72.009" x2="66.9925" y2="72.009" width="1.016" layer="16"/>
+<wire x1="71.1" y1="76.1165" x2="66.9925" y2="72.009" width="1.016" layer="16"/>
 </signal>
 <signal name="B2">
 <contactref element="STEPPERDRIVER" pad="14"/>
-<contactref element="J13" pad="1"/>
-<wire x1="67.31" y1="54.864" x2="69.275" y2="90.28" width="0" layer="19" extent="1-1"/>
+<contactref element="STEPPER" pad="1"/>
+<wire x1="73.6" y1="85.2975" x2="67.885" y2="91.0125" width="1.016" layer="16"/>
+<wire x1="67.885" y1="91.33" x2="67.885" y2="91.0125" width="1.016" layer="16"/>
+<wire x1="73.6" y1="85.2975" x2="73.6" y2="74.8665" width="1.016" layer="16"/>
+<wire x1="73.6" y1="74.8665" x2="68.2025" y2="69.469" width="1.016" layer="16"/>
+<wire x1="68.2025" y1="69.469" x2="65.0875" y2="69.469" width="1.016" layer="16"/>
 </signal>
 <signal name="6V">
 <contactref element="U$1" pad="OUT1+"/>
 <contactref element="U$1" pad="OUT2+"/>
 <contactref element="LAMP" pad="2"/>
-<wire x1="68.71" y1="16.6475" x2="70.11" y2="16.6475" width="0" layer="19" extent="1-1"/>
-<wire x1="46.82" y1="8.4125" x2="68.71" y2="16.6475" width="0" layer="19" extent="1-1"/>
+<wire x1="66.6175" y1="35.6975" x2="65.2175" y2="35.6975" width="1.778" layer="1"/>
+<wire x1="66.6175" y1="35.6975" x2="68.2625" y2="34.0525" width="1.778" layer="1"/>
+<wire x1="68.2625" y1="34.0525" x2="68.2625" y2="32.7025" width="1.778" layer="1"/>
+<wire x1="68.2625" y1="32.7025" x2="68.2625" y2="18.7325" width="1.778" layer="1"/>
+<wire x1="46.9216" y1="7.46" x2="50.3225" y2="7.46" width="1.778" layer="1"/>
+<wire x1="59.69" y1="10.16" x2="68.2625" y2="18.7325" width="1.778" layer="1"/>
+<wire x1="50.3225" y1="7.46" x2="53.0225" y2="10.16" width="1.778" layer="1"/>
+<wire x1="53.0225" y1="10.16" x2="59.69" y2="10.16" width="1.778" layer="1"/>
+</signal>
+<signal name="-12V">
+<contactref element="H9" pad="B3,0"/>
+</signal>
+<signal name="PELT2A">
+<contactref element="JP1" pad="6"/>
+<contactref element="SV1" pad="11"/>
+<wire x1="46.355" y1="66.04" x2="53.34" y2="66.04" width="1.016" layer="16"/>
+<contactref element="U$2" pad="M2AIN"/>
+<wire x1="45.72" y1="-25.4" x2="46.355" y2="66.04" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="PELT1A">
+<contactref element="JP2" pad="3"/>
+<contactref element="SV1" pad="36"/>
+<wire x1="43.815" y1="35.56" x2="37.465" y2="35.56" width="1.016" layer="16"/>
+<contactref element="U$2" pad="M1AIN"/>
+<wire x1="45.72" y1="-15.24" x2="43.815" y2="35.56" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
@@ -3033,6 +3342,32 @@ design rules under a new name.</description>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>
 <mfgpreviewcolor name="substratecolor" color="0xFF786E46"/>
 </mfgpreviewcolors>
+<errors>
+<approved hash="5,16,8efaf609635a4b12"/>
+<approved hash="5,16,276866bbf2903b03"/>
+<approved hash="5,16,ad87d0951d180254"/>
+<approved hash="5,16,a6ebed8cc498d3e2"/>
+<approved hash="5,16,ae199f9b405f49d3"/>
+<approved hash="5,16,e72c0a91cbfac2a6"/>
+<approved hash="5,16,0a2cd58e0a3dd80b"/>
+<approved hash="5,16,2c541a9acff60bdd"/>
+<approved hash="5,16,719f02c42bfea5d4"/>
+<approved hash="5,16,d4ab2912ff229709"/>
+<approved hash="5,16,f4dba1d84ca0fce4"/>
+<approved hash="5,16,54452909fcca12b2"/>
+<approved hash="5,16,f4cba1f84c80fca4"/>
+<approved hash="5,16,d523286afe2be527"/>
+<approved hash="5,16,33e47e761e4c422c"/>
+<approved hash="5,16,4c646903344e9dda"/>
+<approved hash="5,16,d2e3a21b336435d4"/>
+<approved hash="5,16,3ae6fb1da9b7cc81"/>
+<approved hash="5,16,717a1616b34c6958"/>
+<approved hash="5,16,73bfae890cc7f2bf"/>
+<approved hash="5,16,5e508deca581be67"/>
+<approved hash="5,16,5ea0d42cc68db205"/>
+<approved hash="5,16,576d8d966e690462"/>
+<approved hash="5,16,db7ad7a887919f36"/>
+</errors>
 </board>
 </drawing>
 <compatibility>
