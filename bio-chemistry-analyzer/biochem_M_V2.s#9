@@ -12097,6 +12097,8 @@ W = angled&lt;p&gt;
 <classes>
 <class number="0" name="default" width="0" drill="0">
 </class>
+<class number="1" name="power" width="1.778" drill="0">
+</class>
 </classes>
 <parts>
 <part name="ADC" library="Connector" deviceset="PINHD-1X10" device="" package3d_urn="urn:adsk.eagle:package:22406/2"/>
@@ -12524,7 +12526,7 @@ W = angled&lt;p&gt;
 <label x="142.24" y="76.2" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
-<net name="3.3V" class="0">
+<net name="3.3V" class="1">
 <segment>
 <wire x1="30.48" y1="91.44" x2="30.48" y2="83.82" width="0.1524" layer="91"/>
 <label x="30.48" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
@@ -12595,7 +12597,7 @@ W = angled&lt;p&gt;
 <pinref part="J12" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="12V" class="0">
+<net name="12V" class="1">
 <segment>
 <pinref part="L293D" gate="G$1" pin="VCC2"/>
 <wire x1="33.02" y1="157.48" x2="30.48" y2="157.48" width="0.1524" layer="91"/>
@@ -12659,32 +12661,32 @@ W = angled&lt;p&gt;
 </net>
 <net name="GPIO-PUMP1-2" class="0">
 <segment>
-<wire x1="68.58" y1="91.44" x2="68.58" y2="83.82" width="0.1524" layer="91"/>
-<label x="68.58" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
-<pinref part="JP2" gate="A" pin="5"/>
-<junction x="68.58" y="91.44"/>
-<wire x1="68.58" y1="91.44" x2="68.58" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="G$1" pin="32"/>
-</segment>
-<segment>
 <wire x1="63.5" y1="187.96" x2="66.04" y2="187.96" width="0.1524" layer="91"/>
 <label x="66.04" y="187.96" size="1.27" layer="95" xref="yes"/>
 <pinref part="L293D" gate="G$1" pin="4A"/>
 </segment>
+<segment>
+<wire x1="76.2" y1="91.44" x2="76.2" y2="83.82" width="0.1524" layer="91"/>
+<label x="76.2" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
+<junction x="76.2" y="91.44"/>
+<wire x1="76.2" y1="91.44" x2="76.2" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="2"/>
+<pinref part="SV1" gate="G$1" pin="38"/>
+</segment>
 </net>
 <net name="GPIO-PUMP2-2" class="0">
-<segment>
-<wire x1="71.12" y1="91.44" x2="71.12" y2="83.82" width="0.1524" layer="91"/>
-<label x="71.12" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
-<pinref part="JP2" gate="A" pin="4"/>
-<junction x="71.12" y="91.44"/>
-<wire x1="71.12" y1="91.44" x2="71.12" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="G$1" pin="34"/>
-</segment>
 <segment>
 <wire x1="33.02" y1="187.96" x2="30.48" y2="187.96" width="0.1524" layer="91"/>
 <label x="30.48" y="187.96" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="L293D" gate="G$1" pin="1A"/>
+</segment>
+<segment>
+<wire x1="71.12" y1="91.44" x2="71.12" y2="83.82" width="0.1524" layer="91"/>
+<label x="71.12" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
+<junction x="71.12" y="91.44"/>
+<wire x1="71.12" y1="91.44" x2="71.12" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="4"/>
+<pinref part="SV1" gate="G$1" pin="34"/>
 </segment>
 </net>
 <net name="PUMP2-2" class="0">
@@ -12713,17 +12715,17 @@ W = angled&lt;p&gt;
 </net>
 <net name="GPIO-PUMP2-1" class="0">
 <segment>
-<wire x1="76.2" y1="91.44" x2="76.2" y2="83.82" width="0.1524" layer="91"/>
-<label x="76.2" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
-<pinref part="JP2" gate="A" pin="2"/>
-<junction x="76.2" y="91.44"/>
-<wire x1="76.2" y1="91.44" x2="76.2" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="SV1" gate="G$1" pin="38"/>
-</segment>
-<segment>
 <wire x1="33.02" y1="162.56" x2="30.48" y2="162.56" width="0.1524" layer="91"/>
 <label x="30.48" y="162.56" size="1.27" layer="95" rot="R180" xref="yes"/>
 <pinref part="L293D" gate="G$1" pin="2A"/>
+</segment>
+<segment>
+<wire x1="68.58" y1="91.44" x2="68.58" y2="83.82" width="0.1524" layer="91"/>
+<label x="68.58" y="83.82" size="1.27" layer="95" rot="R270" xref="yes"/>
+<junction x="68.58" y="91.44"/>
+<wire x1="68.58" y1="91.44" x2="68.58" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="JP2" gate="A" pin="5"/>
+<pinref part="SV1" gate="G$1" pin="32"/>
 </segment>
 </net>
 <net name="PUMP1-1" class="0">
@@ -12812,7 +12814,7 @@ W = angled&lt;p&gt;
 <pinref part="LAMP" gate="G$1" pin="1"/>
 </segment>
 </net>
-<net name="5V" class="0">
+<net name="5V" class="1">
 <segment>
 <pinref part="L293D" gate="G$1" pin="VCC1"/>
 <wire x1="63.5" y1="193.04" x2="66.04" y2="193.04" width="0.1524" layer="91"/>
@@ -13280,14 +13282,9 @@ W = angled&lt;p&gt;
 <approved hash="208,1,223.52,175.26,GND,sup,,,,"/>
 <approved hash="208,1,223.52,132.08,GND,sup,,,,"/>
 <approved hash="208,1,177.8,5.08,GND,out,,,,"/>
-<approved hash="113,1,56.1696,104.14,SV2,,,,,"/>
-<approved hash="113,1,134.62,151.31,1KR2,,,,,"/>
 <approved hash="113,1,146.23,139.7,10KR2,,,,,"/>
-<approved hash="113,1,137.16,197.03,1KR3,,,,,"/>
 <approved hash="113,1,148.77,185.42,10KR3,,,,,"/>
-<approved hash="113,1,198.12,194.49,1KR4,,,,,"/>
 <approved hash="113,1,209.73,182.88,10KR4,,,,,"/>
-<approved hash="113,1,198.12,151.31,1KR1,,,,,"/>
 <approved hash="113,1,209.73,139.7,10KR1,,,,,"/>
 <approved hash="113,1,318.6,44.45,C2,,,,,"/>
 </errors>
